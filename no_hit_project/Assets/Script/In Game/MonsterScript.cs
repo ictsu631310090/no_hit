@@ -29,16 +29,16 @@ public class MonsterScript : MonoBehaviour
     [HideInInspector] public CombatScript combat;
     public void MonsterAttack()
     {
-        combat.diceRoll.RollDice(20, toHitPlus);
+        combat.diceRoll.RollDice(20, toHitPlus , false);
         StartCoroutine(Damage(damage.y, damage.z));
     }
     IEnumerator Damage(int dice, int bonus)
     {
-        yield return new WaitForSeconds(combat.diceRoll.timeClose + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
+        yield return new WaitForSeconds((2 * combat.diceRoll.timeClose) + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
         if (combat.diceRoll.result >= combat.player.GetComponent<ShowPlayerScript>().armorClass)
         {
             yield return new WaitForSeconds(combat.diceRoll.timeClose * 0.1f);
-            combat.diceRoll.RollDice(dice, bonus);
+            combat.diceRoll.RollDice(dice, bonus , false);//not critical;
             yield return new WaitForSeconds(combat.diceRoll.timeClose + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
             combat.player.GetComponent<ShowPlayerScript>().takeDamage = combat.diceRoll.result;
         }
@@ -60,8 +60,19 @@ public class MonsterScript : MonoBehaviour
         {
             UIScript.addMoney = moneyDrop;
             combat.player.GetComponent<UpLevelPlayerScript>().addXp = xpDrop;
-            Destroy(this.gameObject);
+            combat.diceRoll.RollDice(4, 0, false);
+            StartCoroutine(HealHPPlayer());
+            //combat.monsters.Remove(this.GetComponent<MonsterScript>());
+            //Destroy(this.gameObject);
         }
+    }
+    IEnumerator HealHPPlayer()
+    {
+        yield return new WaitForSeconds((2 * combat.diceRoll.timeClose) + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
+        combat.player.GetComponent<ShowPlayerScript>().healHitPoint = combat.diceRoll.result; // heal after kill
+        Debug.Log("Heal : " + combat.diceRoll.result);
+        combat.monsters.Remove(this.GetComponent<MonsterScript>());
+        Destroy(this.gameObject);
     }
     private void Start()
     {

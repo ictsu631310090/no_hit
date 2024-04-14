@@ -13,10 +13,10 @@ public class DiceRollScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI numberText;
     public float timeClose;
     [HideInInspector] public bool willAttack;
-    public void RollDice(int max, int bonus)
+    public void RollDice(int max, int bonus, bool critical)
     {
         willAttack = true;
-        StopCoroutine(DelayClose(0,0));
+        StopCoroutine(DelayClose(0, 0, false));
         switch (max)
         {
             case 4:
@@ -46,10 +46,18 @@ public class DiceRollScript : MonoBehaviour
         //Debug.Log("result : " + result);
         numberText.text = result.ToString();
         //Debug.Log("text : " + numberText.text);
-        StartCoroutine(DelayClose(timeClose, bonus));
+        StartCoroutine(DelayClose(timeClose, bonus , critical));
     }
-    IEnumerator DelayClose(float time,int bonus)
+    IEnumerator DelayClose(float time,int bonus , bool critical)
     {
+        if (critical)
+        {
+            yield return new WaitForSeconds(time * 0.5f);
+            result += result;
+            numberText.text = result.ToString();
+            Debug.Log("Damage critical : " + result);
+        }
+        yield return new WaitForSeconds(time * 0.5f);
         if (bonus != 0)
         {
             for (int i = 0; i < bonus; i++)
