@@ -11,8 +11,12 @@ public class CombatScript : MonoBehaviour
     public GameObject player;
     [HideInInspector] public UpLevelPlayerScript levelPlayer;
     [HideInInspector] public DiceRollScript diceRoll;
+    private CreateMonsterScript createMonster;
+    private SetMonsterScript setMon;
     public List<MonsterScript> monsters;
     [HideInInspector] public bool monAttack;
+    [SerializeField] private int targetMons;
+    public GameObject lightTarget;
 
     [SerializeField] private Button rightAttack;
     [SerializeField] private Button leftAttack;
@@ -21,6 +25,33 @@ public class CombatScript : MonoBehaviour
     public bool finess;
     private bool critical;
     private int atkBonus;
+    public int findNum(int id)
+    {
+        int numMon = 0;
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            if (monsters[i] != null)
+            {
+                if (monsters[i].id == id)
+                {
+                    numMon = i;
+                    break;
+                }
+            }
+        }
+        return numMon;
+    }
+    public void TargetMonster(int i)
+    {
+        if (i != targetMons)
+        {
+            targetMons = i;
+            if (monsters.Count != 1)
+            {
+                lightTarget.transform.position = createMonster.spawnPointMon[i].transform.position;
+            }
+        }
+    }
     public void AttackButtom(int i)// 0-2 //player
     {
         if (!diceRoll.willAttack && monsters.Count > 0)
@@ -43,6 +74,40 @@ public class CombatScript : MonoBehaviour
             diceRoll.RollDice(20, atkBonus + levelPlayer.bonus, false);
             StartCoroutine(Damage(4, atkBonus));
         }
+    }
+    IEnumerator Damage(int dice, int bonus)
+    {
+        float timeUse = (2 * diceRoll.timeClose) + (0.7f * diceRoll.timeClose) + (diceRoll.timeClose * 0.5f);
+        yield return new WaitForSeconds(timeUse);
+        Debug.Log("result : " + diceRoll.result);
+        if (diceRoll.result - (atkBonus + levelPlayer.bonus) == 20)
+        {
+            critical = true;
+        }
+        if (diceRoll.result >= monsters[findNum(targetMons)].armorClass)
+        {
+            yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
+            //diceRoll.RollDice(dice, bonus, true);
+            diceRoll.RollDice(dice, bonus, critical);
+            Debug.Log("Damage : " + diceRoll.result + " bonus :" + bonus);
+            critical = false;
+            yield return new WaitForSeconds(timeUse);
+            monsters[findNum(targetMons)].takeDamage = diceRoll.result;
+        }
+    }
+    public void CheckMonsterDie(int monDie)
+    {
+        setMon.buttomTarget[monDie].SetActive(false);
+        if (monDie != 0)
+        {
+            TargetMonster(0);
+        }
+        else
+        {
+            TargetMonster(1);
+        }
+        Debug.Log("targetMons : " + targetMons);
+
     }
     private void UpdateATKBonus()
     {
@@ -79,33 +144,20 @@ public class CombatScript : MonoBehaviour
         {
             endTurn.interactable = false;
             monAttack = true;
-            monsters[0].MonsterAttack();//Enemy Attack
+            monsters[findNum(targetMons)].MonsterAttack();//Enemy Attack
         }
     }
-    IEnumerator Damage(int dice, int bonus)
-    {
-        float timeUse = (2 * diceRoll.timeClose) + (0.7f * diceRoll.timeClose) + (diceRoll.timeClose * 0.5f);
-        yield return new WaitForSeconds(timeUse);
-        Debug.Log("result : " + diceRoll.result);
-        if (diceRoll.result - (atkBonus + levelPlayer.bonus) == 20)
-        {
-            critical = true;
-        }
-        if (diceRoll.result >= monsters[0].armorClass)
-        {
-            yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
-            //diceRoll.RollDice(dice, bonus, true);
-            diceRoll.RollDice(dice, bonus, critical);
-            Debug.Log("Damage : " + diceRoll.result + " bonus :" + bonus);
-            critical = false;
-            yield return new WaitForSeconds(timeUse);
-            monsters[0].takeDamage = diceRoll.result;
-        }
-    }
-    private void Start()
+    private void Awake()
     {
         levelPlayer = player.GetComponent<UpLevelPlayerScript>();
         diceRoll = GetComponent<DiceRollScript>();
+        createMonster = GetComponent<CreateMonsterScript>();
+        setMon = GetComponent<SetMonsterScript>();
+    }
+    private void Start()
+    {
+        targetMons = 0;
+
         atkSTR = (levelPlayer.str - 10) / 2;
         atkDEX = (levelPlayer.dex - 10) / 2;
         atkBonus = atkSTR;

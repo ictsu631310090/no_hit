@@ -152,19 +152,23 @@ public class UpLevelPlayerScript : MonoBehaviour
         conText.text = con.ToString();
         conMoText.text = "+" + ((con - 10) / 2).ToString();
     }
-    private void Start()
+    private void Awake()
     {
-        addXp = 0;
-        bonus = 2;
-        pointLevel = 0;
-        levelText.text = "Lv." + level;
-
         strText = statusText.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         strMoText = statusText.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         dexText = statusText.transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         dexMoText = statusText.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         conText = statusText.transform.GetChild(2).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         conMoText = statusText.transform.GetChild(2).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+    }
+    private void Start()
+    {
+        //addXp = 0;
+        bonus = 2;
+        pointLevel = 0;
+        levelText.text = "Lv." + level;
+
+
         UpStatusButtomObj.gameObject.SetActive(false);
 
         UpdateStatus();

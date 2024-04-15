@@ -6,13 +6,12 @@ using UnityEngine;
 public class CreateTypeMonScript : ScriptableObject
 {
     [Header("Data Mon")]
-    public int id;
     public string monName;
     public Vector3Int hitPoint;
     public int armorClass;
     public int toHitPlus;
     public Vector3Int damage;
-    //public GameObject model;
+    public GameObject model;
 
     [Header("Item Drop")]
     public Vector2Int moneyDrop;

@@ -6,7 +6,7 @@ using TMPro;
 
 public class ShowPlayerScript : MonoBehaviour
 {
-    //[Header("Status")]
+    [Header("Status")]
     public int hitPoint;
     private int hpLvOne;
     [HideInInspector] public int hitPointMax;
@@ -63,9 +63,12 @@ public class ShowPlayerScript : MonoBehaviour
             acText.text = armorClass.ToString();
         }
     }
-    private void Start()
+    private void Awake()
     {
         levelPlayer = GetComponent<UpLevelPlayerScript>();
+    }
+    private void Start()
+    {
         oldLevelPlayer = levelPlayer.level;
         oldDexMoPLayer = (levelPlayer.dex - 10) / 2;
         oldConMoPLayer = (levelPlayer.con - 10) / 2;

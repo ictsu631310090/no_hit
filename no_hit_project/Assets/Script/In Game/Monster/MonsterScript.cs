@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class MonsterScript : MonoBehaviour
 {
-    [Header("Just Look")]
+    [Header("Read Only")]
     public int id;
+    private int hitPointMax;
+    public List<int> diceDrop;
     [HideInInspector] public string monName;
     [HideInInspector] public int hitPoint;
-    private int hitPointMax;
     [HideInInspector] public int armorClass;
     [HideInInspector] public int moneyDrop;
     [HideInInspector] public int xpDrop;
-    public List<int> diceDrop;
-    public int toHitPlus;
-    public Vector3Int damage;
+    [HideInInspector] public int toHitPlus;
+    [HideInInspector] public Vector3Int damage;
 
     [Header("link Obj")]
     [SerializeField] private TextMeshProUGUI nameText;
@@ -24,7 +25,8 @@ public class MonsterScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI acText;
     [SerializeField] private Image hpbar;
     private float scaleBar;
-    [SerializeField] private Animator animaMon;
+    [HideInInspector] public GameObject model;
+    [HideInInspector] public Animator animaMon;
     [HideInInspector] public int takeDamage;
     [HideInInspector] public CombatScript combat;
     public void MonsterAttack()
@@ -61,9 +63,8 @@ public class MonsterScript : MonoBehaviour
             UIScript.addMoney = moneyDrop;
             combat.player.GetComponent<UpLevelPlayerScript>().addXp = xpDrop;
             combat.diceRoll.RollDice(4, 0, false);
+            combat.CheckMonsterDie(id);
             StartCoroutine(HealHPPlayer());
-            //combat.monsters.Remove(this.GetComponent<MonsterScript>());
-            //Destroy(this.gameObject);
         }
     }
     IEnumerator HealHPPlayer()
@@ -71,8 +72,18 @@ public class MonsterScript : MonoBehaviour
         yield return new WaitForSeconds((2 * combat.diceRoll.timeClose) + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
         combat.player.GetComponent<ShowPlayerScript>().healHitPoint = combat.diceRoll.result; // heal after kill
         Debug.Log("Heal : " + combat.diceRoll.result);
-        combat.monsters.Remove(this.GetComponent<MonsterScript>());
+        combat.monsters[combat.findNum(id)] = null;
+        //combat.monsters.Remove(this.GetComponent<MonsterScript>());
+        if (combat.monsters.Count > 0)
+        {
+            combat.lightTarget.SetActive(true);
+        }
+        else
+        {
+            combat.lightTarget.SetActive(false);
+        }
         Destroy(this.gameObject);
+
     }
     private void Start()
     {
