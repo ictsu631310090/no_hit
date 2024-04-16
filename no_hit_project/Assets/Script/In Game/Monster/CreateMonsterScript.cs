@@ -33,6 +33,9 @@ public class CreateMonsterScript : MonoBehaviour
             }
             combat.monsters.Add(monScript);
         }
+        combat.lightTarget.transform.parent = combat.monsters[numOfMon - 1].transform.GetChild(1);
+        combat.lightTarget.transform.position = combat.monsters[numOfMon - 1].transform.GetChild(1).position;
+        combat.targetMons = numOfMon - 1;//front
     }
     private void Awake()
     {

@@ -11,10 +11,15 @@ public class DiceRollScript : MonoBehaviour
     [SerializeField] private RawImage diceImage;
     [SerializeField] private Texture[] diceTextur;
     [SerializeField] private TextMeshProUGUI numberText;
+    [SerializeField] private TextMeshProUGUI detailText;
     public float timeClose;
     [HideInInspector] public bool willAttack;
-    public void RollDice(int max, int bonus, bool critical)
+    public void RollDice(int max, int bonus, bool critical , int type)
     {
+        //max => what dice roll.
+        //bonus => add bonus.
+        //critical => critical or not. 
+        //type => 0 = player Attack, 1 = monster Attack , 2 = heal Player.
         willAttack = true;
         StopCoroutine(DelayClose(0, 0, false));
         switch (max)
@@ -40,6 +45,27 @@ public class DiceRollScript : MonoBehaviour
             default:
                 break;
         }//dice image
+        switch (type)
+        {
+            case 0:
+                detailText.text = "Player \nd" + max;
+                deplayDice.GetComponent<RawImage>().color = new Color(0, 1, 1, 0.5f);//blue sky
+                break;
+            case 1:
+                detailText.text = "Monster \nd" + max;
+                deplayDice.GetComponent<RawImage>().color = new Color(1, 0, 0, 0.5f);//red
+                break;
+            case 2:
+                detailText.text = "Heal PLayer \nd" + max;
+                deplayDice.GetComponent<RawImage>().color = new Color(0, 1, 0, 0.5f);//green
+                break;
+            default:
+                break;
+        }
+        if (bonus != 0)
+        {
+            detailText.text += "+" + bonus;
+        }
         deplayDice.SetActive(true);
         deplayDice.GetComponent<Animator>().SetBool ("Open",true);
         result = Random.Range(1, max + 1);
@@ -77,6 +103,5 @@ public class DiceRollScript : MonoBehaviour
     {
         willAttack = false;
         deplayDice.SetActive(false);
-        //combat = GetComponent<CombatScript>();
     }
 }

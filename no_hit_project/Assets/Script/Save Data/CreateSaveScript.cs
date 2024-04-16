@@ -4,13 +4,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class CreateSaveScript
 {
-    public static void Save(ShowPlayerScript player, UpLevelPlayerScript level)
+    public static void Save(DataPlayerScript dataPlayer)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/Player.text";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameSaveScript gameSave = new GameSaveScript(player, level);
+        GameSaveScript gameSave = new GameSaveScript(dataPlayer);
 
         formatter.Serialize(stream, gameSave);
         stream.Close();

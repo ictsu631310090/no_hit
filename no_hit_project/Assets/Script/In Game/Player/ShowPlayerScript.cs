@@ -6,102 +6,73 @@ using TMPro;
 
 public class ShowPlayerScript : MonoBehaviour
 {
-    [Header("Status")]
-    public int hitPoint;
-    private int hpLvOne;
-    [HideInInspector] public int hitPointMax;
-    [HideInInspector] public int healHitPoint;
-    [HideInInspector] public int takeDamage;
-    public int armorClass;
-    private int oldLevelPlayer;
-    private int oldDexMoPLayer;
-    private int oldConMoPLayer;
-
     [Header("link Obj")]
+    [HideInInspector] public DataPlayerScript dataPlayer;
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI acText;
     [SerializeField] private Image hpbar;
     [SerializeField] private Animator animaMon;
-    private UpLevelPlayerScript levelPlayer;
 
+    [SerializeField] private GameObject statusText;
+    private TextMeshProUGUI strText;
+    private TextMeshProUGUI strMoText;
+    private TextMeshProUGUI dexText;
+    private TextMeshProUGUI dexMoText;
+    private TextMeshProUGUI conText;
+    private TextMeshProUGUI conMoText;
+    [SerializeField] private TextMeshProUGUI levelText;
     public void UpdateTextHp()
     {
-        hpText.text = hitPoint.ToString() + " / " + hitPointMax.ToString();
-        float hp = hitPoint;
-        float hpMax = hitPointMax;
+        hpText.text = dataPlayer.hitPoint.ToString() + " / " + dataPlayer.hitPointMax.ToString();
+        float hp = dataPlayer.hitPoint;
+        float hpMax = dataPlayer.hitPointMax;
         hpbar.fillAmount = hp / hpMax;
     }
-    public void UpLevelHp()
+    private void UpStatus()
     {
-        int conMo = (levelPlayer.con - 10) / 2;
-        int damageHave = hitPointMax - hitPoint;
-        if (oldLevelPlayer != levelPlayer.level)
+        if (dataPlayer.pointLevel != 0)
         {
-            hitPointMax = hpLvOne;
-            for (int i = 0; i < levelPlayer.level - oldLevelPlayer; i++)
-            {
-                hitPointMax += 4;
-            }
-            hitPointMax += conMo;
-            hitPoint = hitPointMax - damageHave;
-            oldLevelPlayer = levelPlayer.level;
+            levelText.text = "Lv." + dataPlayer.level + " Point : " + dataPlayer.pointLevel;
         }
-        if (oldConMoPLayer != conMo)
+        else
         {
-            hitPointMax += conMo - oldConMoPLayer;
-            hitPoint += conMo - oldConMoPLayer;
-            oldConMoPLayer = conMo;
+            levelText.text = "Lv." + dataPlayer.level;
         }
-        UpdateTextHp();
     }
-    public void UpdateAC()
+    public void UpdateStatus()
     {
-        int dexMo = (levelPlayer.dex - 10) / 2;
-        if (dexMo != oldDexMoPLayer)
-        {
-            armorClass = 10 + dexMo;
-            acText.text = armorClass.ToString();
-        }
+        strText.text = dataPlayer.str.ToString();
+        strMoText.text = "+" + ((dataPlayer.str - 10) / 2).ToString();
+        dexText.text = dataPlayer.dex.ToString();
+        dexMoText.text = "+" + ((dataPlayer.dex - 10) / 2).ToString();
+        conText.text = dataPlayer.con.ToString();
+        conMoText.text = "+" + ((dataPlayer.con - 10) / 2).ToString();
+    }
+    public void UpdateACText()
+    {
+        acText.text = dataPlayer.armorClass.ToString();
     }
     private void Awake()
     {
-        levelPlayer = GetComponent<UpLevelPlayerScript>();
+        strText = statusText.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        strMoText = statusText.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        dexText = statusText.transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        dexMoText = statusText.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        conText = statusText.transform.GetChild(2).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        conMoText = statusText.transform.GetChild(2).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
     private void Start()
     {
-        oldLevelPlayer = levelPlayer.level;
-        oldDexMoPLayer = (levelPlayer.dex - 10) / 2;
-        oldConMoPLayer = (levelPlayer.con - 10) / 2;
-
-        healHitPoint = 0;
-        hitPoint += oldConMoPLayer;
-        hpLvOne = hitPoint;
-        hitPointMax = hitPoint;
-
-        armorClass = 10 + oldDexMoPLayer;
-        acText.text = armorClass.ToString();
+        acText.text = dataPlayer.armorClass.ToString();
 
         UpdateTextHp();
+
+        levelText.text = "Lv." + dataPlayer.level;
+
+        UpdateStatus();
     }
     private void Update()
     {
-        if (takeDamage != 0)
-        {
-            hitPoint -= takeDamage;
-            takeDamage = 0;
-            UpdateTextHp();
-        }
-        if (healHitPoint != 0)
-        {
-            hitPoint += healHitPoint;
-            healHitPoint = 0;
-            if (hitPoint > hitPointMax)
-            {
-                hitPoint = hitPointMax;
-            }
-            UpdateTextHp();
-        }
-        UpLevelHp();
-        UpdateAC();
+        UpStatus();
     }
 }

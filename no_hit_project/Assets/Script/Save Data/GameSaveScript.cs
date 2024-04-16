@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameSaveScript
 {
     public int hitPoint;
-    public int hitPointMax;
     public int str;//0
     public int dex;//1
     public int con;//2
@@ -16,16 +15,15 @@ public class GameSaveScript
     //public List<int> itemUse;
     //public List<GameObject> diceHave;
 
-    public GameSaveScript (ShowPlayerScript player, UpLevelPlayerScript level)
+    public GameSaveScript (DataPlayerScript dataPlayer)
     {
-        hitPoint = player.hitPoint;
-        hitPointMax = player.hitPointMax;
-        str = level.str;
-        dex = level.dex;
-        con = level.con;
-        xp = level.xp;
-        levelPlayer = level.level;
-        bonus = level.bonus;
+        hitPoint = dataPlayer.hitPoint;
+        str = dataPlayer.str;
+        dex = dataPlayer.dex;
+        con = dataPlayer.con;
+        xp = dataPlayer.xp;
+        levelPlayer = dataPlayer.level;
+        bonus = dataPlayer.bonus;
         //itemUse = null;
         //diceHave = null;
     }

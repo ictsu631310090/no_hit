@@ -21,10 +21,4 @@ public class SetMonsterScript : MonoBehaviour
             buttomTarget[i].SetActive(false);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

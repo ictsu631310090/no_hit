@@ -1013,6 +1013,7 @@ GameObject:
   - component: {fileID: 311917746}
   - component: {fileID: 311917749}
   - component: {fileID: 311917750}
+  - component: {fileID: 311917753}
   - component: {fileID: 311917751}
   m_Layer: 0
   m_Name: Script
@@ -1044,6 +1045,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 18c77227e1e843e44a79a195f5453e31, type: 3}
   - {fileID: 2800000, guid: aaac2632a73754d4a8324e255fb36734, type: 3}
   numberText: {fileID: 797600916}
+  detailText: {fileID: 1016862767}
   timeClose: 0.9
   willAttack: 0
 --- !u!4 &311917745
@@ -1077,8 +1079,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 831a256d96988894db66780ae2df13a2, type: 2}
   monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}
   spawnPointMon:
-  - {fileID: 1373367219}
   - {fileID: 2058824379}
+  - {fileID: 1373367219}
   - {fileID: 804973453}
 --- !u!114 &311917749
 MonoBehaviour:
@@ -1092,9 +1094,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a3593d2eefe9f4c891a88eefa267b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1617428740}
-  levelPlayer: {fileID: 0}
   diceRoll: {fileID: 0}
+  dataPlayer: {fileID: 0}
   monsters: []
   monAttack: 0
   targetMons: 0
@@ -1134,7 +1135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadGameButtom: {fileID: 0}
-  player: {fileID: 1617428740}
 --- !u!114 &311917752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,9 +1149,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfMon: 3
   buttomTarget:
-  - {fileID: 1609850555}
   - {fileID: 1840749930}
+  - {fileID: 1609850555}
   - {fileID: 1192343050}
+--- !u!114 &311917753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311917743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a85351bb6a44541aa77188371c5e31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoint: 14
+  hitPointMax: 0
+  takeDamage: 0
+  healHitPoint: 0
+  armorClass: 0
+  str: 30
+  dex: 10
+  con: 10
+  xp: 0
+  addXp: 0
+  level: 1
+  bonus: 2
+  pointLevel: 0
+  player: {fileID: 1617428742}
+  UpStatusButtomObj: {fileID: 1062109416}
 --- !u!1 &353572003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,8 +2324,8 @@ RectTransform:
   - {fileID: 264188841}
   - {fileID: 1506615251}
   - {fileID: 1062109417}
-  - {fileID: 1609850556}
   - {fileID: 1840749931}
+  - {fileID: 1609850556}
   - {fileID: 1192343051}
   m_Father: {fileID: 436502736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3032,8 +3059,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1373367219}
   - {fileID: 2058824379}
+  - {fileID: 1373367219}
   - {fileID: 804973453}
   - {fileID: 298707756}
   m_Father: {fileID: 0}
@@ -3121,8 +3148,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1617428741}
-        m_TargetAssemblyTypeName: UpLevelPlayerScript, Assembly-CSharp
+      - m_Target: {fileID: 311917753}
+        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
         m_MethodName: UpStatusButtom
         m_Mode: 3
         m_Arguments:
@@ -3571,6 +3598,142 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951545442}
   m_CullTransparentMesh: 1
+--- !u!1 &1016862765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016862766}
+  - component: {fileID: 1016862768}
+  - component: {fileID: 1016862767}
+  m_Layer: 5
+  m_Name: Detail Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1016862766
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016862765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1532789148}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -196.12268, y: 286.65906}
+  m_SizeDelta: {x: 301.7546, y: 122.6819}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1016862767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016862765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Payer Attack
+
+    d20+10'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 47.3
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1016862768
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016862765}
+  m_CullTransparentMesh: 1
 --- !u!1 &1062109416
 GameObject:
   m_ObjectHideFlags: 0
@@ -4009,6 +4172,88 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192343050}
   m_CullTransparentMesh: 1
+--- !u!1 &1251112713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1251112714}
+  - component: {fileID: 1251112715}
+  m_Layer: 0
+  m_Name: Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1251112714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251112713}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.1, y: 2.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1592939079}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1251112715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251112713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 0.95926714, b: 0.25, a: 1}
+  m_Intensity: 2
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 1
+  m_PointLightOuterRadius: 2.5
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &1278823731
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,8 +4603,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1617428741}
-        m_TargetAssemblyTypeName: UpLevelPlayerScript, Assembly-CSharp
+      - m_Target: {fileID: 311917753}
+        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
         m_MethodName: UpStatusButtom
         m_Mode: 3
         m_Arguments:
@@ -4418,7 +4663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1373367219}
   m_Layer: 0
-  m_Name: SpawnPoint
+  m_Name: SpawnPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5005,6 +5250,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 557396929}
+  - {fileID: 1016862766}
   m_Father: {fileID: 436502736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5135,6 +5381,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1251112714}
+  - {fileID: 2016877437}
   - {fileID: 1662220222}
   - {fileID: 2072141594}
   - {fileID: 683054643}
@@ -5154,7 +5402,7 @@ GameObject:
   - component: {fileID: 1609850558}
   - component: {fileID: 1609850557}
   m_Layer: 0
-  m_Name: Mon 0 Button
+  m_Name: Mon 1 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5230,7 +5478,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5273,20 +5521,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609850555}
   m_CullTransparentMesh: 1
---- !u!1 &1617428740 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5354798364525316083, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
-  m_PrefabInstance: {fileID: 1712968512434039826}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1617428741 stripped
+--- !u!114 &1617428742 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3284085463669937682, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2097051071395206361, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
   m_PrefabInstance: {fileID: 1712968512434039826}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617428740}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471ceb5d465eee640918f14311bdbeff, type: 3}
+  m_Script: {fileID: 11500000, guid: 356dcd837a4102e4296c910885372364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1662220221
@@ -5612,7 +5855,7 @@ GameObject:
   - component: {fileID: 1840749933}
   - component: {fileID: 1840749932}
   m_Layer: 0
-  m_Name: Mon 1 Button
+  m_Name: Mon 0 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5688,7 +5931,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6000,6 +6243,88 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005808384}
   m_CullTransparentMesh: 1
+--- !u!1 &2016877436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2016877437}
+  - component: {fileID: 2016877438}
+  m_Layer: 0
+  m_Name: Light 2D (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2016877437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016877436}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.27, y: 2.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1592939079}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2016877438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016877436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 0.95926714, b: 0.25, a: 1}
+  m_Intensity: 2
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 1
+  m_PointLightOuterRadius: 2.5
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &2033321946
 GameObject:
   m_ObjectHideFlags: 0
@@ -6242,8 +6567,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1617428741}
-        m_TargetAssemblyTypeName: UpLevelPlayerScript, Assembly-CSharp
+      - m_Target: {fileID: 311917753}
+        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
         m_MethodName: UpStatusButtom
         m_Mode: 3
         m_Arguments:
@@ -6436,7 +6761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2058824379}
   m_Layer: 0
-  m_Name: SpawnPoint (1)
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6549,18 +6874,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3284085463669937682, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
-      propertyPath: str
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3284085463669937682, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
-      propertyPath: addXp
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3284085463669937682, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
-      propertyPath: UpStatusButtomObj
-      value: 
-      objectReference: {fileID: 1062109416}
     - target: {fileID: 5354798364525316083, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
       propertyPath: m_Name
       value: Player

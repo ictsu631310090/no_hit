@@ -1015,7 +1015,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6827545431001657529}
   m_Father: {fileID: 8817043942340842783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4787888686176042190
@@ -1214,7 +1215,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7160302253075930995}
   - component: {fileID: 2097051071395206361}
-  - component: {fileID: 3284085463669937682}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1235,7 +1235,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6827545431001657529}
   - {fileID: 8817043942340842783}
   - {fileID: 1892673295037787103}
   m_Father: {fileID: 0}
@@ -1252,37 +1251,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356dcd837a4102e4296c910885372364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoint: 14
   hitPointMax: 0
-  healHitPoint: 0
-  takeDamage: 0
-  armorClass: 10
+  dataPlayer: {fileID: 0}
   hpText: {fileID: 4690665391532356792}
   acText: {fileID: 1540418232452634566}
   hpbar: {fileID: 4668496450608820360}
   animaMon: {fileID: 3815296750456428511}
---- !u!114 &3284085463669937682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5354798364525316083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471ceb5d465eee640918f14311bdbeff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  str: 10
-  dex: 10
-  con: 10
-  xp: 0
-  addXp: 0
-  level: 1
-  bonus: 0
   statusText: {fileID: 4163446707687166366}
   levelText: {fileID: 146414518035032310}
-  UpStatusButtomObj: {fileID: 0}
 --- !u!1 &6199294717270094104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1289,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7160302253075930995}
+  m_Father: {fileID: 4739860526126919489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5917927916375757176
 MonoBehaviour:

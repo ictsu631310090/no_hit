@@ -8,14 +8,12 @@ public class CombatScript : MonoBehaviour
 {
     private int atkSTR;//modifier
     private int atkDEX;//modifier
-    public GameObject player;
-    [HideInInspector] public UpLevelPlayerScript levelPlayer;
     [HideInInspector] public DiceRollScript diceRoll;
-    private CreateMonsterScript createMonster;
+    [HideInInspector] public DataPlayerScript dataPlayer;
     private SetMonsterScript setMon;
     public List<MonsterScript> monsters;
     [HideInInspector] public bool monAttack;
-    [SerializeField] private int targetMons;
+    [HideInInspector] public int targetMons;
     public GameObject lightTarget;
 
     [SerializeField] private Button rightAttack;
@@ -25,33 +23,6 @@ public class CombatScript : MonoBehaviour
     public bool finess;
     private bool critical;
     private int atkBonus;
-    public int findNum(int id)
-    {
-        int numMon = 0;
-        for (int i = 0; i < monsters.Count; i++)
-        {
-            if (monsters[i] != null)
-            {
-                if (monsters[i].id == id)
-                {
-                    numMon = i;
-                    break;
-                }
-            }
-        }
-        return numMon;
-    }
-    public void TargetMonster(int i)
-    {
-        if (i != targetMons)
-        {
-            targetMons = i;
-            if (monsters.Count != 1)
-            {
-                lightTarget.transform.position = createMonster.spawnPointMon[i].transform.position;
-            }
-        }
-    }
     public void AttackButtom(int i)// 0-2 //player
     {
         if (!diceRoll.willAttack && monsters.Count > 0)
@@ -71,8 +42,12 @@ public class CombatScript : MonoBehaviour
                     Debug.LogError("Enter the attack button number.");
                     break;
             }//ปิดปุ่ม
-            diceRoll.RollDice(20, atkBonus + levelPlayer.bonus, false);
+            diceRoll.RollDice(20, atkBonus + dataPlayer.bonus, false, 0);
             StartCoroutine(Damage(4, atkBonus));
+        }
+        else
+        {
+            Debug.Log("No Monster");
         }
     }
     IEnumerator Damage(int dice, int bonus)
@@ -80,39 +55,56 @@ public class CombatScript : MonoBehaviour
         float timeUse = (2 * diceRoll.timeClose) + (0.7f * diceRoll.timeClose) + (diceRoll.timeClose * 0.5f);
         yield return new WaitForSeconds(timeUse);
         Debug.Log("result : " + diceRoll.result);
-        if (diceRoll.result - (atkBonus + levelPlayer.bonus) == 20)
+        if (diceRoll.result - (atkBonus + dataPlayer.bonus) == 20)
         {
             critical = true;
         }
-        if (diceRoll.result >= monsters[findNum(targetMons)].armorClass)
+        if (diceRoll.result >= monsters[targetMons].armorClass)
         {
             yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
             //diceRoll.RollDice(dice, bonus, true);
-            diceRoll.RollDice(dice, bonus, critical);
+            diceRoll.RollDice(dice, bonus, critical , 0);
             Debug.Log("Damage : " + diceRoll.result + " bonus :" + bonus);
             critical = false;
             yield return new WaitForSeconds(timeUse);
-            monsters[findNum(targetMons)].takeDamage = diceRoll.result;
+            monsters[targetMons].takeDamage = diceRoll.result;
         }
     }
-    public void CheckMonsterDie(int monDie)
+    public void CheckMonsterDie(int idMonDie)
     {
-        setMon.buttomTarget[monDie].SetActive(false);
-        if (monDie != 0)
+        int numMon = 0;
+        for (int i = 0; i < monsters.Count; i++)
         {
-            TargetMonster(0);
+            if (monsters[i] != null)
+            {
+                targetMons = monsters[i].id;
+                lightTarget.transform.parent = monsters[i].transform.GetChild(1);
+                lightTarget.transform.position = monsters[i].transform.GetChild(1).position;
+            }
+            else
+            {
+                numMon++;
+            }
         }
-        else
+        if (numMon == monsters.Count)//die all
         {
-            TargetMonster(1);
+            monsters.Clear();
+            lightTarget.SetActive(false);
         }
+        else if (numMon == 2)//have 1 mon
+        {
+            foreach (var item in setMon.buttomTarget)
+            {
+                item.SetActive(false);
+            }
+        }
+        setMon.buttomTarget[idMonDie].SetActive(false);
         Debug.Log("targetMons : " + targetMons);
-
-    }
+    } // plater attack
     private void UpdateATKBonus()
     {
-        int newStrMo = (levelPlayer.str - 10) / 2;
-        int newDexMo = (levelPlayer.dex - 10) / 2;
+        int newStrMo = (dataPlayer.str - 10) / 2;
+        int newDexMo = (dataPlayer.dex - 10) / 2;
         if (newStrMo != atkSTR || newDexMo != atkDEX)
         {
             atkSTR = newStrMo;
@@ -133,33 +125,74 @@ public class CombatScript : MonoBehaviour
                 atkBonus = atkSTR;
             }
         }
-        int numText = atkBonus + levelPlayer.bonus;
+        int numText = atkBonus + dataPlayer.bonus;
         rightAttack.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "right hand \n d20 + " + numText;
         leftAttack.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "left hand \n d20 + " + numText;
         bothAttack.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "both hand \n d20 + " + numText;
-    }
+    }  //finess str or dex
+    public void TargetMonster(int i)
+    {
+        if (i != targetMons)
+        {
+            targetMons = i;
+            if (monsters.Count != 1)
+            {
+                lightTarget.transform.parent = monsters[targetMons].transform.GetChild(1);
+                lightTarget.transform.position = monsters[targetMons].transform.GetChild(1).position;
+            }
+        }
+    }//buttom
     public void EndTurnButtom()
     {
-        if (!diceRoll.willAttack)
+        if (!diceRoll.willAttack && monsters.Count > 0)
         {
-            endTurn.interactable = false;
-            monAttack = true;
-            monsters[findNum(targetMons)].MonsterAttack();//Enemy Attack
+            StopAllCoroutines();
+            StartCoroutine(DelayMonsterAttack(diceRoll.timeClose));
         }
+        else if (!diceRoll.willAttack && monsters.Count == 0)
+        {
+            Debug.Log("Next");
+        }
+    }
+    IEnumerator DelayMonsterAttack(float time)
+    {
+        endTurn.interactable = false;
+        float timeUse = (2 * time) + (0.7f * time) + (time * 0.5f);
+        yield return new WaitForSeconds(time * 0.2f);
+
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            if (monsters[i] != null)
+            {
+                monsters[i].MonsterAttack();
+                yield return new WaitForSeconds(timeUse);
+                if (monsters[i].canAttack)//to hit
+                {
+                    yield return new WaitForSeconds(timeUse);
+                }
+            }
+        }
+        monAttack = true;
+    }
+    private void ReadyToCombat()
+    {
+        rightAttack.interactable = true;
+        leftAttack.interactable = true;
+        bothAttack.interactable = true;
+        diceRoll.willAttack = false;
+        endTurn.interactable = true;
+        monAttack = false;
     }
     private void Awake()
     {
-        levelPlayer = player.GetComponent<UpLevelPlayerScript>();
         diceRoll = GetComponent<DiceRollScript>();
-        createMonster = GetComponent<CreateMonsterScript>();
         setMon = GetComponent<SetMonsterScript>();
+        dataPlayer = GetComponent<DataPlayerScript>();
     }
     private void Start()
     {
-        targetMons = 0;
-
-        atkSTR = (levelPlayer.str - 10) / 2;
-        atkDEX = (levelPlayer.dex - 10) / 2;
+        atkSTR = (dataPlayer.str - 10) / 2;
+        atkDEX = (dataPlayer.dex - 10) / 2;
         atkBonus = atkSTR;
         critical = false;
         monAttack = false;
@@ -171,12 +204,7 @@ public class CombatScript : MonoBehaviour
         {
             if (monAttack)//มอนตีเสร็จยัง
             {
-                rightAttack.interactable = true;
-                leftAttack.interactable = true;
-                bothAttack.interactable = true;
-                diceRoll.willAttack = false;
-                endTurn.interactable = true;
-                monAttack = false;
+                ReadyToCombat();
             }
         }
         UpdateATKBonus();

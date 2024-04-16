@@ -1,31 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-public class UpLevelPlayerScript : MonoBehaviour
+public class DataPlayerScript : MonoBehaviour
 {
+    [Header("Status")]
+    public int hitPoint;
+    private int hpLvOne;
+    [HideInInspector] public int hitPointMax;
+    [HideInInspector] public int takeDamage;
+    [HideInInspector] public int healHitPoint;
+    [HideInInspector] public int armorClass;
     public int str;//0
     public int dex;//1
     public int con;//2
+    private int oldLevelPlayer;
+    private int oldDexMoPLayer;
+    private int oldConMoPLayer;
     public int xp;
     public int addXp;
     public int level;
     public int bonus;
-    private int pointLevel;
+    [HideInInspector] public int pointLevel;
 
     [Header("Link Obj")]
-    [SerializeField] private GameObject statusText;
-    private TextMeshProUGUI strText;
-    private TextMeshProUGUI strMoText;
-    private TextMeshProUGUI dexText;
-    private TextMeshProUGUI dexMoText;
-    private TextMeshProUGUI conText;
-    private TextMeshProUGUI conMoText;
-    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private ShowPlayerScript player;
     [SerializeField] private GameObject UpStatusButtomObj;
-    public void LevelUp()
+
+    private void LevelUp()
     {
         if (addXp != 0)
         {
@@ -34,7 +36,7 @@ public class UpLevelPlayerScript : MonoBehaviour
             int oldLevel = level;
             switch (xp)
             {
-                case < 300 :
+                case < 300:
                     level = 1;
                     break;
                 case < 900:
@@ -111,19 +113,6 @@ public class UpLevelPlayerScript : MonoBehaviour
             }
         }
     }
-    private void UpStatus()
-    {
-        if (pointLevel != 0)
-        {
-            UpStatusButtomObj.gameObject.SetActive(true);
-            levelText.text = "Lv." + level + " Point : " + pointLevel;
-        }
-        else
-        {
-            UpStatusButtomObj.gameObject.SetActive(false);
-            levelText.text = "Lv." + level;
-        }
-    }
     public void UpStatusButtom(int i)
     {
         switch (i)
@@ -141,41 +130,95 @@ public class UpLevelPlayerScript : MonoBehaviour
                 break;
         }
         pointLevel -= 1;
-        UpdateStatus();
+        player.UpdateStatus();
     }
-    private void UpdateStatus()
+    private void UpStatusButtom()
     {
-        strText.text = str.ToString();
-        strMoText.text = "+" + ((str - 10) / 2).ToString();
-        dexText.text = dex.ToString();
-        dexMoText.text = "+" + ((dex - 10) / 2).ToString();
-        conText.text = con.ToString();
-        conMoText.text = "+" + ((con - 10) / 2).ToString();
+        if (pointLevel != 0)
+        {
+            UpStatusButtomObj.gameObject.SetActive(true);
+        }
+        else
+        {
+            UpStatusButtomObj.gameObject.SetActive(false);
+        }
+    }
+    private void UpLevelHp()
+    {
+        int conMo = (con - 10) / 2;
+        int damageHave = hitPointMax - hitPoint;
+        if (oldLevelPlayer != level)
+        {
+            hitPointMax = hpLvOne;
+            for (int i = 0; i < level - oldLevelPlayer; i++)
+            {
+                hitPointMax += 4;
+            }
+            hitPointMax += conMo;
+            hitPoint = hitPointMax - damageHave;
+            oldLevelPlayer = level;
+        }
+        if (oldConMoPLayer != conMo)
+        {
+            hitPointMax += conMo - oldConMoPLayer;
+            hitPoint += conMo - oldConMoPLayer;
+            oldConMoPLayer = conMo;
+        }
+        player.UpdateTextHp();
+    }
+    private void UpdateAC()
+    {
+        int dexMo = (dex - 10) / 2;
+        if (dexMo != oldDexMoPLayer)
+        {
+            armorClass = 10 + dexMo;
+            player.UpdateACText();
+        }
     }
     private void Awake()
     {
-        strText = statusText.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        strMoText = statusText.transform.GetChild(0).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        dexText = statusText.transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        dexMoText = statusText.transform.GetChild(1).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        conText = statusText.transform.GetChild(2).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        conMoText = statusText.transform.GetChild(2).gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        player.dataPlayer = this;
     }
     private void Start()
     {
-        //addXp = 0;
+        oldLevelPlayer = level;
+        oldDexMoPLayer = (dex - 10) / 2;
+        oldConMoPLayer = (con - 10) / 2;
+
+        hitPoint += oldConMoPLayer;
+        hpLvOne = hitPoint;
+        hitPointMax = hitPoint;
+
+        armorClass = 10 + oldDexMoPLayer;
+
         bonus = 2;
         pointLevel = 0;
-        levelText.text = "Lv." + level;
-
 
         UpStatusButtomObj.gameObject.SetActive(false);
-
-        UpdateStatus();
     }
+
+    // Update is called once per frame
     private void Update()
     {
         LevelUp();
-        UpStatus();
+        UpStatusButtom();
+        UpLevelHp();
+        UpdateAC();
+        if (healHitPoint != 0)
+        {
+            hitPoint += healHitPoint;
+            healHitPoint = 0;
+            if (hitPoint >= hitPointMax)
+            {
+                hitPoint = hitPointMax;
+            }
+            player.UpdateTextHp();
+        }
+        if (takeDamage != 0)
+        {
+            hitPoint -= takeDamage;
+            takeDamage = 0;
+            player.UpdateTextHp();
+        }
     }
 }
