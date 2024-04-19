@@ -1079,8 +1079,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 831a256d96988894db66780ae2df13a2, type: 2}
   monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}
   spawnPointMon:
-  - {fileID: 2058824379}
   - {fileID: 1373367219}
+  - {fileID: 2058824379}
   - {fileID: 804973453}
 --- !u!114 &311917749
 MonoBehaviour:
@@ -1105,6 +1105,8 @@ MonoBehaviour:
   bothAttack: {fileID: 951545444}
   endTurn: {fileID: 1506615252}
   finess: 0
+  distanceMon: -2
+  speedMove: 40
 --- !u!114 &311917750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,10 +1149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec7e4dca15a31843808697d3adb958e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfMon: 3
+  numOfMon: 2
   buttomTarget:
-  - {fileID: 1840749930}
   - {fileID: 1609850555}
+  - {fileID: 1840749930}
   - {fileID: 1192343050}
 --- !u!114 &311917753
 MonoBehaviour:
@@ -2324,8 +2326,8 @@ RectTransform:
   - {fileID: 264188841}
   - {fileID: 1506615251}
   - {fileID: 1062109417}
-  - {fileID: 1840749931}
   - {fileID: 1609850556}
+  - {fileID: 1840749931}
   - {fileID: 1192343051}
   m_Father: {fileID: 436502736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2697,7 +2699,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 480620d2b58b5e44d970bf9ce411ced6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3059,8 +3061,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2058824379}
   - {fileID: 1373367219}
+  - {fileID: 2058824379}
   - {fileID: 804973453}
   - {fileID: 298707756}
   m_Father: {fileID: 0}
@@ -3083,7 +3085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &845857745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3101,7 +3103,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -175}
+  m_AnchoredPosition: {x: 0, y: -295}
   m_SizeDelta: {x: 97.05, y: 40.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845857746
@@ -3560,6 +3562,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 311917753}
+        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
+        m_MethodName: PlayAnimation
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &951545445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3749,7 +3763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1062109417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4538,7 +4552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1317348671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4556,7 +4570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -115, y: -175}
+  m_AnchoredPosition: {x: -115, y: -295}
   m_SizeDelta: {x: 97.05, y: 40.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317348672
@@ -4775,6 +4789,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 311917753}
+        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
+        m_MethodName: PlayAnimation
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5478,7 +5504,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5604,7 +5630,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 480620d2b58b5e44d970bf9ce411ced6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5931,7 +5957,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6201,6 +6227,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 311917753}
+        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
+        m_MethodName: PlayAnimation
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6502,7 +6540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2036402319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6520,7 +6558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: -175}
+  m_AnchoredPosition: {x: 115, y: -295}
   m_SizeDelta: {x: 97.05, y: 40.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2036402320
@@ -6854,7 +6892,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 480620d2b58b5e44d970bf9ce411ced6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

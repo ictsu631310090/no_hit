@@ -76,7 +76,6 @@ public class MonsterScript : MonoBehaviour
         yield return new WaitForSeconds((2 * combat.diceRoll.timeClose) + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
         combat.dataPlayer.healHitPoint = combat.diceRoll.result; // heal after kill
         Debug.Log("Heal : " + combat.diceRoll.result);
-        //combat.monsters.Remove(this.GetComponent<MonsterScript>());
         if (combat.monsters.Count > 0)
         {
             combat.lightTarget.SetActive(true);

@@ -16,7 +16,7 @@ public class SetMonsterScript : MonoBehaviour
     private void Start()
     {
         createMonster.CreateMon(numOfMon);
-        for (int i = numOfMon ; i < buttomTarget.Length ; i++)
+        for (int i = numOfMon; i < buttomTarget.Length; i++)
         {
             buttomTarget[i].SetActive(false);
         }

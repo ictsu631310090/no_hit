@@ -11,7 +11,7 @@ public class ShowPlayerScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI acText;
     [SerializeField] private Image hpbar;
-    [SerializeField] private Animator animaMon;
+    public Animator animaMon;
 
     [SerializeField] private GameObject statusText;
     private TextMeshProUGUI strText;

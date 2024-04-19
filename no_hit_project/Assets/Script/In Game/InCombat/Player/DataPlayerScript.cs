@@ -10,7 +10,7 @@ public class DataPlayerScript : MonoBehaviour
     [HideInInspector] public int hitPointMax;
     [HideInInspector] public int takeDamage;
     [HideInInspector] public int healHitPoint;
-    [HideInInspector] public int armorClass;
+    public int armorClass;
     public int str;//0
     public int dex;//1
     public int con;//2
@@ -24,8 +24,9 @@ public class DataPlayerScript : MonoBehaviour
     [HideInInspector] public int pointLevel;
 
     [Header("Link Obj")]
-    [SerializeField] private ShowPlayerScript player;
+    public ShowPlayerScript player;
     [SerializeField] private GameObject UpStatusButtomObj;
+    private DiceRollScript diceRoll;
 
     private void LevelUp()
     {
@@ -175,9 +176,21 @@ public class DataPlayerScript : MonoBehaviour
             player.UpdateACText();
         }
     }
+    public void PlayAnimation(int  i)
+    {
+        player.animaMon.SetInteger("step", i);
+        StartCoroutine(DeleyTime());
+    }
+    IEnumerator DeleyTime()
+    {
+        float time = diceRoll.timeClose;
+        yield return new WaitForSeconds(time);
+        player.animaMon.SetInteger("step", 0);
+    }
     private void Awake()
     {
         player.dataPlayer = this;
+        diceRoll = GetComponent<DiceRollScript>();
     }
     private void Start()
     {
@@ -189,7 +202,7 @@ public class DataPlayerScript : MonoBehaviour
         hpLvOne = hitPoint;
         hitPointMax = hitPoint;
 
-        armorClass = 10 + oldDexMoPLayer;
+        armorClass += oldDexMoPLayer;
 
         bonus = 2;
         pointLevel = 0;
@@ -216,6 +229,7 @@ public class DataPlayerScript : MonoBehaviour
         }
         if (takeDamage != 0)
         {
+            PlayAnimation(5);
             hitPoint -= takeDamage;
             takeDamage = 0;
             player.UpdateTextHp();

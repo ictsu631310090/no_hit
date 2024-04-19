@@ -23,6 +23,9 @@ public class CombatScript : MonoBehaviour
     public bool finess;
     private bool critical;
     private int atkBonus;
+    private bool movePlayer;
+    [SerializeField] private float distanceMon;
+    [SerializeField] private float speedMove;
     public void AttackButtom(int i)// 0-2 //player
     {
         if (!diceRoll.willAttack && monsters.Count > 0)
@@ -42,6 +45,7 @@ public class CombatScript : MonoBehaviour
                     Debug.LogError("Enter the attack button number.");
                     break;
             }//ปิดปุ่ม
+            movePlayer = true;
             diceRoll.RollDice(20, atkBonus + dataPlayer.bonus, false, 0);
             StartCoroutine(Damage(4, atkBonus));
         }
@@ -50,19 +54,36 @@ public class CombatScript : MonoBehaviour
             Debug.Log("No Monster");
         }
     }
+    private void MovePlayerObj()
+    {
+        if (movePlayer)
+        {
+            Vector3 positionMon = monsters[targetMons].gameObject.transform.position;
+            positionMon.x += distanceMon;
+            dataPlayer.player.animaMon.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaMon.gameObject.transform.position, positionMon, Time.deltaTime * speedMove);
+        }
+        else
+        {
+            Vector3 oldPosition = dataPlayer.player.gameObject.transform.position;
+            dataPlayer.player.animaMon.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaMon.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
+        }
+    }
     IEnumerator Damage(int dice, int bonus)
     {
         float timeUse = (2 * diceRoll.timeClose) + (0.7f * diceRoll.timeClose) + (diceRoll.timeClose * 0.5f);
-        yield return new WaitForSeconds(timeUse);
+        yield return new WaitForSeconds(timeUse / 4);
+        movePlayer = false;
+        yield return new WaitForSeconds(timeUse * 3 / 4);
         Debug.Log("result : " + diceRoll.result);
         if (diceRoll.result - (atkBonus + dataPlayer.bonus) == 20)
         {
             critical = true;
+            Debug.Log("Critical!!");
         }
         if (diceRoll.result >= monsters[targetMons].armorClass)
         {
             yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
-            //diceRoll.RollDice(dice, bonus, true);
+            //diceRoll.RollDice(dice, bonus, true);//critical 100%
             diceRoll.RollDice(dice, bonus, critical , 0);
             Debug.Log("Damage : " + diceRoll.result + " bonus :" + bonus);
             critical = false;
@@ -196,6 +217,7 @@ public class CombatScript : MonoBehaviour
         atkBonus = atkSTR;
         critical = false;
         monAttack = false;
+        movePlayer = false;
         UpdateATKBonus();
     }
     private void Update()
@@ -208,5 +230,6 @@ public class CombatScript : MonoBehaviour
             }
         }
         UpdateATKBonus();
+        MovePlayerObj();
     }
 }
