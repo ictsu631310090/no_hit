@@ -965,7 +965,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0, g: 1, b: 0.9685726, a: 1}
+  m_Color: {r: 0.504717, g: 1, b: 0.9844617, a: 1}
   m_Intensity: 1.2
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataMon:
-  - {fileID: 11400000, guid: 831a256d96988894db66780ae2df13a2, type: 2}
+  - {fileID: 11400000, guid: 32029fca296aa1946bde5526b169c701, type: 2}
   monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}
   spawnPointMon:
   - {fileID: 1373367219}
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   takeDamage: 0
   healHitPoint: 0
   armorClass: 0
-  str: 30
+  str: 20
   dex: 10
   con: 10
   xp: 0

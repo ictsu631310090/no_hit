@@ -338,14 +338,17 @@ MonoBehaviour:
   xpDrop: 0
   toHitPlus: 0
   damage: {x: 0, y: 0, z: 0}
-  model: {fileID: 0}
   nameText: {fileID: 6979495538248708182}
   hpText: {fileID: 4690665391532356792}
   acText: {fileID: 1540418232452634566}
   hpbar: {fileID: 4668496450608820360}
+  model: {fileID: 0}
   animaMon: {fileID: 0}
   takeDamage: 0
   combat: {fileID: 0}
+  canAttack: 0
+  speedMove: 40
+  distancePlayer: -2
 --- !u!1 &6664994500693374947
 GameObject:
   m_ObjectHideFlags: 0

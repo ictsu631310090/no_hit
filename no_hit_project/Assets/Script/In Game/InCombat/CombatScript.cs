@@ -179,7 +179,7 @@ public class CombatScript : MonoBehaviour
     {
         endTurn.interactable = false;
         float timeUse = (2 * time) + (0.7f * time) + (time * 0.5f);
-        yield return new WaitForSeconds(time * 0.2f);
+        yield return new WaitForSeconds(time * 0.3f);
 
         for (int i = 0; i < monsters.Count; i++)
         {
@@ -203,6 +203,7 @@ public class CombatScript : MonoBehaviour
         diceRoll.willAttack = false;
         endTurn.interactable = true;
         monAttack = false;
+        StopAllCoroutines();
     }
     private void Awake()
     {

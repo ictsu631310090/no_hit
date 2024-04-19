@@ -179,9 +179,9 @@ public class DataPlayerScript : MonoBehaviour
     public void PlayAnimation(int  i)
     {
         player.animaMon.SetInteger("step", i);
-        StartCoroutine(DeleyTime());
+        StartCoroutine(DeleyAnimationTime());
     }
-    IEnumerator DeleyTime()
+    IEnumerator DeleyAnimationTime()
     {
         float time = diceRoll.timeClose;
         yield return new WaitForSeconds(time);

@@ -25,7 +25,7 @@ public class CreateMonsterScript : MonoBehaviour
             monScript.xpDrop = dataMon[typeMon].xpDrop;
             monScript.combat = combat;
             GameObject modelMon = Instantiate(dataMon[typeMon].model, monScript.GetComponent<Transform>(), false);
-            monScript.animaMon = modelMon.GetComponent<Animator>();
+            monScript.model = modelMon;
             int r = Random.Range(dataMon[typeMon].numDiceDrop.x, dataMon[typeMon].numDiceDrop.y + 1);//dice
             for (int j = 0; j < r; j++)
             {
