@@ -48,15 +48,15 @@ public class DiceRollScript : MonoBehaviour
         switch (type)
         {
             case 0:
-                detailText.text = "Player \nd" + max;
+                detailText.text = "Player";
                 deplayDice.GetComponent<RawImage>().color = new Color(0, 1, 1, 0.5f);//blue sky
                 break;
             case 1:
-                detailText.text = "Monster \nd" + max;
+                detailText.text = "Monster";
                 deplayDice.GetComponent<RawImage>().color = new Color(1, 0, 0, 0.5f);//red
                 break;
             case 2:
-                detailText.text = "Heal PLayer \nd" + max;
+                detailText.text = "Heal PLayer";
                 deplayDice.GetComponent<RawImage>().color = new Color(0, 1, 0, 0.5f);//green
                 break;
             default:
@@ -66,7 +66,6 @@ public class DiceRollScript : MonoBehaviour
         {
             detailText.text += "+" + bonus;
         }
-        deplayDice.SetActive(true);
         deplayDice.GetComponent<Animator>().SetBool ("Open",true);
         result = Random.Range(1, max + 1);
         //Debug.Log("result : " + result);
@@ -81,7 +80,7 @@ public class DiceRollScript : MonoBehaviour
             yield return new WaitForSeconds(time * 0.5f);
             result += result;
             numberText.text = result.ToString();
-            Debug.Log("Damage critical : " + result);
+            //Debug.Log("Damage critical : " + result);
         }
         yield return new WaitForSeconds(time * 0.5f);
         if (bonus != 0)
@@ -96,12 +95,10 @@ public class DiceRollScript : MonoBehaviour
         yield return new WaitForSeconds(time);
         deplayDice.GetComponent<Animator>().SetBool("Open", false);
         yield return new WaitForSeconds(0.7f * time);
-        deplayDice.SetActive(false);
         willAttack = false;
     }
     private void Start()
     {
         willAttack = false;
-        deplayDice.SetActive(false);
     }
 }
