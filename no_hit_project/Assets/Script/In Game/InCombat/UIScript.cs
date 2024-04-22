@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class UIScript : MonoBehaviour
 {
-    [SerializeField] private GameObject blackScene;
-    [SerializeField] private AnimationClip animationBlack;
-    private float timeAnimaBlack;
+    public Animator blackScene;
     private int moneyPlayer;
     public static int addMoney;
     [SerializeField] private TextMeshProUGUI moneyText;
@@ -15,6 +14,7 @@ public class UIScript : MonoBehaviour
     private bool openMap;
     [SerializeField] private GameObject bagUI;
     private bool openBag;
+    [HideInInspector] public bool nextScene;
     public void OpenMapUI()
     {
         if (!openMap)
@@ -41,17 +41,30 @@ public class UIScript : MonoBehaviour
             openBag = false;
         }
     }
+    private void CloseScene()
+    {
+        if (nextScene)
+        {
+            blackScene.SetBool("close", true);
+            StartCoroutine(DelayChangeScene());
+        }
+    }
+    IEnumerator DelayChangeScene()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(0);//main menu test
+    }
     private void Start()
     {
         moneyPlayer = 0;
+
         moneyText.text = moneyPlayer.ToString();
         mapUI.SetActive(false);
         openMap = false;
         bagUI.SetActive(false);
         openBag = false;
 
-        timeAnimaBlack = animationBlack.length;
-        blackScene.SetActive(true);
+        nextScene = false;
     }
     void Update()
     {
@@ -61,14 +74,6 @@ public class UIScript : MonoBehaviour
             addMoney = 0;
             moneyText.text = moneyPlayer.ToString();
         }
-
-        if (timeAnimaBlack >= 0)
-        {
-            timeAnimaBlack -= Time.deltaTime;
-            if (timeAnimaBlack <= 0)
-            {
-                blackScene.SetActive(false);
-            }
-        }
+        CloseScene();
     }
 }

@@ -36,8 +36,7 @@ public class MonsterScript : MonoBehaviour
     private bool moveMons;
     public void MonsterAttack()
     {
-        combat.diceRoll.RollDice(20, toHitPlus , false , 1);
-        Debug.Log("Attack");
+        combat.diceRoll.RollToHit(toHitPlus, 0, 1);
         animaMon.SetInteger("step", 1);
         moveMons = true;
         StartCoroutine(Damage(damage.y, damage.z));
@@ -48,13 +47,17 @@ public class MonsterScript : MonoBehaviour
         moveMons = false;
         animaMon.SetInteger("step", 0);
         yield return new WaitForSeconds(( combat.diceRoll.timeClose *3/4) + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
-        if (combat.diceRoll.result >= combat.dataPlayer.armorClass)
+        if (combat.diceRoll.allResult >= combat.dataPlayer.armorClass)
         {
             canAttack = true;
             yield return new WaitForSeconds(combat.diceRoll.timeClose * 0.1f);
-            combat.diceRoll.RollDice(dice, bonus , false , 1);//not critical;
+            combat.diceRoll.RollDamage(dice, bonus, 0, 1);
             yield return new WaitForSeconds(combat.diceRoll.timeClose + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
-            combat.dataPlayer.takeDamage = combat.diceRoll.result;
+            combat.dataPlayer.takeDamage = combat.diceRoll.allResult;
+        }
+        else
+        {
+            combat.diceRoll.willAttack = false;
         }
         canAttack = false;
     }
@@ -75,7 +78,7 @@ public class MonsterScript : MonoBehaviour
         {
             UIScript.addMoney = moneyDrop;
             combat.dataPlayer.addXp = xpDrop;
-            combat.diceRoll.RollDice(4, 0, false , 2); // heal
+            combat.diceRoll.RollDamage(4, 0, 0, 2);
             combat.monsters[id] = null;
             combat.CheckMonsterDie(id);
             StopAllCoroutines();
@@ -91,8 +94,8 @@ public class MonsterScript : MonoBehaviour
         yield return new WaitForSeconds(combat.diceRoll.timeClose / 2);
         animaMon.SetInteger("step", 3);
         yield return new WaitForSeconds((combat.diceRoll.timeClose * 3/4) + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
-        combat.dataPlayer.healHitPoint = combat.diceRoll.result; // heal after kill
-        Debug.Log("Heal : " + combat.diceRoll.result);
+        combat.dataPlayer.healHitPoint = combat.diceRoll.allResult; // heal after kill
+        Debug.Log("Heal : " + combat.diceRoll.allResult);
         if (combat.monsters.Count > 0)
         {
             combat.lightTarget.SetActive(true);

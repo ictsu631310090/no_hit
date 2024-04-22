@@ -40,7 +40,7 @@ public class NewDiceRollScript : MonoBehaviour
 
             }
         }
-    }
+    }//test
     public void RollToHit(int bonus,int diceAdd, int who)
     {
         willAttack = true;
@@ -112,7 +112,8 @@ public class NewDiceRollScript : MonoBehaviour
         {
             item.GetComponent<Animator>().SetBool("open", false);
         }
-        Open = false;//don't forget remove
+        ClearAllDice();
+        Open = false;//test, don't forget remove
     }
     private void ChangeDiceImage(GameObject obj,int diceImage)
     {
@@ -167,72 +168,14 @@ public class NewDiceRollScript : MonoBehaviour
             case 1:
                 whoUseText.text = "Monster Damage";
                 break;
+            case 2:
+                whoUseText.text = "Player Heal";
+                break;
             default:
                 break;
         }
         willAttack = false;
     }
-    public void RollDice(int max, int bonus, bool critical , int type)
-    {
-        //max => what dice roll.
-        //bonus => add bonus.
-        //critical => critical or not. 
-        //type => 0 = player Attack, 1 = monster Attack , 2 = heal Player.
-        willAttack = true;
-        StopCoroutine(DelayClose(0, 0, false));
-        //ChangeDiceImage();
-        //switch (type)
-        //{
-        //    case 0:
-        //        whoUseText.text = "Player";
-        //        deplayDice.GetComponent<RawImage>().color = new Color(0, 1, 1, 0.5f);//blue sky
-        //        break;
-        //    case 1:
-        //        whoUseText.text = "Monster";
-        //        deplayDice.GetComponent<RawImage>().color = new Color(1, 0, 0, 0.5f);//red
-        //        break;
-        //    case 2:
-        //        whoUseText.text = "Heal PLayer";
-        //        deplayDice.GetComponent<RawImage>().color = new Color(0, 1, 0, 0.5f);//green
-        //        break;
-        //    default:
-        //        break;
-        //}
-        if (bonus != 0)
-        {
-            whoUseText.text += "+" + bonus;
-        }
-        //deplayDice.GetComponent<Animator>().SetBool ("Open",true);
-        allResult = Random.Range(1, max + 1);
-        //Debug.Log("result : " + result);
-        numberText.text = allResult.ToString();
-        //Debug.Log("text : " + numberText.text);
-        StartCoroutine(DelayClose(timeClose, bonus , critical));
-    }//old
-    IEnumerator DelayClose(float time,int bonus , bool critical)
-    {
-        if (critical)
-        {
-            yield return new WaitForSeconds(time * 0.5f);
-            allResult += allResult;
-            numberText.text = allResult.ToString();
-            //Debug.Log("Damage critical : " + result);
-        }
-        yield return new WaitForSeconds(time * 0.5f);
-        if (bonus != 0)
-        {
-            for (int i = 0; i < bonus; i++)
-            {
-                yield return new WaitForSeconds((time * 0.5f) / bonus);
-                allResult += 1;
-                numberText.text = allResult.ToString();
-            }
-        }//add bonus
-        yield return new WaitForSeconds(time);
-        //deplayDice.GetComponent<Animator>().SetBool("Open", false);
-        yield return new WaitForSeconds(0.7f * time);
-        willAttack = false;
-    }//old
     private void Start()
     {
         willAttack = false;

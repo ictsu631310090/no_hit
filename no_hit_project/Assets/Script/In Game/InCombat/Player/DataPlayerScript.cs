@@ -26,7 +26,7 @@ public class DataPlayerScript : MonoBehaviour
     [Header("Link Obj")]
     public ShowPlayerScript player;
     [SerializeField] private GameObject UpStatusButtomObj;
-    private DiceRollScript diceRoll;
+    private NewDiceRollScript diceRoll;
 
     private void LevelUp()
     {
@@ -190,7 +190,7 @@ public class DataPlayerScript : MonoBehaviour
     private void Awake()
     {
         player.dataPlayer = this;
-        diceRoll = GetComponent<DiceRollScript>();
+        diceRoll = GetComponent<NewDiceRollScript>();
     }
     private void Start()
     {

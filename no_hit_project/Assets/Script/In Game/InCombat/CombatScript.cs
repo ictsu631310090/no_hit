@@ -8,7 +8,8 @@ public class CombatScript : MonoBehaviour
 {
     private int atkSTR;//modifier
     private int atkDEX;//modifier
-    [HideInInspector] public DiceRollScript diceRoll;
+    private UIScript uiScript;
+    [HideInInspector] public NewDiceRollScript diceRoll;
     [HideInInspector] public DataPlayerScript dataPlayer;
     private SetMonsterScript setMon;
     public List<MonsterScript> monsters;
@@ -21,7 +22,6 @@ public class CombatScript : MonoBehaviour
     [SerializeField] private Button bothAttack;
     [SerializeField] private Button endTurn;
     public bool finess;
-    private bool critical;
     private int atkBonus;
     private bool movePlayer;
     [SerializeField] private float distanceMon;
@@ -46,7 +46,7 @@ public class CombatScript : MonoBehaviour
                     break;
             }//ปิดปุ่ม
             movePlayer = true;
-            diceRoll.RollDice(20, atkBonus + dataPlayer.bonus, false, 0);
+            diceRoll.RollToHit(atkBonus + dataPlayer.bonus, 0, 0);//0 = player, 1 = enemy
             StartCoroutine(Damage(4, atkBonus));
         }
         else
@@ -74,23 +74,19 @@ public class CombatScript : MonoBehaviour
         yield return new WaitForSeconds(timeUse / 4);
         movePlayer = false;
         yield return new WaitForSeconds(timeUse * 3 / 4);
-        Debug.Log("result : " + diceRoll.result);
-        if (diceRoll.result - (atkBonus + dataPlayer.bonus) == 20)
+        Debug.Log("result : " + diceRoll.allResult);
+        if (diceRoll.allResult >= monsters[targetMons].armorClass)
         {
-            critical = true;
-            Debug.Log("Critical!!");
-        }
-        if (diceRoll.result >= monsters[targetMons].armorClass)
-        {
-            yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
-            //diceRoll.RollDice(dice, bonus, true);//critical 100%
-            diceRoll.RollDice(dice, bonus, critical , 0);
-            Debug.Log("Damage : " + diceRoll.result + " bonus :" + bonus);
-            critical = false;
+            //yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
+            diceRoll.RollDamage(dice, bonus, 0, 0);
             yield return new WaitForSeconds(timeUse);
-            monsters[targetMons].takeDamage = diceRoll.result;
+            monsters[targetMons].takeDamage = diceRoll.allResult;
         }
-    }
+        else
+        {
+            diceRoll.willAttack = false;
+        }
+    }//old
     public void CheckMonsterDie(int idMonDie)
     {
         int numMon = 0;
@@ -121,7 +117,7 @@ public class CombatScript : MonoBehaviour
         }
         setMon.buttomTarget[idMonDie].SetActive(false);
         Debug.Log("targetMons : " + targetMons);
-    } // plater attack
+    } // player attack
     private void UpdateATKBonus()
     {
         int newStrMo = (dataPlayer.str - 10) / 2;
@@ -165,6 +161,7 @@ public class CombatScript : MonoBehaviour
     }//buttom
     public void EndTurnButtom()
     {
+        endTurn.interactable = false;
         if (!diceRoll.willAttack && monsters.Count > 0)
         {
             StopAllCoroutines();
@@ -173,11 +170,11 @@ public class CombatScript : MonoBehaviour
         else if (!diceRoll.willAttack && monsters.Count == 0)
         {
             Debug.Log("Next");
+            uiScript.nextScene = true;
         }
     }
     IEnumerator DelayMonsterAttack(float time)
     {
-        endTurn.interactable = false;
         float timeUse = (2 * time) + (0.7f * time) + (time * 0.5f);
         yield return new WaitForSeconds(time * 0.3f);
 
@@ -207,7 +204,8 @@ public class CombatScript : MonoBehaviour
     }
     private void Awake()
     {
-        diceRoll = GetComponent<DiceRollScript>();
+        uiScript = GetComponent<UIScript>();
+        diceRoll = GetComponent<NewDiceRollScript>();
         setMon = GetComponent<SetMonsterScript>();
         dataPlayer = GetComponent<DataPlayerScript>();
     }
@@ -216,7 +214,6 @@ public class CombatScript : MonoBehaviour
         atkSTR = (dataPlayer.str - 10) / 2;
         atkDEX = (dataPlayer.dex - 10) / 2;
         atkBonus = atkSTR;
-        critical = false;
         monAttack = false;
         movePlayer = false;
         UpdateATKBonus();
