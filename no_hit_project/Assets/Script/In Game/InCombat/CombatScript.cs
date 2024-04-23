@@ -60,20 +60,20 @@ public class CombatScript : MonoBehaviour
         {
             Vector3 positionMon = monsters[targetMons].gameObject.transform.position;
             positionMon.x += distanceMon;
-            dataPlayer.player.animaMon.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaMon.gameObject.transform.position, positionMon, Time.deltaTime * speedMove);
+            dataPlayer.player.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaPlayer.gameObject.transform.position, positionMon, Time.deltaTime * speedMove);
         }
         else
         {
             Vector3 oldPosition = dataPlayer.player.gameObject.transform.position;
-            dataPlayer.player.animaMon.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaMon.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
+            dataPlayer.player.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaPlayer.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
         }
     }
     IEnumerator Damage(int dice, int bonus)
     {
-        float timeUse = (2 * diceRoll.timeClose) + (0.7f * diceRoll.timeClose) + (diceRoll.timeClose * 0.5f);
-        yield return new WaitForSeconds(timeUse / 4);
+        float timeUse = (3 * diceRoll.timeClose);
+        yield return new WaitForSeconds(timeUse / 3);
         movePlayer = false;
-        yield return new WaitForSeconds(timeUse * 3 / 4);
+        yield return new WaitForSeconds(timeUse / 3);
         Debug.Log("result : " + diceRoll.allResult);
         if (diceRoll.allResult >= monsters[targetMons].armorClass)
         {
@@ -84,6 +84,7 @@ public class CombatScript : MonoBehaviour
         }
         else
         {
+            monsters[targetMons].showMissImage = true;
             diceRoll.willAttack = false;
         }
     }//old
@@ -165,7 +166,7 @@ public class CombatScript : MonoBehaviour
         if (!diceRoll.willAttack && monsters.Count > 0)
         {
             StopAllCoroutines();
-            StartCoroutine(DelayMonsterAttack(diceRoll.timeClose));
+            StartCoroutine(DelayMonsterAttack());
         }
         else if (!diceRoll.willAttack && monsters.Count == 0)
         {
@@ -173,10 +174,10 @@ public class CombatScript : MonoBehaviour
             uiScript.nextScene = true;
         }
     }
-    IEnumerator DelayMonsterAttack(float time)
+    IEnumerator DelayMonsterAttack()
     {
-        float timeUse = (2 * time) + (0.7f * time) + (time * 0.5f);
-        yield return new WaitForSeconds(time * 0.3f);
+        float timeUse = (3 * diceRoll.timeClose);
+        yield return new WaitForSeconds(timeUse * 0.1f);
 
         for (int i = 0; i < monsters.Count; i++)
         {
@@ -186,7 +187,8 @@ public class CombatScript : MonoBehaviour
                 yield return new WaitForSeconds(timeUse);
                 if (monsters[i].canAttack)//to hit
                 {
-                    yield return new WaitForSeconds(timeUse);
+                    yield return new WaitForSeconds(timeUse / 2);
+                    monsters[i].canAttack = false;
                 }
             }
         }

@@ -11,7 +11,9 @@ public class ShowPlayerScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI acText;
     [SerializeField] private Image hpbar;
-    public Animator animaMon;
+    public Animator animaPlayer;
+    [HideInInspector] public bool showMiss;
+    [SerializeField] private Animator missPlayer;
 
     [SerializeField] private GameObject statusText;
     private TextMeshProUGUI strText;
@@ -42,15 +44,52 @@ public class ShowPlayerScript : MonoBehaviour
     public void UpdateStatus()
     {
         strText.text = dataPlayer.str.ToString();
-        strMoText.text = "+" + ((dataPlayer.str - 10) / 2).ToString();
+        if ((dataPlayer.str - 10) / 2 > 0)
+        {
+            strMoText.text = "+" + ((dataPlayer.str - 10) / 2).ToString();
+        }
+        else
+        {
+            strMoText.text =((dataPlayer.str - 10) / 2).ToString();
+        }
+
         dexText.text = dataPlayer.dex.ToString();
-        dexMoText.text = "+" + ((dataPlayer.dex - 10) / 2).ToString();
+        if ((dataPlayer.dex - 10) / 2 > 0)
+        {
+            dexMoText.text = "+" + ((dataPlayer.dex - 10) / 2).ToString();
+        }
+        else
+        {
+            dexMoText.text = ((dataPlayer.dex - 10) / 2).ToString();
+        }
+
         conText.text = dataPlayer.con.ToString();
-        conMoText.text = "+" + ((dataPlayer.con - 10) / 2).ToString();
+        if ((dataPlayer.con - 10) / 2 > 0)
+        {
+            conMoText.text = "+" + ((dataPlayer.con - 10) / 2).ToString();
+        }
+        else
+        {
+            conMoText.text = ((dataPlayer.con - 10) / 2).ToString();
+        }
     }
     public void UpdateACText()
     {
         acText.text = dataPlayer.armorClass.ToString();
+    }
+    private void CheckMiss()
+    {
+        if (showMiss)
+        {
+            missPlayer.SetBool("show", true);
+            StartCoroutine(DelayCloseMiss());
+        }
+    }
+    IEnumerator DelayCloseMiss()
+    {
+        showMiss = false;
+        yield return new WaitForSeconds(0.5f);
+        missPlayer.SetBool("show", false);
     }
     private void Awake()
     {
@@ -63,6 +102,8 @@ public class ShowPlayerScript : MonoBehaviour
     }
     private void Start()
     {
+        showMiss = false;
+
         acText.text = dataPlayer.armorClass.ToString();
 
         UpdateTextHp();
@@ -74,5 +115,6 @@ public class ShowPlayerScript : MonoBehaviour
     private void Update()
     {
         UpStatus();
+        CheckMiss();
     }
 }

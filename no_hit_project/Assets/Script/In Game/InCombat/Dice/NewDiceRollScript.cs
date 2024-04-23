@@ -90,8 +90,19 @@ public class NewDiceRollScript : MonoBehaviour
             yield return new WaitForSeconds(timeClose);
             GameObject objAdd = Instantiate(diceUIPrefab, spwanDice, false);
             ChangeDiceImage(objAdd, imageDice);
+            if (bonus > 0)
+            {
+                objAdd.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+ " + bonus.ToString() + " ";
+            }
+            else
+            {
+                objAdd.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = bonus.ToString() + " ";
+            }
             allResult += bonus;
-            objAdd.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "+ " + bonus.ToString() + " ";
+            if (allResult <= 0)
+            {
+                allResult = 1;//fix
+            }
             numberText.text = allResult.ToString();
             allDice.Add(objAdd);
         }
@@ -106,14 +117,14 @@ public class NewDiceRollScript : MonoBehaviour
             numberText.text = allResult.ToString();
             allDice.Add(objAdd);
         }
-        yield return new WaitForSeconds(timeClose);
+        yield return new WaitForSeconds(timeClose / 2);
         animationUI.SetBool("open", false);
         foreach (var item in allDice)
         {
             item.GetComponent<Animator>().SetBool("open", false);
         }
-        ClearAllDice();
-        Open = false;//test, don't forget remove
+        yield return new WaitForSeconds(timeClose / 3);
+        //Open = false;//test, don't forget remove
     }
     private void ChangeDiceImage(GameObject obj,int diceImage)
     {

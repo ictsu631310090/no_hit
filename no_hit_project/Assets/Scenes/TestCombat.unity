@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec7e4dca15a31843808697d3adb958e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfMon: 1
+  numOfMon: 3
   buttomTarget:
   - {fileID: 1609850555}
   - {fileID: 1840749930}
@@ -1512,8 +1512,8 @@ MonoBehaviour:
   hitPointMax: 0
   takeDamage: 0
   healHitPoint: 0
-  armorClass: 0
-  str: 20
+  armorClass: 10
+  str: 5
   dex: 10
   con: 10
   xp: 0
@@ -7592,6 +7592,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 431177655152659357, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5354798364525316083, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
       propertyPath: m_Name
       value: Player

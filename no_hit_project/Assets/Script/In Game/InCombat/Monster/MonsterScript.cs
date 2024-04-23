@@ -26,6 +26,8 @@ public class MonsterScript : MonoBehaviour
     private float scaleBar;
     [HideInInspector] public GameObject model;
     private Animator animaMon;
+    [HideInInspector] public bool showMissImage;
+    [SerializeField] private Animator showMissAnimator;
     [HideInInspector] public int takeDamage;
     [HideInInspector] public CombatScript combat;
     [HideInInspector] public bool canAttack;
@@ -43,23 +45,32 @@ public class MonsterScript : MonoBehaviour
     }
     IEnumerator Damage(int dice, int bonus)
     {
-        yield return new WaitForSeconds((combat.diceRoll.timeClose *1/2));
+        float time = combat.diceRoll.timeClose + (combat.diceRoll.timeClose * 0.1f);
+        if (bonus != 0)
+        {
+            time += combat.diceRoll.timeClose;
+        }
+        yield return new WaitForSeconds((time * 1/2));
         moveMons = false;
         animaMon.SetInteger("step", 0);
-        yield return new WaitForSeconds(( combat.diceRoll.timeClose *3/4) + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
+        yield return new WaitForSeconds((time * 3/4));
         if (combat.diceRoll.allResult >= combat.dataPlayer.armorClass)
         {
             canAttack = true;
-            yield return new WaitForSeconds(combat.diceRoll.timeClose * 0.1f);
+            if (combat.diceRoll.allResult - toHitPlus == 20)
+            {
+                time += combat.diceRoll.timeClose;
+            }
+            yield return new WaitForSeconds(time * 0.1f);
             combat.diceRoll.RollDamage(dice, bonus, 0, 1);
-            yield return new WaitForSeconds(combat.diceRoll.timeClose + (0.7f * combat.diceRoll.timeClose) + (combat.diceRoll.timeClose * 0.5f));
+            yield return new WaitForSeconds(time);
             combat.dataPlayer.takeDamage = combat.diceRoll.allResult;
         }
         else
         {
+            combat.dataPlayer.player.showMiss = true;
             combat.diceRoll.willAttack = false;
         }
-        canAttack = false;
     }
     public void UpdateHp()
     {
@@ -122,6 +133,20 @@ public class MonsterScript : MonoBehaviour
             model.transform.position = Vector3.MoveTowards(model.transform.position, oldPosition, Time.deltaTime * speedMove);
         }
     }
+    private void ShowMissImage()
+    {
+        if (showMissImage)
+        {
+            showMissAnimator.SetBool("show", true);
+            StartCoroutine(DelayCloseMiss());
+        }
+    }
+    IEnumerator DelayCloseMiss()
+    {
+        showMissImage = false;
+        yield return new WaitForSeconds(0.5f);
+        showMissAnimator.SetBool("show", false);
+    }
     private void Start()
     {
         animaMon = model.GetComponent<Animator>();
@@ -141,5 +166,6 @@ public class MonsterScript : MonoBehaviour
             UpdateHp();
         }
         MoveMonster();
+        ShowMissImage();
     }
 }

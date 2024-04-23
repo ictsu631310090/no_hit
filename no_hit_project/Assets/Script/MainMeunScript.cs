@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMeunScript : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class MainMeunScript : MonoBehaviour
     [SerializeField] private GameObject ExitGameUI;
     private bool exitGameOpen;
     private SaveManagerScript saveManager;
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void OpenSettingUI()
     {
         if (!settingOpen)
@@ -40,12 +45,15 @@ public class MainMeunScript : MonoBehaviour
         saveManager.SaveGame();
         Application.Quit();
     }
+    private void Awake()
+    {
+        saveManager = GetComponent<SaveManagerScript>();
+    }
     private void Start()
     {
         SettingUI.SetActive(false);
         settingOpen = false;
         ExitGameUI.SetActive(false);
         exitGameOpen = false;
-        saveManager = GetComponent<SaveManagerScript>();
     }
 }
