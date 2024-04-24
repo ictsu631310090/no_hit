@@ -8,7 +8,7 @@ public class CombatScript : MonoBehaviour
 {
     private int atkSTR;//modifier
     private int atkDEX;//modifier
-    private UIScript uiScript;
+    [SerializeField] private UIScript uiScript;
     [HideInInspector] public NewDiceRollScript diceRoll;
     [HideInInspector] public DataPlayerScript dataPlayer;
     private SetMonsterScript setMon;
@@ -22,6 +22,8 @@ public class CombatScript : MonoBehaviour
     [SerializeField] private Button bothAttack;
     [SerializeField] private Button endTurn;
     public bool finess;
+    public int addDice;
+
     private int atkBonus;
     private bool movePlayer;
     [SerializeField] private float distanceMon;
@@ -46,11 +48,26 @@ public class CombatScript : MonoBehaviour
                     break;
             }//ปิดปุ่ม
             movePlayer = true;
-            diceRoll.RollToHit(atkBonus + dataPlayer.bonus, 0, 0);//0 = player, 1 = enemy
-            StartCoroutine(Damage(4, atkBonus));
+            diceRoll.RollToHit(atkBonus + dataPlayer.bonus, addDice, 0);//0 = player, 1 = enemy
+            StartCoroutine(Damage(dataPlayer.diceDamage, atkBonus, addDice));
         }
         else
         {
+            switch (i)
+            {
+                case 0:
+                    rightAttack.interactable = false;
+                    break;
+                case 1:
+                    leftAttack.interactable = false;
+                    break;
+                case 2:
+                    bothAttack.interactable = false;
+                    break;
+                default:
+                    Debug.LogError("Enter the attack button number.");
+                    break;
+            }//ปิดปุ่ม
             Debug.Log("No Monster");
         }
     }
@@ -68,18 +85,26 @@ public class CombatScript : MonoBehaviour
             dataPlayer.player.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaPlayer.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
         }
     }
-    IEnumerator Damage(int dice, int bonus)
+    IEnumerator Damage(int dice, int bonus, int addDiceInMethod)
     {
         float timeUse = (3 * diceRoll.timeClose);
-        yield return new WaitForSeconds(timeUse / 3);
+        yield return new WaitForSeconds(timeUse / 2);
         movePlayer = false;
         yield return new WaitForSeconds(timeUse / 3);
+        if (addDiceInMethod != 0)
+        {
+            yield return new WaitForSeconds(timeUse / 3);
+        }
         Debug.Log("result : " + diceRoll.allResult);
         if (diceRoll.allResult >= monsters[targetMons].armorClass)
         {
             //yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
-            diceRoll.RollDamage(dice, bonus, 0, 0);
+            diceRoll.RollDamage(dice, bonus, addDiceInMethod, 0);
             yield return new WaitForSeconds(timeUse);
+            if (addDiceInMethod != 0)
+            {
+                yield return new WaitForSeconds(timeUse / 3);
+            }
             monsters[targetMons].takeDamage = diceRoll.allResult;
         }
         else
@@ -87,7 +112,8 @@ public class CombatScript : MonoBehaviour
             monsters[targetMons].showMissImage = true;
             diceRoll.willAttack = false;
         }
-    }//old
+        addDice = 0;
+    }
     public void CheckMonsterDie(int idMonDie)
     {
         int numMon = 0;
@@ -206,19 +232,20 @@ public class CombatScript : MonoBehaviour
     }
     private void Awake()
     {
-        uiScript = GetComponent<UIScript>();
         diceRoll = GetComponent<NewDiceRollScript>();
         setMon = GetComponent<SetMonsterScript>();
         dataPlayer = GetComponent<DataPlayerScript>();
     }
     private void Start()
     {
+        addDice = 0;
         atkSTR = (dataPlayer.str - 10) / 2;
         atkDEX = (dataPlayer.dex - 10) / 2;
         atkBonus = atkSTR;
         monAttack = false;
         movePlayer = false;
         UpdateATKBonus();
+        ReadyToCombat();
     }
     private void Update()
     {

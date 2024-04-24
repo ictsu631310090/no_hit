@@ -89,7 +89,30 @@ public class MonsterScript : MonoBehaviour
         {
             UIScript.addMoney = moneyDrop;
             combat.dataPlayer.addXp = xpDrop;
-            combat.diceRoll.RollDamage(4, 0, 0, 2);
+            combat.diceRoll.RollDamage(4, 0, 0, 2);//heal
+            foreach (var item in diceDrop)
+            {
+                switch (item)
+                {
+                    case 4:
+                        combat.dataPlayer.diceHave[0] += 1;
+                        break;
+                    case 6:
+                        combat.dataPlayer.diceHave[1] += 1;
+                        break;
+                    case 8:
+                        combat.dataPlayer.diceHave[2] += 1;
+                        break;
+                    case 10:
+                        combat.dataPlayer.diceHave[3] += 1;
+                        break;
+                    case 12:
+                        combat.dataPlayer.diceHave[4] += 1;
+                        break;
+                    default:
+                        break;
+                }
+            }//Add Dice
             combat.monsters[id] = null;
             combat.CheckMonsterDie(id);
             StopAllCoroutines();

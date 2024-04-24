@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class SaveManagerScript : MonoBehaviour
 {
+    [SerializeField] private DataPlayerScript dataPlayer;
     [SerializeField] private Button loadGameButtom;
 
-    private DataPlayerScript dataPlayer;
 
     public void NewGameButtom()
     {
@@ -28,9 +28,5 @@ public class SaveManagerScript : MonoBehaviour
     public void SaveGame()
     {
         CreateSaveScript.Save(dataPlayer);
-    }
-    private void Awake()
-    {
-        dataPlayer = GetComponent<DataPlayerScript>();
     }
 }

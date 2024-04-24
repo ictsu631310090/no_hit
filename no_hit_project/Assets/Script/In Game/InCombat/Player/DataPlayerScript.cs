@@ -20,7 +20,9 @@ public class DataPlayerScript : MonoBehaviour
     public int xp;
     public int addXp;
     public int level;
+    public int diceDamage;//wapon
     public int bonus;
+    public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
     [HideInInspector] public int pointLevel;
 
     [Header("Link Obj")]
@@ -203,7 +205,7 @@ public class DataPlayerScript : MonoBehaviour
         hitPointMax = hitPoint;
 
         armorClass += oldDexMoPLayer;
-
+        diceDamage = 4;//just hand
         bonus = 2;
         pointLevel = 0;
 

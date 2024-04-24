@@ -26,10 +26,11 @@ public class CreateMonsterScript : MonoBehaviour
             monScript.combat = combat;
             GameObject modelMon = Instantiate(dataMon[typeMon].model, monScript.GetComponent<Transform>(), false);
             monScript.model = modelMon;
-            int r = Random.Range(dataMon[typeMon].numDiceDrop.x, dataMon[typeMon].numDiceDrop.y + 1);//dice
+            int r = Random.Range(dataMon[typeMon].numDiceDrop.x, dataMon[typeMon].numDiceDrop.y + 1);//num dice
             for (int j = 0; j < r; j++)
             {
-                monScript.diceDrop.Add(Random.Range(0, dataMon[typeMon].typeDiceDrop.Length));
+                int rDice = Random.Range(0, dataMon[typeMon].typeDiceDrop.Length);
+                monScript.diceDrop.Add(dataMon[typeMon].typeDiceDrop[rDice]);
             }
             combat.monsters.Add(monScript);
         }
