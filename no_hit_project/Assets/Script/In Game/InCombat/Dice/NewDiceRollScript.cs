@@ -131,9 +131,6 @@ public class NewDiceRollScript : MonoBehaviour
         GameObject image = obj.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
         switch (diceImage)
         {
-            case 0:
-                image.GetComponent<RawImage>().texture = diceTextur[6];
-                break;
             case 4:
                 image.GetComponent<RawImage>().texture = diceTextur[0];
                 break;
@@ -153,6 +150,7 @@ public class NewDiceRollScript : MonoBehaviour
                 image.GetComponent<RawImage>().texture = diceTextur[5];
                 break;
             default:
+                image.GetComponent<RawImage>().texture = diceTextur[6];
                 break;
         }//dice image
     }

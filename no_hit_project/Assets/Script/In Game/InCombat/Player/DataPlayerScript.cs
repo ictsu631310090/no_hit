@@ -17,13 +17,18 @@ public class DataPlayerScript : MonoBehaviour
     private int oldLevelPlayer;
     private int oldDexMoPLayer;
     private int oldConMoPLayer;
+
     public int xp;
-    public int addXp;
-    public int level;
+    public int addXp;//just test
+    [HideInInspector] public int level;
     public int diceDamage;//wapon
     public int bonus;
+    public List<CreateWeaponScript> listWeapon;
+    public List<CreateShieldScript> listShield;
+    public List<CreateArmorScript> listArmor;
     public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
     [HideInInspector] public int pointLevel;
+
 
     [Header("Link Obj")]
     public ShowPlayerScript player;
@@ -205,14 +210,12 @@ public class DataPlayerScript : MonoBehaviour
         hitPointMax = hitPoint;
 
         armorClass += oldDexMoPLayer;
-        diceDamage = 4;//just hand
+        diceDamage = 1;//just hand
         bonus = 2;
         pointLevel = 0;
 
         UpStatusButtomObj.gameObject.SetActive(false);
     }
-
-    // Update is called once per frame
     private void Update()
     {
         LevelUp();

@@ -7,17 +7,33 @@ using UnityEngine.SceneManagement;
 public class UIScript : MonoBehaviour
 {
     public Animator blackScene;
+
     private int moneyPlayer;
     public static int addMoney;
-    [SerializeField] private DataPlayerScript dataPlayer;
-    [SerializeField] private CombatScript combat;
+
+    [SerializeField] private GameObject anotherScript;
+    private DataPlayerScript dataPlayer;
+    private CombatScript combat;
+
     [SerializeField] private TextMeshProUGUI moneyText;
+
     [SerializeField] private GameObject mapUI;
     private bool openMap;
+
+    [Header ("Bag EquipMent")]
     [SerializeField] private GameObject bagUI;
     private bool openBag;
+    [SerializeField] private GameObject[] itemCanva;//0 = weapon, 1 = shield, 2 = armor
+    [SerializeField] private Transform createShowItem;
+    [HideInInspector] public List<GameObject> showItemObj;
+    [SerializeField] private Image itemImage;
+
+    [Header("Bag Dice")]
+    [SerializeField] private GameObject bagDiceUI;
+    private bool openDiceBag;
     [SerializeField] private TextMeshProUGUI[] numDiceText;
     [SerializeField] private Button[] useDiceButton;
+
     [HideInInspector] public bool nextScene;
     public void OpenMapUI()
     {
@@ -32,10 +48,12 @@ public class UIScript : MonoBehaviour
             openMap = false;
         }
     }
+    //Equipment
     public void OpenBagUI()
     {
         if (!openBag)
         {
+            ShowEquipment();
             bagUI.SetActive(true);
             openBag = true;
         }
@@ -43,6 +61,78 @@ public class UIScript : MonoBehaviour
         {
             bagUI.SetActive(false);
             openBag = false;
+        }
+    }
+    private void ShowEquipment()
+    {
+        ClearItemShow();
+        for (int i = 0; i < dataPlayer.listWeapon.Count; i++)
+        {
+            GameObject itemShow = Instantiate(itemCanva[0], createShowItem, false);
+            itemShow.GetComponent<ItemWeaponUIScript>().dataWeapon = dataPlayer.listWeapon[i];
+            itemShow.GetComponent<ItemWeaponUIScript>().mainUI = this;
+            showItemObj.Add(itemShow);
+        }
+        for (int i = 0; i < dataPlayer.listShield.Count; i++)
+        {
+            GameObject itemShow = Instantiate(itemCanva[1], createShowItem, false);
+            itemShow.GetComponent<ItemShieldUIScript>().dataShield = dataPlayer.listShield[i];
+            itemShow.GetComponent<ItemShieldUIScript>().mainUI = this;
+            showItemObj.Add(itemShow);
+        }
+        for (int i = 0; i < dataPlayer.listArmor.Count; i++)
+        {
+            GameObject itemShow = Instantiate(itemCanva[2], createShowItem, false);
+            itemShow.GetComponent<ItemArmorUIScript>().dataArmor = dataPlayer.listArmor[i];
+            itemShow.GetComponent<ItemArmorUIScript>().mainUI = this;
+            showItemObj.Add(itemShow);
+        }
+
+        if (showItemObj.Count > 0)
+        {
+            if (dataPlayer.listWeapon.Count > 0)
+            {
+                ImageItemShow(showItemObj[0].GetComponent<ItemWeaponUIScript>().dataWeapon.image);
+            }
+            else if (dataPlayer.listShield.Count > 0)
+            {
+                ImageItemShow(showItemObj[0].GetComponent<ItemShieldUIScript>().dataShield.image);
+            }
+            else if (dataPlayer.listArmor.Count > 0)
+            {
+                ImageItemShow(showItemObj[0].GetComponent<ItemArmorUIScript>().dataArmor.image[1]);
+            }
+        }
+    }
+    public void ImageItemShow(Sprite i)
+    {
+        itemImage.sprite = i;
+        itemImage.SetNativeSize();
+    }
+    private void ClearItemShow()
+    {
+        foreach (var item in showItemObj)
+        {
+            Destroy(item);
+        }
+        showItemObj.Clear();
+    }
+    //Dice Bag
+    public void OpenBagDiceUI()
+    {
+        if (!openDiceBag)
+        {
+            UpdateNumDice();
+            UpdateButtonDice();
+            bagDiceUI.SetActive(true);
+            openDiceBag = true;
+        }
+        else
+        {
+            UpdateNumDice();
+            UpdateButtonDice();
+            bagDiceUI.SetActive(false);
+            openDiceBag = false;
         }
     }
     private void UpdateNumDice()
@@ -228,7 +318,7 @@ public class UIScript : MonoBehaviour
             default:
                 break;
         }//0 = 4, 1 = 6, 2 = 8, 3 = 10, 4 = 12
-        OpenBagUI();
+        OpenBagDiceUI();
     }
     private void CloseScene()
     {
@@ -243,6 +333,11 @@ public class UIScript : MonoBehaviour
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(0);//main menu test
     }
+    private void Awake()
+    {
+        dataPlayer = anotherScript.GetComponent<DataPlayerScript>();
+        combat = anotherScript.GetComponent<CombatScript>();
+    }
     private void Start()
     {
         moneyPlayer = 0;
@@ -250,9 +345,10 @@ public class UIScript : MonoBehaviour
         moneyText.text = moneyPlayer.ToString();
         mapUI.SetActive(false);
         openMap = false;
+        bagDiceUI.SetActive(false);
+        openDiceBag = false;
         bagUI.SetActive(false);
         openBag = false;
-
         nextScene = false;
     }
     void Update()
@@ -264,7 +360,5 @@ public class UIScript : MonoBehaviour
             moneyText.text = moneyPlayer.ToString();
         }
         CloseScene();
-        UpdateNumDice();
-        UpdateButtonDice();
     }
 }
