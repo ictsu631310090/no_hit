@@ -27,6 +27,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private Transform createShowItem;
     [HideInInspector] public List<GameObject> showItemObj;
     [SerializeField] private Image itemImage;
+    public TextMeshProUGUI warnText;
 
     [Header("Bag Dice")]
     [SerializeField] private GameObject bagDiceUI;
@@ -71,6 +72,7 @@ public class UIScript : MonoBehaviour
             GameObject itemShow = Instantiate(itemCanva[0], createShowItem, false);
             itemShow.GetComponent<ItemWeaponUIScript>().dataWeapon = dataPlayer.listWeapon[i];
             itemShow.GetComponent<ItemWeaponUIScript>().mainUI = this;
+            itemShow.GetComponent<ItemWeaponUIScript>().combat = combat;
             showItemObj.Add(itemShow);
         }
         for (int i = 0; i < dataPlayer.listShield.Count; i++)
@@ -78,6 +80,7 @@ public class UIScript : MonoBehaviour
             GameObject itemShow = Instantiate(itemCanva[1], createShowItem, false);
             itemShow.GetComponent<ItemShieldUIScript>().dataShield = dataPlayer.listShield[i];
             itemShow.GetComponent<ItemShieldUIScript>().mainUI = this;
+            itemShow.GetComponent<ItemShieldUIScript>().combat = combat;
             showItemObj.Add(itemShow);
         }
         for (int i = 0; i < dataPlayer.listArmor.Count; i++)
@@ -85,6 +88,7 @@ public class UIScript : MonoBehaviour
             GameObject itemShow = Instantiate(itemCanva[2], createShowItem, false);
             itemShow.GetComponent<ItemArmorUIScript>().dataArmor = dataPlayer.listArmor[i];
             itemShow.GetComponent<ItemArmorUIScript>().mainUI = this;
+            itemShow.GetComponent<ItemArmorUIScript>().combat = combat;
             showItemObj.Add(itemShow);
         }
 
@@ -350,6 +354,7 @@ public class UIScript : MonoBehaviour
         openMap = false;
         bagDiceUI.SetActive(false);
         openDiceBag = false;
+        warnText.text = null;
         bagUI.SetActive(false);
         openBag = false;
         nextScene = false;

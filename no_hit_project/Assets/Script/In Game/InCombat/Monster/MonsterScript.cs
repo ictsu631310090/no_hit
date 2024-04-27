@@ -68,7 +68,7 @@ public class MonsterScript : MonoBehaviour
         }
         else
         {
-            combat.dataPlayer.player.showMiss = true;
+            combat.dataPlayer.showPlayer.showMiss = true;
             combat.diceRoll.willAttack = false;
         }
     }
@@ -145,7 +145,7 @@ public class MonsterScript : MonoBehaviour
     {
         if (moveMons)
         {
-            Vector3 positionPlayer = combat.dataPlayer.player.gameObject.transform.position;
+            Vector3 positionPlayer = combat.dataPlayer.showPlayer.gameObject.transform.position;
             Debug.Log(positionPlayer);
             positionPlayer.x -= distancePlayer;
             model.transform.position = Vector3.MoveTowards(model.transform.position, positionPlayer, Time.deltaTime * speedMove);

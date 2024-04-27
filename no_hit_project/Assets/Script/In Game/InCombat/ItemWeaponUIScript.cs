@@ -13,8 +13,10 @@ public class ItemWeaponUIScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI addOnText;
     [SerializeField] private TextMeshProUGUI detailText;
     [HideInInspector] public UIScript mainUI;
+    [HideInInspector] public CombatScript combat;
     public void CilckLookImage()
     {
+        mainUI.warnText.text = null;
         mainUI.ImageItemShow(dataWeapon.image);
     }
 

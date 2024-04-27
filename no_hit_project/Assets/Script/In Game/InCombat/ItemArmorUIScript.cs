@@ -10,8 +10,10 @@ public class ItemArmorUIScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI addOnText;
     [SerializeField] private TextMeshProUGUI detailText;
     [HideInInspector] public UIScript mainUI;
+    [HideInInspector] public CombatScript combat;
     public void CilckLookImage()
     {
+        mainUI.warnText.text = null;
         mainUI.ImageItemShow(dataArmor.image[1]);
     }
     public void EquipArmor()
@@ -23,12 +25,18 @@ public class ItemArmorUIScript : MonoBehaviour
             if (dataArmor.light)
             {
                 mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
+                ChangeArmor();
             }
             else if (dataArmor.heavy && mainUI.dataPlayer.str >= dataArmor.condition)
             {
                 mainUI.dataPlayer.armorClass = dataArmor.setAC;
+                ChangeArmor();
             }
-            else
+            else if (dataArmor.heavy && mainUI.dataPlayer.str < dataArmor.condition)
+            {
+                mainUI.warnText.text = "Not enough STR.";
+            }
+            else if (!dataArmor.heavy && !dataArmor.light)
             {
                 if (dexMo >= 2)
                 {
@@ -38,24 +46,28 @@ public class ItemArmorUIScript : MonoBehaviour
                 {
                     mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
                 }
+                ChangeArmor();
             }
-            mainUI.dataPlayer.UpdateImageArmor();
-            mainUI.OpenBagUI();
-            mainUI.dataPlayer.listArmor.Remove(dataArmor);
         }
         else
         {
-            mainUI.dataPlayer.listArmor.Add(mainUI.dataPlayer.armorUse);
-            mainUI.dataPlayer.armorUse = dataArmor;
             if (dataArmor.light)
             {
                 mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
+                mainUI.dataPlayer.listArmor.Add(mainUI.dataPlayer.armorUse);
+                ChangeArmor();
             }
             else if (dataArmor.heavy && mainUI.dataPlayer.str >= dataArmor.condition)
             {
                 mainUI.dataPlayer.armorClass = dataArmor.setAC;
+                mainUI.dataPlayer.listArmor.Add(mainUI.dataPlayer.armorUse);
+                ChangeArmor();
             }
-            else
+            else if (dataArmor.heavy && mainUI.dataPlayer.str < dataArmor.condition)
+            {
+                mainUI.warnText.text = "Not enough STR.";
+            }//can not use
+            else if (!dataArmor.heavy && !dataArmor.light)
             {
                 if (dexMo >= 2)
                 {
@@ -65,12 +77,19 @@ public class ItemArmorUIScript : MonoBehaviour
                 {
                     mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
                 }
+                mainUI.dataPlayer.listArmor.Add(mainUI.dataPlayer.armorUse);
+                ChangeArmor();
             }
-            mainUI.dataPlayer.UpdateImageArmor();
-            mainUI.OpenBagUI();
-            mainUI.dataPlayer.listArmor.Remove(dataArmor);
         }//update AC
-        mainUI.dataPlayer.player.UpdateACText();
+        mainUI.dataPlayer.showPlayer.UpdateACText();
+        combat.EndTurnButtom();
+    }
+    private void ChangeArmor()
+    {
+        mainUI.dataPlayer.armorUse = dataArmor;
+        mainUI.dataPlayer.UpdateImageArmor();
+        mainUI.OpenBagUI();
+        mainUI.dataPlayer.listArmor.Remove(dataArmor);
     }
     private void Start()
     {

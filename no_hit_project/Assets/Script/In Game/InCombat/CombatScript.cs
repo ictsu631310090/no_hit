@@ -17,9 +17,9 @@ public class CombatScript : MonoBehaviour
     [HideInInspector] public int targetMons;
     public GameObject lightTarget;
 
-    [SerializeField] private Button rightAttack;
-    [SerializeField] private Button leftAttack;
-    [SerializeField] private Button bothAttack;
+    public Button rightAttack;
+    public Button leftAttack;
+    public Button bothAttack;
     [SerializeField] private Button endTurn;
     public bool finess;
     public int addDice;
@@ -77,12 +77,12 @@ public class CombatScript : MonoBehaviour
         {
             Vector3 positionMon = monsters[targetMons].gameObject.transform.position;
             positionMon.x += distanceMon;
-            dataPlayer.player.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaPlayer.gameObject.transform.position, positionMon, Time.deltaTime * speedMove);
+            dataPlayer.showPlayer.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.showPlayer.animaPlayer.gameObject.transform.position, positionMon, Time.deltaTime * speedMove);
         }
         else
         {
-            Vector3 oldPosition = dataPlayer.player.gameObject.transform.position;
-            dataPlayer.player.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.player.animaPlayer.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
+            Vector3 oldPosition = dataPlayer.showPlayer.gameObject.transform.position;
+            dataPlayer.showPlayer.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.showPlayer.animaPlayer.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
         }
     }
     IEnumerator Damage(int dice, int bonus, int addDiceInMethod)

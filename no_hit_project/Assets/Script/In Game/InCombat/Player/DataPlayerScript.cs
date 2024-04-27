@@ -29,15 +29,16 @@ public class DataPlayerScript : MonoBehaviour
     public List<CreateWeaponScript> listWeapon;
     public List<CreateShieldScript> listShield;
     public List<CreateArmorScript> listArmor;
+    public CreateWeaponScript[] rlHandWeapon = { null, null };//null,have
+    public CreateShieldScript[] rlHandShield = { null, null };//null,have
     public CreateArmorScript armorUse;
 
     [Header("Bag Dice")]
     public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
     [HideInInspector] public int pointLevel;
 
-
     [Header("Link Obj")]
-    public ShowPlayerScript player;
+    public ShowPlayerScript showPlayer;
     [SerializeField] private GameObject UpStatusButtomObj;
     private NewDiceRollScript diceRoll;
 
@@ -144,7 +145,7 @@ public class DataPlayerScript : MonoBehaviour
                 break;
         }
         pointLevel -= 1;
-        player.UpdateStatus();
+        showPlayer.UpdateStatus();
     }
     private void UpStatusButtom()
     {
@@ -178,32 +179,32 @@ public class DataPlayerScript : MonoBehaviour
             hitPoint += conMo - oldConMoPLayer;
             oldConMoPLayer = conMo;
         }
-        player.UpdateTextHp();
+        showPlayer.UpdateTextHp();
     }
     public void PlayAnimation(int  i)
     {
-        player.animaPlayer.SetInteger("step", i);
+        showPlayer.animaPlayer.SetInteger("step", i);
         StartCoroutine(DeleyAnimationTime());
     }
     IEnumerator DeleyAnimationTime()
     {
         float time = diceRoll.timeClose;
         yield return new WaitForSeconds(time);
-        player.animaPlayer.SetInteger("step", 0);
+        showPlayer.animaPlayer.SetInteger("step", 0);
     }
     public void UpdateImageArmor()
     {
         if (armorUse != null)
         {
-            for (int i = 0; i < player.modelPlayer.Length; i++)
+            for (int i = 0; i < showPlayer.modelPlayer.Length; i++)
             {
-                player.modelPlayer[i].sprite = armorUse.image[i];
+                showPlayer.modelPlayer[i].sprite = armorUse.image[i];
             }
         }
     }
     private void Awake()
     {
-        player.dataPlayer = this;
+        showPlayer.dataPlayer = GetComponent<DataPlayerScript>();
         diceRoll = GetComponent<NewDiceRollScript>();
     }
     private void Start()
@@ -224,7 +225,7 @@ public class DataPlayerScript : MonoBehaviour
         UpStatusButtomObj.gameObject.SetActive(false);
 
         armorClass = 10 + oldDexMoPLayer;
-        player.UpdateACText();
+        showPlayer.UpdateACText();
 
         UpdateImageArmor();
     }
@@ -241,14 +242,14 @@ public class DataPlayerScript : MonoBehaviour
             {
                 hitPoint = hitPointMax;
             }
-            player.UpdateTextHp();
+            showPlayer.UpdateTextHp();
         }
         if (takeDamage != 0)
         {
             PlayAnimation(5);
             hitPoint -= takeDamage;
             takeDamage = 0;
-            player.UpdateTextHp();
+            showPlayer.UpdateTextHp();
         }
     }
 }
