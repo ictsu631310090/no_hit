@@ -11,5 +11,5 @@ public class CreateArmorScript : ScriptableObject
     public bool light;
     public bool heavy;
     public int condition;//str
-    public Sprite[] image;//หัว, ตัว, แขนท่อนบนขวา, แขนท่อนบนซ้าย, แขนท่อนล่างขวา, แขนท่อนล่างซ้าย, ขาท่อนบนขวา, ขาท่อนบนซ้าย, ขาท่อนล่างขวา, ขาท่อนล่างซ้าย
+    public Sprite[] image;//หัว, ตัว, แขนท่อนบนขวา, แขนท่อนบนซ้าย, แขนท่อนล่างขวา, แขนท่อนล่างซ้าย, ขาท่อนบนขวา, ขาท่อนบนซ้าย, ขาท่อนล่างขวา, ขาท่อนล่างซ้าย, หน้า2, หน้า3
 }

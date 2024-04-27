@@ -17,6 +17,7 @@ public class ItemWeaponUIScript : MonoBehaviour
     {
         mainUI.ImageItemShow(dataWeapon.image);
     }
+
     private void Start()
     {
         twoButton.SetActive(false);

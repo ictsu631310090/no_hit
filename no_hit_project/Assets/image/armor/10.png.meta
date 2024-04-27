@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a05c604952e781b4f95cc9be3d540752
+guid: aea425f710d7d5f43ada0317f62edc71
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: chartertest_0
+      name: 10_1
       rect:
         serializedVersion: 2
-        x: 111
-        y: 343
-        width: 88
-        height: 86
+        x: 17
+        y: 389
+        width: 94
+        height: 94
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,41 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e424b9121246e7348bd82df49dd921a6
-      internalID: -836761362
+      spriteID: f927452f94e4df341a3f1785bff325cb
+      internalID: -2060326036
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_3
+      name: 10_11
       rect:
         serializedVersion: 2
-        x: 250
-        y: 271
-        width: 29
-        height: 76
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b1a321bf7b2f0e44cb8c5947eba1bb71
-      internalID: 2077407962
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chartertest_12
-      rect:
-        serializedVersion: 2
-        x: 313
-        y: 343
-        width: 88
-        height: 86
+        x: 129
+        y: 389
+        width: 94
+        height: 94
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +158,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 427e5e5375da8d5438023d667d753756
-      internalID: 2080306051
+      spriteID: 5d09a359aeae33c4296c755a3879302c
+      internalID: -679230582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_
+      name: 10_12
       rect:
         serializedVersion: 2
-        x: 78
-        y: 265
-        width: 29
-        height: 76
+        x: 240
+        y: 390
+        width: 94
+        height: 94
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0312a92df6375441a95bc7b058b07b8
+      internalID: -1583926260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 10_3
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 293
+        width: 46
+        height: 78
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 874bfbeb90d3a1d4e88d0a1186245f5b
-      internalID: 669396575
+      spriteID: 5159b243f8aed8c428314d7cdfd60bda
+      internalID: 1924538825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_4
+      name: 10_4
       rect:
         serializedVersion: 2
-        x: 122
-        y: 236
-        width: 69
-        height: 98
+        x: 81
+        y: 293
+        width: 46
+        height: 78
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45416e4fadd63b14a9b6047ae221f273
+      internalID: -585095486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 10_2
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 277
+        width: 78
+        height: 94
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,41 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ab2f5976b1f3624093cb7b84714c612
-      internalID: 1125925623
+      spriteID: 2db4c764b4470d0459d510f74481c157
+      internalID: -2119581860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_5
+      name: 10_5
       rect:
         serializedVersion: 2
-        x: 313
-        y: 252
-        width: 88
-        height: 86
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6064c8aa2dc95a4baba0ac36a7676aa
-      internalID: -783216553
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chartertest_6
-      rect:
-        serializedVersion: 2
-        x: 53
-        y: 178
-        width: 39
-        height: 79
+        x: 17
+        y: 181
+        width: 46
+        height: 94
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,62 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cfb17d398c15464e8e69339ec66d03b
-      internalID: 2040605611
+      spriteID: 5ad196fa84facbf48a2eb02b913a233f
+      internalID: -1572978944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_7
+      name: 10_6
       rect:
         serializedVersion: 2
-        x: 105
-        y: 176
-        width: 33
-        height: 61
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13483c8adf6222e42961883dd24687a6
-      internalID: 1530772807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chartertest_8
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 175
-        width: 33
-        height: 61
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c26c53996aa2404cb0387b5e2b5c379
-      internalID: 885069813
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chartertest_9
-      rect:
-        serializedVersion: 2
-        x: 255
+        x: 79
         y: 182
-        width: 39
-        height: 79
+        width: 46
+        height: 94
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,41 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9311c5893061f5448eecdf886282d12
-      internalID: -1079332662
+      spriteID: 33c0f07f49412ce4a94c03946328f694
+      internalID: 1638946095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_14
+      name: 10_7
       rect:
         serializedVersion: 2
-        x: 313
-        y: 159
-        width: 88
-        height: 86
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 116d713f44abb6446bfbb8b049905efe
-      internalID: -1539085117
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: chartertest_1
-      rect:
-        serializedVersion: 2
-        x: 109
-        y: 92
-        width: 52
-        height: 80
+        x: 17
+        y: 100
+        width: 46
+        height: 63
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 994388c0fd772c54eb3874ede0874e29
-      internalID: -858537358
+      spriteID: 87993494b46872d42bf88c21a0ff12be
+      internalID: -2046339381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_11
+      name: 10_8
       rect:
         serializedVersion: 2
-        x: 191
-        y: 92
-        width: 52
-        height: 80
+        x: 81
+        y: 101
+        width: 46
+        height: 63
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,29 +326,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e731738498d04049bb24ae0cc8b9325
-      internalID: -1157523159
+      spriteID: f75e59e4a1a81fb4ba37e5a45d69e6ba
+      internalID: -2012059085
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chartertest_15
+      name: 10_9
       rect:
         serializedVersion: 2
-        x: 313
-        y: 67
-        width: 88
-        height: 86
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 17
+        y: 5
+        width: 46
+        height: 78
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c76a9af4a8edf074db834f3a33df0351
-      internalID: 1403242916
+      spriteID: 6d1d7bf7198fcf34a9e3600b3c0f054c
+      internalID: -1385989626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 10_10
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 6
+        width: 46
+        height: 78
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f7d48ca97c794b49adbe1fafda13a9f
+      internalID: 1628366054
       vertices: []
       indices: 
       edges: []
@@ -427,20 +385,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      chartertest_: 669396575
-      chartertest_0: -836761362
-      chartertest_1: -858537358
-      chartertest_11: -1157523159
-      chartertest_12: 2080306051
-      chartertest_14: -1539085117
-      chartertest_15: 1403242916
-      chartertest_3: 2077407962
-      chartertest_4: 1125925623
-      chartertest_5: -783216553
-      chartertest_6: 2040605611
-      chartertest_7: 1530772807
-      chartertest_8: 885069813
-      chartertest_9: -1079332662
+      10_1: -2060326036
+      10_10: 1628366054
+      10_11: -679230582
+      10_12: -1583926260
+      10_2: -2119581860
+      10_3: 1924538825
+      10_4: -585095486
+      10_5: -1572978944
+      10_6: 1638946095
+      10_7: -2046339381
+      10_8: -2012059085
+      10_9: -1385989626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

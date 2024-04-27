@@ -18,4 +18,16 @@ MonoBehaviour:
   light: 1
   heavy: 0
   condition: 0
-  image: []
+  image:
+  - {fileID: -1684240817, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: 1345638047, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: -440910198, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: 515960789, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: 1558118591, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: 1110069363, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: -186956092, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: -23818546, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: -1754210109, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: -635621743, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: -1830135360, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}
+  - {fileID: 1524808215, guid: 638e0b4e909e5e04a83ffb7e167d1daf, type: 3}

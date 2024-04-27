@@ -1211,7 +1211,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -40}
+  m_SizeDelta: {x: 20, y: -90}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &104186338
 MonoBehaviour:
@@ -1777,20 +1777,27 @@ MonoBehaviour:
   takeDamage: 0
   healHitPoint: 0
   armorClass: 10
-  str: 20
-  dex: 10
+  str: 10
+  dex: 20
   con: 10
   xp: 0
   addXp: 0
   level: 1
   diceDamage: 4
   bonus: 2
-  listWeapon:
-  - {fileID: 11400000, guid: 8e5357900f4b9aa4e922dc11fbee0043, type: 2}
-  - {fileID: 11400000, guid: 153a55dbfc13c7248933a0baf71f029c, type: 2}
-  listShield:
-  - {fileID: 11400000, guid: 7362ed5cd08f1bb46b9da7e55a277720, type: 2}
-  listArmor: []
+  listWeapon: []
+  listShield: []
+  listArmor:
+  - {fileID: 11400000, guid: 8b4ebd400584916468d0a6b4ef6972fd, type: 2}
+  - {fileID: 11400000, guid: 56b8b85ea8aa79f46a6d3e5c652e3dce, type: 2}
+  - {fileID: 11400000, guid: 2e74097e86745f944b6fb24449e186ec, type: 2}
+  - {fileID: 11400000, guid: 530d5a149a0bba144bddd354cdafd003, type: 2}
+  - {fileID: 11400000, guid: 097736ab5311d9d419939971066c28d6, type: 2}
+  - {fileID: 11400000, guid: 763c7226e2da5cc42bb2320a9b19abe1, type: 2}
+  - {fileID: 11400000, guid: 3db684a82f0d18444b8717b66a2a26a1, type: 2}
+  - {fileID: 11400000, guid: a83ce1529af5b9846a05aac5ab786ddf, type: 2}
+  - {fileID: 11400000, guid: b1bf671b0ff491944a5814fe01cb43a9, type: 2}
+  armorUse: {fileID: 0}
   diceHave: 0000000000000000000000000000000000000000
   pointLevel: 0
   player: {fileID: 1617428742}
@@ -3202,20 +3209,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 871650822}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 50
   m_Viewport: {fileID: 2044034024}
   m_HorizontalScrollbar: {fileID: 1299175415}
   m_VerticalScrollbar: {fileID: 104186338}
   m_HorizontalScrollbarVisibility: 2
   m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: 20
-  m_VerticalScrollbarSpacing: 20
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4362,7 +4369,7 @@ RectTransform:
   m_Father: {fileID: 464508250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0.9166667, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5294,7 +5301,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &871650823
 MonoBehaviour:
@@ -5330,7 +5337,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 1150, y: 120}
+  m_CellSize: {x: 1200, y: 120}
   m_Spacing: {x: 0, y: 3}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -7390,7 +7397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1299175414
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7409,7 +7416,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -40, y: 20}
+  m_SizeDelta: {x: -90, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1299175415
 MonoBehaviour:
@@ -7455,7 +7462,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 675377750}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9166667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9192,6 +9199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackScene: {fileID: 561925018}
   anotherScript: {fileID: 311917743}
+  dataPlayer: {fileID: 0}
   moneyText: {fileID: 619539620}
   mapUI: {fileID: 1536965950}
   bagUI: {fileID: 1545212489}
@@ -11004,7 +11012,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -40, y: -40}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2044034025
 MonoBehaviour:
@@ -11420,10 +11428,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 431177655152659357, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5354798364525316083, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
       propertyPath: m_Name
       value: Player

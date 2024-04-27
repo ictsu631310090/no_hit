@@ -12,7 +12,7 @@ public class UIScript : MonoBehaviour
     public static int addMoney;
 
     [SerializeField] private GameObject anotherScript;
-    private DataPlayerScript dataPlayer;
+    [HideInInspector] public DataPlayerScript dataPlayer;
     private CombatScript combat;
 
     [SerializeField] private TextMeshProUGUI moneyText;
@@ -108,6 +108,9 @@ public class UIScript : MonoBehaviour
     {
         itemImage.sprite = i;
         itemImage.SetNativeSize();
+        float sizeX = itemImage.GetComponent<RectTransform>().sizeDelta.x;
+        float sizeY = itemImage.GetComponent<RectTransform>().sizeDelta.y;
+        itemImage.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeX * 2, sizeY * 2);
     }
     private void ClearItemShow()
     {

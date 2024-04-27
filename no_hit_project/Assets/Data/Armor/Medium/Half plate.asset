@@ -14,8 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameArmor: Half plate
   price: 750
-  setAC: 0
+  setAC: 15
   light: 0
   heavy: 0
   condition: 0
-  image: []
+  image:
+  - {fileID: 596861123, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: 1711417862, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: -1788263236, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: 347936121, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: -976346407, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: 1928053463, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: 953771832, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: -413449122, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: -81997373, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: 1368308427, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: 1077691694, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}
+  - {fileID: -1925124579, guid: 7ec2a4683a5e39d4d8ba5e854a9e506f, type: 3}

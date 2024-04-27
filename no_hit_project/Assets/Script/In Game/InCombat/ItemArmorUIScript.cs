@@ -14,6 +14,64 @@ public class ItemArmorUIScript : MonoBehaviour
     {
         mainUI.ImageItemShow(dataArmor.image[1]);
     }
+    public void EquipArmor()
+    {
+        int dexMo = ((mainUI.dataPlayer.dex - 10) / 2);
+        if (mainUI.dataPlayer.armorUse == null)
+        {
+            mainUI.dataPlayer.armorUse = dataArmor;
+            if (dataArmor.light)
+            {
+                mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
+            }
+            else if (dataArmor.heavy && mainUI.dataPlayer.str >= dataArmor.condition)
+            {
+                mainUI.dataPlayer.armorClass = dataArmor.setAC;
+            }
+            else
+            {
+                if (dexMo >= 2)
+                {
+                    mainUI.dataPlayer.armorClass = dataArmor.setAC + 2;
+                }
+                else
+                {
+                    mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
+                }
+            }
+            mainUI.dataPlayer.UpdateImageArmor();
+            mainUI.OpenBagUI();
+            mainUI.dataPlayer.listArmor.Remove(dataArmor);
+        }
+        else
+        {
+            mainUI.dataPlayer.listArmor.Add(mainUI.dataPlayer.armorUse);
+            mainUI.dataPlayer.armorUse = dataArmor;
+            if (dataArmor.light)
+            {
+                mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
+            }
+            else if (dataArmor.heavy && mainUI.dataPlayer.str >= dataArmor.condition)
+            {
+                mainUI.dataPlayer.armorClass = dataArmor.setAC;
+            }
+            else
+            {
+                if (dexMo >= 2)
+                {
+                    mainUI.dataPlayer.armorClass = dataArmor.setAC + 2;
+                }
+                else
+                {
+                    mainUI.dataPlayer.armorClass = dataArmor.setAC + dexMo;
+                }
+            }
+            mainUI.dataPlayer.UpdateImageArmor();
+            mainUI.OpenBagUI();
+            mainUI.dataPlayer.listArmor.Remove(dataArmor);
+        }//update AC
+        mainUI.dataPlayer.player.UpdateACText();
+    }
     private void Start()
     {
         nameItemText.text = dataArmor.nameArmor;

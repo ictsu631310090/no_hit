@@ -14,6 +14,7 @@ public class ShowPlayerScript : MonoBehaviour
     public Animator animaPlayer;
     [HideInInspector] public bool showMiss;
     [SerializeField] private Animator missPlayer;
+    public SpriteRenderer[] modelPlayer;
 
     [SerializeField] private GameObject statusText;
     private TextMeshProUGUI strText;

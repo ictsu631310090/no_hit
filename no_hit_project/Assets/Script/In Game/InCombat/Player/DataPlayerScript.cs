@@ -18,14 +18,20 @@ public class DataPlayerScript : MonoBehaviour
     private int oldDexMoPLayer;
     private int oldConMoPLayer;
 
+    [Header ("Level")]
     public int xp;
     public int addXp;//just test
     [HideInInspector] public int level;
     public int diceDamage;//wapon
     public int bonus;
+
+    [Header("Bag")]
     public List<CreateWeaponScript> listWeapon;
     public List<CreateShieldScript> listShield;
     public List<CreateArmorScript> listArmor;
+    public CreateArmorScript armorUse;
+
+    [Header("Bag Dice")]
     public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
     [HideInInspector] public int pointLevel;
 
@@ -174,15 +180,6 @@ public class DataPlayerScript : MonoBehaviour
         }
         player.UpdateTextHp();
     }
-    private void UpdateAC()
-    {
-        int dexMo = (dex - 10) / 2;
-        if (dexMo != oldDexMoPLayer)
-        {
-            armorClass = 10 + dexMo;
-            player.UpdateACText();
-        }
-    }
     public void PlayAnimation(int  i)
     {
         player.animaPlayer.SetInteger("step", i);
@@ -193,6 +190,16 @@ public class DataPlayerScript : MonoBehaviour
         float time = diceRoll.timeClose;
         yield return new WaitForSeconds(time);
         player.animaPlayer.SetInteger("step", 0);
+    }
+    public void UpdateImageArmor()
+    {
+        if (armorUse != null)
+        {
+            for (int i = 0; i < player.modelPlayer.Length; i++)
+            {
+                player.modelPlayer[i].sprite = armorUse.image[i];
+            }
+        }
     }
     private void Awake()
     {
@@ -215,13 +222,17 @@ public class DataPlayerScript : MonoBehaviour
         pointLevel = 0;
 
         UpStatusButtomObj.gameObject.SetActive(false);
+
+        armorClass = 10 + oldDexMoPLayer;
+        player.UpdateACText();
+
+        UpdateImageArmor();
     }
     private void Update()
     {
         LevelUp();
         UpStatusButtom();
         UpLevelHp();
-        UpdateAC();
         if (healHitPoint != 0)
         {
             hitPoint += healHitPoint;

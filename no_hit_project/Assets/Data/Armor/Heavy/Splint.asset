@@ -18,4 +18,16 @@ MonoBehaviour:
   light: 0
   heavy: 1
   condition: 15
-  image: []
+  image:
+  - {fileID: -2060326036, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -2119581860, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: 1924538825, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -585095486, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -1572978944, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: 1638946095, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -2046339381, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -2012059085, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -1385989626, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: 1628366054, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -679230582, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
+  - {fileID: -1583926260, guid: aea425f710d7d5f43ada0317f62edc71, type: 3}
