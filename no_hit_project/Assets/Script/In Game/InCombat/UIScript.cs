@@ -114,7 +114,7 @@ public class UIScript : MonoBehaviour
         itemImage.SetNativeSize();
         float sizeX = itemImage.GetComponent<RectTransform>().sizeDelta.x;
         float sizeY = itemImage.GetComponent<RectTransform>().sizeDelta.y;
-        itemImage.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeX * 2, sizeY * 2);
+        itemImage.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeX * 1.5f, sizeY * 1.5f);
     }
     private void ClearItemShow()
     {

@@ -15,4 +15,4 @@ MonoBehaviour:
   nameWeapon: Shield
   price: 10
   addAC: 2
-  image: {fileID: -1142864601, guid: e84181b2ce609d44ba041308805fbaf7, type: 3}
+  image: {fileID: -766864313, guid: e84181b2ce609d44ba041308805fbaf7, type: 3}

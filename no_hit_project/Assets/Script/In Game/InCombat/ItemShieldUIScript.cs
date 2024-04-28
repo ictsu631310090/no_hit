@@ -18,39 +18,57 @@ public class ItemShieldUIScript : MonoBehaviour
     }
     public void UseShield(int right)//r = 0, L = 1
     {
-        if (mainUI.dataPlayer.rlHandWeapon[right] == null && mainUI.dataPlayer.rlHandShield[right] == null ) 
+        bool canChange = false;
+        switch (right)
+        {
+            case 0:
+                if (combat.rightAttack.interactable)
+                {
+                    combat.rightAttack.interactable = false;
+                    canChange = true;
+                }
+                else
+                {
+                    mainUI.warnText.text = "Action is not enough.";
+                }
+                break;
+            case 1:
+                if (combat.leftAttack.interactable)
+                {
+                    canChange = true;
+                    combat.leftAttack.interactable = false;
+                }
+                else
+                {
+                    mainUI.warnText.text = "Action is not enough.";
+                }
+                break;
+            default:
+                break;
+        }
+        if (mainUI.dataPlayer.rlHandWeapon[right] == null && mainUI.dataPlayer.rlHandShield[right] == null && canChange) 
         {
             mainUI.dataPlayer.rlHandShield[right] = dataShield;
-            ChangeItemInHand();
+            ChangeItemInHand(right);
         }//free hand
-        else
+        else if (canChange)
         {
             if (mainUI.dataPlayer.rlHandWeapon[right] != null)//have weapon
             {
                 mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[right]);
-                ChangeItemInHand();
+                mainUI.dataPlayer.rlHandShield[right] = dataShield;
+                ChangeItemInHand(right);
             }
             else if (mainUI.dataPlayer.rlHandShield[right] != null)//have shield
             {
                 mainUI.warnText.text = "You're wearing a Shield.";
             }
-        }
-        switch (right)
-        {
-            case 0:
-                combat.rightAttack.interactable = false;
-                break;
-            case 1:
-                combat.leftAttack.interactable = false;
-                break;
-            default:
-                break;
-        }
+        }//have something
     }
-    private void ChangeItemInHand()
+    private void ChangeItemInHand(int i)
     {
         mainUI.dataPlayer.armorClass += 2;
-        mainUI.dataPlayer.UpdateImageArmor();
+        mainUI.dataPlayer.UpdateImageWeapon(i , false);
         mainUI.OpenBagUI();//close
         mainUI.dataPlayer.listShield.Remove(dataShield);
     }

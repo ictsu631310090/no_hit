@@ -19,4 +19,4 @@ MonoBehaviour:
   damage: 8
   canTwoHand: 1
   damageTwoHand: 10
-  image: {fileID: -731778372, guid: e84181b2ce609d44ba041308805fbaf7, type: 3}
+  image: {fileID: -790750953, guid: e84181b2ce609d44ba041308805fbaf7, type: 3}

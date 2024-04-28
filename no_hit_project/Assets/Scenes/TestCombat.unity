@@ -1889,7 +1889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec7e4dca15a31843808697d3adb958e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfMon: 3
+  numOfMon: 1
   buttomTarget:
   - {fileID: 1609850555}
   - {fileID: 1840749930}
@@ -1914,26 +1914,24 @@ MonoBehaviour:
   str: 10
   dex: 20
   con: 10
+  weaponTwoHand: 0
   xp: 0
   addXp: 0
   level: 1
   diceDamage: 4
   bonus: 2
-  listWeapon: []
+  listWeapon:
+  - {fileID: 11400000, guid: 8e5357900f4b9aa4e922dc11fbee0043, type: 2}
+  - {fileID: 11400000, guid: 8e5357900f4b9aa4e922dc11fbee0043, type: 2}
+  - {fileID: 11400000, guid: 627397e314c773d4084edf95b9865580, type: 2}
+  - {fileID: 11400000, guid: 9a7edcde81918334d9cb76232784bc73, type: 2}
+  - {fileID: 11400000, guid: fb84bc7400f33d3468cca08d7921295f, type: 2}
   listShield:
   - {fileID: 11400000, guid: 7362ed5cd08f1bb46b9da7e55a277720, type: 2}
   - {fileID: 11400000, guid: 7362ed5cd08f1bb46b9da7e55a277720, type: 2}
   - {fileID: 11400000, guid: 7362ed5cd08f1bb46b9da7e55a277720, type: 2}
   listArmor:
   - {fileID: 11400000, guid: 8b4ebd400584916468d0a6b4ef6972fd, type: 2}
-  - {fileID: 11400000, guid: 56b8b85ea8aa79f46a6d3e5c652e3dce, type: 2}
-  - {fileID: 11400000, guid: 2e74097e86745f944b6fb24449e186ec, type: 2}
-  - {fileID: 11400000, guid: 530d5a149a0bba144bddd354cdafd003, type: 2}
-  - {fileID: 11400000, guid: 097736ab5311d9d419939971066c28d6, type: 2}
-  - {fileID: 11400000, guid: 763c7226e2da5cc42bb2320a9b19abe1, type: 2}
-  - {fileID: 11400000, guid: 3db684a82f0d18444b8717b66a2a26a1, type: 2}
-  - {fileID: 11400000, guid: a83ce1529af5b9846a05aac5ab786ddf, type: 2}
-  - {fileID: 11400000, guid: b1bf671b0ff491944a5814fe01cb43a9, type: 2}
   rlHandWeapon:
   - {fileID: 0}
   - {fileID: 0}

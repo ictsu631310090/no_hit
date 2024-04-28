@@ -17,6 +17,7 @@ public class DataPlayerScript : MonoBehaviour
     private int oldLevelPlayer;
     private int oldDexMoPLayer;
     private int oldConMoPLayer;
+    [HideInInspector] public bool weaponTwoHand;
 
     [Header ("Level")]
     public int xp;
@@ -41,6 +42,7 @@ public class DataPlayerScript : MonoBehaviour
     public ShowPlayerScript showPlayer;
     [SerializeField] private GameObject UpStatusButtomObj;
     private NewDiceRollScript diceRoll;
+    private CombatScript combat;
 
     private void LevelUp()
     {
@@ -196,16 +198,52 @@ public class DataPlayerScript : MonoBehaviour
     {
         if (armorUse != null)
         {
-            for (int i = 0; i < showPlayer.modelPlayer.Length; i++)
+            for (int i = 0; i < armorUse.image.Length; i++)
             {
                 showPlayer.modelPlayer[i].sprite = armorUse.image[i];
             }
+            showPlayer.UpdateACText();
         }
+    }
+    public void UpdateImageWeapon(int right, bool weapon)
+    {
+        if (weapon)
+        {
+            combat.finess = rlHandWeapon[right].finesse;
+            if (weaponTwoHand)
+            {
+                combat.rightAttack.gameObject.SetActive(false);
+                combat.leftAttack.gameObject.SetActive(false);
+                combat.bothAttack.gameObject.SetActive(true);
+            }
+            showPlayer.modelPlayer[right + 12].sprite = rlHandWeapon[right].image;
+            if (right == 0)
+            {
+                showPlayer.modelPlayer[12].sortingOrder = 2;
+            }
+            showPlayer.modelPlayer[right + 12].color = new Color(1, 1, 1, 1);
+        }
+        else//shield
+        {
+            if (right == 0)
+            {
+                showPlayer.modelPlayer[12].sprite = rlHandShield[right].image;
+                showPlayer.modelPlayer[12].sortingOrder = 4;
+                showPlayer.modelPlayer[12].color = new Color(1, 1, 1, 1);
+            }
+            else//i == 1
+            {
+                showPlayer.modelPlayer[13].sprite = rlHandShield[right].image;
+                showPlayer.modelPlayer[13].color = new Color(0.5f, 0.5f, 0.5f, 1);
+            }
+            showPlayer.UpdateACText();
+        }        
     }
     private void Awake()
     {
         showPlayer.dataPlayer = GetComponent<DataPlayerScript>();
         diceRoll = GetComponent<NewDiceRollScript>();
+        combat = GetComponent<CombatScript>();
     }
     private void Start()
     {
@@ -216,6 +254,7 @@ public class DataPlayerScript : MonoBehaviour
         hitPoint += oldConMoPLayer;
         hpLvOne = hitPoint;
         hitPointMax = hitPoint;
+        weaponTwoHand = false;
 
         armorClass += oldDexMoPLayer;
         diceDamage = 1;//just hand
@@ -224,8 +263,9 @@ public class DataPlayerScript : MonoBehaviour
 
         UpStatusButtomObj.gameObject.SetActive(false);
 
-        armorClass = 10 + oldDexMoPLayer;
         showPlayer.UpdateACText();
+        showPlayer.modelPlayer[12].color = new Color(1, 1, 1, 0);
+        showPlayer.modelPlayer[13].color = new Color(0.5f, 0.5f, 0.5f, 0);
 
         UpdateImageArmor();
     }

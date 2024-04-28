@@ -18,8 +18,10 @@ public class ItemArmorUIScript : MonoBehaviour
     }
     public void EquipArmor()
     {
-        int dexMo = ((mainUI.dataPlayer.dex - 10) / 2);
-        if (mainUI.dataPlayer.armorUse == null)
+        if (combat.rightAttack.interactable && combat.rightAttack.interactable && combat.rightAttack.interactable)
+        {
+            int dexMo = ((mainUI.dataPlayer.dex - 10) / 2);
+            if (mainUI.dataPlayer.armorUse == null)
         {
             mainUI.dataPlayer.armorUse = dataArmor;
             if (dataArmor.light)
@@ -49,7 +51,7 @@ public class ItemArmorUIScript : MonoBehaviour
                 ChangeArmor();
             }
         }
-        else
+            else
         {
             if (dataArmor.light)
             {
@@ -81,8 +83,14 @@ public class ItemArmorUIScript : MonoBehaviour
                 ChangeArmor();
             }
         }//update AC
-        mainUI.dataPlayer.showPlayer.UpdateACText();
-        combat.EndTurnButtom();
+            combat.rightAttack.interactable = false;
+            combat.leftAttack.interactable = false;
+            combat.bothAttack.interactable = false;
+        }
+        else
+        {
+            mainUI.warnText.text = "Action is not enough.";
+        }
     }
     private void ChangeArmor()
     {
