@@ -1912,7 +1912,7 @@ MonoBehaviour:
   healHitPoint: 0
   armorClass: 10
   str: 10
-  dex: 20
+  dex: 10
   con: 10
   weaponTwoHand: 0
   xp: 0
@@ -5985,7 +5985,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -11710,6 +11710,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5000885365774715275, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000885365774715275, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+      propertyPath: m_Size.y
+      value: 4.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000885365774715275, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7993121, guid: e84181b2ce609d44ba041308805fbaf7, type: 3}
+    - target: {fileID: 5000885365774715275, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000885365774715275, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5000885365774715275, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5354798364525316083, guid: a89fecce8ddf2fa42ab87ac92bbfd44c, type: 3}
       propertyPath: m_Name
       value: Player

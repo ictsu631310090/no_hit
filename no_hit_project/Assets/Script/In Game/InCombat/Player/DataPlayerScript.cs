@@ -190,9 +190,16 @@ public class DataPlayerScript : MonoBehaviour
     }
     IEnumerator DeleyAnimationTime()
     {
-        float time = diceRoll.timeClose;
+        float time = diceRoll.timeClose / 2;
         yield return new WaitForSeconds(time);
-        showPlayer.animaPlayer.SetInteger("step", 0);
+        if (!weaponTwoHand)
+        {
+            showPlayer.animaPlayer.SetInteger("step", 0);
+        }
+        else
+        {
+            showPlayer.animaPlayer.SetInteger("step", 3);
+        }
     }
     public void UpdateImageArmor()
     {
@@ -215,6 +222,7 @@ public class DataPlayerScript : MonoBehaviour
                 combat.rightAttack.gameObject.SetActive(false);
                 combat.leftAttack.gameObject.SetActive(false);
                 combat.bothAttack.gameObject.SetActive(true);
+                showPlayer.animaPlayer.SetInteger("step", 3);
             }
             showPlayer.modelPlayer[right + 12].sprite = rlHandWeapon[right].image;
             if (right == 0)
