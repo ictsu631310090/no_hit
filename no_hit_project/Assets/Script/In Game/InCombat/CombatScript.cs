@@ -17,9 +17,7 @@ public class CombatScript : MonoBehaviour
     [HideInInspector] public int targetMons;
     public GameObject lightTarget;
 
-    public Button rightAttack;
-    public Button leftAttack;
-    public Button bothAttack;
+    public Button[] buttonAttack; 
     [SerializeField] private Button endTurn;
     public bool finess;
     public int addDice;
@@ -30,44 +28,15 @@ public class CombatScript : MonoBehaviour
     [SerializeField] private float speedMove;
     public void AttackButtom(int i)// 0-2 //player
     {
+        buttonAttack[i].interactable = false;//ปิดปุ่ม
         if (!diceRoll.willAttack && monsters.Count > 0)
         {
-            switch (i)
-            {
-                case 0:
-                    rightAttack.interactable = false;
-                    break;
-                case 1:
-                    leftAttack.interactable = false;
-                    break;
-                case 2:
-                    bothAttack.interactable = false;
-                    break;
-                default:
-                    Debug.LogError("Enter the attack button number.");
-                    break;
-            }//ปิดปุ่ม
             movePlayer = true;
             diceRoll.RollToHit(atkBonus + dataPlayer.bonus, addDice, 0);//0 = player, 1 = enemy
             StartCoroutine(Damage(dataPlayer.diceDamage, atkBonus, addDice));
         }
         else
         {
-            switch (i)
-            {
-                case 0:
-                    rightAttack.interactable = false;
-                    break;
-                case 1:
-                    leftAttack.interactable = false;
-                    break;
-                case 2:
-                    bothAttack.interactable = false;
-                    break;
-                default:
-                    Debug.LogError("Enter the attack button number.");
-                    break;
-            }//ปิดปุ่ม
             Debug.Log("No Monster");
         }
     }
@@ -170,9 +139,12 @@ public class CombatScript : MonoBehaviour
             }
         }
         int numText = atkBonus + dataPlayer.bonus;
-        rightAttack.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "right hand \n d20 + " + numText;
-        leftAttack.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "left hand \n d20 + " + numText;
-        bothAttack.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "both hand \n d20 + " + numText;
+        if (buttonAttack.Length > 0)
+        {
+            buttonAttack[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "right hand \n d20 + " + numText;
+            buttonAttack[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "left hand \n d20 + " + numText;
+            buttonAttack[2].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "both hand \n d20 + " + numText;
+        }
     }  //finess str or dex
     public void TargetMonster(int i)
     {
@@ -189,14 +161,21 @@ public class CombatScript : MonoBehaviour
     public void EndTurnButtom()
     {
         endTurn.interactable = false;
-        if (!diceRoll.willAttack && monsters.Count > 0)
+        if (diceRoll != null)
         {
-            StopAllCoroutines();
-            StartCoroutine(DelayMonsterAttack());
+            if (!diceRoll.willAttack && monsters.Count > 0)
+            {
+                StopAllCoroutines();
+                StartCoroutine(DelayMonsterAttack());
+            }
+            else if (!diceRoll.willAttack && monsters.Count == 0)
+            {
+                Debug.Log("Next");
+                uiScript.nextScene = true;
+            }
         }
-        else if (!diceRoll.willAttack && monsters.Count == 0)
+        else
         {
-            Debug.Log("Next");
             uiScript.nextScene = true;
         }
     }
@@ -222,11 +201,15 @@ public class CombatScript : MonoBehaviour
     }
     private void ReadyToCombat()
     {
-        rightAttack.interactable = true;
-        leftAttack.interactable = true;
-        bothAttack.interactable = true;
-        diceRoll.willAttack = false;
-        endTurn.interactable = true;
+        foreach (Button item in buttonAttack)
+        {
+            item.interactable = true;
+        }
+        if (diceRoll != null)
+        {
+            diceRoll.willAttack = false;
+            endTurn.interactable = true;
+        }
         monAttack = false;
         StopAllCoroutines();
     }

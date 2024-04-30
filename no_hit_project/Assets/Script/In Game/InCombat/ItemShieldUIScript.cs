@@ -19,37 +19,26 @@ public class ItemShieldUIScript : MonoBehaviour
     public void UseShield(int right)//r = 0, L = 1
     {
         bool canChange = false;
-        switch (right)
+        if (combat.monsters.Count > 0)
         {
-            case 0:
-                if (combat.rightAttack.interactable)
-                {
-                    combat.rightAttack.interactable = false;
-                    canChange = true;
-                }
-                else
-                {
-                    mainUI.warnText.text = "Action is not enough.";
-                }
-                break;
-            case 1:
-                if (combat.leftAttack.interactable)
-                {
-                    canChange = true;
-                    combat.leftAttack.interactable = false;
-                }
-                else
-                {
-                    mainUI.warnText.text = "Action is not enough.";
-                }
-                break;
-            default:
-                break;
+            if (combat.buttonAttack[right].interactable)
+            {
+                combat.buttonAttack[right].interactable = false;
+                canChange = true;
+            }
+            else
+            {
+                mainUI.warnText.text = "Action is not enough.";
+            }
+        }
+        else
+        {
+            canChange = true;
         }
         if (mainUI.dataPlayer.rlHandWeapon[right] == null && mainUI.dataPlayer.rlHandShield[right] == null && canChange) 
         {
             mainUI.dataPlayer.rlHandShield[right] = dataShield;
-            ChangeItemInHand(right);
+            ChangeDataItemInHand(right);
         }//free hand
         else if (canChange)
         {
@@ -57,7 +46,7 @@ public class ItemShieldUIScript : MonoBehaviour
             {
                 mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[right]);
                 mainUI.dataPlayer.rlHandShield[right] = dataShield;
-                ChangeItemInHand(right);
+                ChangeDataItemInHand(right);
             }
             else if (mainUI.dataPlayer.rlHandShield[right] != null)//have shield
             {
@@ -65,7 +54,7 @@ public class ItemShieldUIScript : MonoBehaviour
             }
         }//have something
     }
-    private void ChangeItemInHand(int i)
+    private void ChangeDataItemInHand(int i)
     {
         mainUI.dataPlayer.armorClass += 2;
         mainUI.dataPlayer.UpdateImageWeapon(i , false);

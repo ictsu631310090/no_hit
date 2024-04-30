@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataPlayerScript : MonoBehaviour
 {
@@ -30,9 +31,9 @@ public class DataPlayerScript : MonoBehaviour
     public List<CreateWeaponScript> listWeapon;
     public List<CreateShieldScript> listShield;
     public List<CreateArmorScript> listArmor;
-    public CreateWeaponScript[] rlHandWeapon = { null, null };//null,have
-    public CreateShieldScript[] rlHandShield = { null, null };//null,have
-    public CreateArmorScript armorUse;
+    [HideInInspector] public CreateWeaponScript[] rlHandWeapon = { null, null };//null,have
+    [HideInInspector] public CreateShieldScript[] rlHandShield = { null, null };//null,have
+    [HideInInspector] public CreateArmorScript armorUse;
 
     [Header("Bag Dice")]
     public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
@@ -219,9 +220,12 @@ public class DataPlayerScript : MonoBehaviour
             combat.finess = rlHandWeapon[right].finesse;
             if (weaponTwoHand)
             {
-                combat.rightAttack.gameObject.SetActive(false);
-                combat.leftAttack.gameObject.SetActive(false);
-                combat.bothAttack.gameObject.SetActive(true);
+                if (combat.buttonAttack.Length > 0)
+                {
+                    combat.buttonAttack[0].gameObject.SetActive(false);
+                    combat.buttonAttack[1].gameObject.SetActive(false);
+                    combat.buttonAttack[2].gameObject.SetActive(true);
+                }
                 showPlayer.animaPlayer.SetInteger("step", 3);
             }
             showPlayer.modelPlayer[right + 12].sprite = rlHandWeapon[right].image;

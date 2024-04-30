@@ -42,7 +42,7 @@ public class MainMeunScript : MonoBehaviour
     }
     public void EixtGame()
     {
-        saveManager.SaveGame();
+        //saveManager.SaveGame();
         Application.Quit();
     }
     private void Awake()

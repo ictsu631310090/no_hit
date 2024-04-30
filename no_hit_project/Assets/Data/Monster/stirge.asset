@@ -18,7 +18,7 @@ MonoBehaviour:
   toHitPlus: 0
   damage: {x: 1, y: 4, z: 0}
   model: {fileID: 4552085598951162047, guid: 7dec23eeba7da1f43a2d7bd652e9a1c1, type: 3}
-  moneyDrop: {x: 1, y: 10}
+  moneyDrop: {x: 0, y: 0}
   xpDrop: 75
   numDiceDrop: {x: 1, y: 2}
   typeDiceDrop: 04000000

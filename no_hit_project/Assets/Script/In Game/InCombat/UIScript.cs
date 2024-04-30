@@ -8,7 +8,7 @@ public class UIScript : MonoBehaviour
 {
     public Animator blackScene;
 
-    private int moneyPlayer;
+    public int moneyPlayer;
     public static int addMoney;
 
     [SerializeField] private GameObject anotherScript;
@@ -347,8 +347,6 @@ public class UIScript : MonoBehaviour
     }
     private void Start()
     {
-        moneyPlayer = 0;
-
         moneyText.text = moneyPlayer.ToString();
         mapUI.SetActive(false);
         openMap = false;

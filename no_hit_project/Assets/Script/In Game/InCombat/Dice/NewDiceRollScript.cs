@@ -13,7 +13,7 @@ public class NewDiceRollScript : MonoBehaviour
     [SerializeField] private Transform spwanDice;
     [SerializeField] private Texture[] diceTextur;
     [SerializeField] private TextMeshProUGUI whoUseText;
-    public float timeClose;
+    [HideInInspector] public float timeClose;
     [HideInInspector] public bool willAttack;
     private bool critical;
     [HideInInspector] public List<GameObject> allDice;
@@ -189,7 +189,7 @@ public class NewDiceRollScript : MonoBehaviour
     {
         willAttack = false;
         critical = false;
-
+        timeClose = 1f;
         Open = false;
     }
 }
