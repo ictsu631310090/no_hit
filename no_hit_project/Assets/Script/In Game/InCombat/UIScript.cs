@@ -16,9 +16,11 @@ public class UIScript : MonoBehaviour
     private CombatScript combat;
 
     [SerializeField] private TextMeshProUGUI moneyText;
-
+    [SerializeField] private GameObject pauseUI;
+    private bool pause;
     [SerializeField] private GameObject mapUI;
     private bool openMap;
+    [HideInInspector] public bool nextScene;
 
     [Header ("Bag EquipMent")]
     [SerializeField] private GameObject bagUI;
@@ -35,7 +37,6 @@ public class UIScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] numDiceText;
     [SerializeField] private Button[] useDiceButton;
 
-    [HideInInspector] public bool nextScene;
     public void OpenMapUI()
     {
         if (!openMap)
@@ -112,9 +113,9 @@ public class UIScript : MonoBehaviour
     {
         itemImage.sprite = i;
         itemImage.SetNativeSize();
-        float sizeX = itemImage.GetComponent<RectTransform>().sizeDelta.x;
-        float sizeY = itemImage.GetComponent<RectTransform>().sizeDelta.y;
-        itemImage.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeX * 1.5f, sizeY * 1.5f);
+        //float sizeX = itemImage.GetComponent<RectTransform>().sizeDelta.x;
+        //float sizeY = itemImage.GetComponent<RectTransform>().sizeDelta.y;
+        //itemImage.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeX * 1.5f, sizeY * 1.5f);
     }
     private void ClearItemShow()
     {
@@ -327,6 +328,33 @@ public class UIScript : MonoBehaviour
         }//0 = 4, 1 = 6, 2 = 8, 3 = 10, 4 = 12
         OpenBagDiceUI();
     }
+    //Pause UI
+    public void PauseGame()
+    {
+        if (!pause)
+        {
+            pause = true;
+            pauseUI.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            pause = false;
+            Time.timeScale = 1;
+            pauseUI.SetActive(false);
+        }
+    }
+    public void RestartScene()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void BackMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);//main menu
+    }
+    //Scene
     private void CloseScene()
     {
         if (nextScene)
@@ -355,6 +383,9 @@ public class UIScript : MonoBehaviour
         warnText.text = null;
         bagUI.SetActive(false);
         openBag = false;
+
+        pauseUI.SetActive(false);
+        pause = false;
         nextScene = false;
     }
     void Update()
@@ -366,5 +397,9 @@ public class UIScript : MonoBehaviour
             moneyText.text = moneyPlayer.ToString();
         }
         CloseScene();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
     }
 }

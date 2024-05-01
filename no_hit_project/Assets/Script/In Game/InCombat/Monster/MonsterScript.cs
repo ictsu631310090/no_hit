@@ -69,7 +69,7 @@ public class MonsterScript : MonoBehaviour
         else
         {
             combat.dataPlayer.showPlayer.showMiss = true;
-            combat.diceRoll.willAttack = false;
+            combat.diceRoll.attacking = false;
         }
     }
     public void UpdateHp()

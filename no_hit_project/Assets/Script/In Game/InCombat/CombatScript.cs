@@ -28,15 +28,17 @@ public class CombatScript : MonoBehaviour
     [SerializeField] private float speedMove;
     public void AttackButtom(int i)// 0-2 //player
     {
-        buttonAttack[i].interactable = false;//ปิดปุ่ม
-        if (!diceRoll.willAttack && monsters.Count > 0)
+        if (!diceRoll.attacking && monsters.Count > 0)
         {
+            buttonAttack[i].interactable = false;//ปิดปุ่ม
+            diceRoll.attacking = true;
             movePlayer = true;
             diceRoll.RollToHit(atkBonus + dataPlayer.bonus, addDice, 0);//0 = player, 1 = enemy
             StartCoroutine(Damage(dataPlayer.diceDamage, atkBonus, addDice));
         }
-        else
+        else if (!diceRoll.attacking)
         {
+            buttonAttack[i].interactable = false;//ปิดปุ่ม
             Debug.Log("No Monster");
         }
     }
@@ -79,7 +81,7 @@ public class CombatScript : MonoBehaviour
         else
         {
             monsters[targetMons].showMissImage = true;
-            diceRoll.willAttack = false;
+            diceRoll.attacking = false;
         }
         addDice = 0;
     }
@@ -163,12 +165,12 @@ public class CombatScript : MonoBehaviour
         endTurn.interactable = false;
         if (diceRoll != null)
         {
-            if (!diceRoll.willAttack && monsters.Count > 0)
+            if (!diceRoll.attacking && monsters.Count > 0)
             {
                 StopAllCoroutines();
                 StartCoroutine(DelayMonsterAttack());
             }
-            else if (!diceRoll.willAttack && monsters.Count == 0)
+            else if (!diceRoll.attacking && monsters.Count == 0)
             {
                 Debug.Log("Next");
                 uiScript.nextScene = true;
@@ -207,7 +209,7 @@ public class CombatScript : MonoBehaviour
         }
         if (diceRoll != null)
         {
-            diceRoll.willAttack = false;
+            diceRoll.attacking = false;
             endTurn.interactable = true;
         }
         monAttack = false;

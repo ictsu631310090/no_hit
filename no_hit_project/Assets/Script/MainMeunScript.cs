@@ -14,6 +14,11 @@ public class MainMeunScript : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void GoShopScene()
+    {
+
+        SceneManager.LoadScene(2);
+    }
     public void OpenSettingUI()
     {
         if (!settingOpen)

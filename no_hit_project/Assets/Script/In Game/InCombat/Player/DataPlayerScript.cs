@@ -186,8 +186,16 @@ public class DataPlayerScript : MonoBehaviour
     }
     public void PlayAnimation(int  i)
     {
-        showPlayer.animaPlayer.SetInteger("step", i);
-        StartCoroutine(DeleyAnimationTime());
+        if (!diceRoll.attacking)
+        {
+            showPlayer.animaPlayer.SetInteger("step", i);
+            StartCoroutine(DeleyAnimationTime());
+        }
+        else if (takeDamage != 0)
+        {
+            showPlayer.animaPlayer.SetInteger("step", i);
+            StartCoroutine(DeleyAnimationTime());
+        }
     }
     IEnumerator DeleyAnimationTime()
     {

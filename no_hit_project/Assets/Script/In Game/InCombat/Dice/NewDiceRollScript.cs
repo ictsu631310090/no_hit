@@ -14,7 +14,7 @@ public class NewDiceRollScript : MonoBehaviour
     [SerializeField] private Texture[] diceTextur;
     [SerializeField] private TextMeshProUGUI whoUseText;
     [HideInInspector] public float timeClose;
-    [HideInInspector] public bool willAttack;
+    [HideInInspector] public bool attacking;
     private bool critical;
     [HideInInspector] public List<GameObject> allDice;
 
@@ -25,7 +25,7 @@ public class NewDiceRollScript : MonoBehaviour
     private bool Open;
     public void ButtonChack()
     {
-        if (!willAttack)
+        if (!attacking)
         {
             if (!Open)
             {
@@ -43,7 +43,7 @@ public class NewDiceRollScript : MonoBehaviour
     }//test
     public void RollToHit(int bonus,int diceAdd, int who)
     {
-        willAttack = true;
+        attacking = true;
         animationUI.SetBool("open", true);
         ClearAllDice();
         StopCoroutine((TimeDelayRoll(0,0,0,0)));
@@ -124,6 +124,7 @@ public class NewDiceRollScript : MonoBehaviour
             item.GetComponent<Animator>().SetBool("open", false);
         }
         yield return new WaitForSeconds(timeClose / 3);
+        attacking = false;
         //Open = false;//test, don't forget remove
     }
     private void ChangeDiceImage(GameObject obj,int diceImage)
@@ -183,11 +184,11 @@ public class NewDiceRollScript : MonoBehaviour
             default:
                 break;
         }
-        willAttack = false;
+        attacking = false;
     }
     private void Start()
     {
-        willAttack = false;
+        attacking = false;
         critical = false;
         timeClose = 1f;
         Open = false;
