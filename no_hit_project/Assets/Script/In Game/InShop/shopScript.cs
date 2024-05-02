@@ -7,6 +7,7 @@ using TMPro;
 public class shopScript : MonoBehaviour
 {
     private UIScript mainUI;
+    [SerializeField] private Animator merchantAni;
     [SerializeField] private GameObject bubbleTalk;
     private TextMeshProUGUI talkText;
     [SerializeField] private CreateArmorScript[] armorCanSell;
@@ -74,13 +75,21 @@ public class shopScript : MonoBehaviour
         if (canbuy)
         {
             bubbleTalk.SetActive(true);
+            merchantAni.SetInteger("buy", 1);
             talkText.text = "Thank you. ~ ~ ~";
         }
         else
         {
             bubbleTalk.SetActive(true);
+            merchantAni.SetInteger("buy", 2);
             talkText.text = "There's not enough money.";
         }
+        StartCoroutine(DelayAnimation());
+    }
+    IEnumerator DelayAnimation()
+    {
+        yield return new WaitForSeconds(0.5f);
+        merchantAni.SetInteger("buy", 0);
     }
     private void Awake()
     {
@@ -105,7 +114,7 @@ public class shopScript : MonoBehaviour
                     }
                     else
                     {
-                        mainUI.moneyPlayer -= itemBuy.dataArmor.price;
+                        UIScript.addMoney = itemBuy.dataArmor.price * -1;
                         mainUI.dataPlayer.listArmor.Add(itemBuy.dataArmor);
                         TextTelk(true);
                     }
@@ -117,7 +126,7 @@ public class shopScript : MonoBehaviour
                     }
                     else
                     {
-                        mainUI.moneyPlayer -= itemBuy.dataShiel.price;
+                        UIScript.addMoney = itemBuy.dataShiel.price * -1;
                         mainUI.dataPlayer.listShield.Add(itemBuy.dataShiel);
                         TextTelk(true);
                     }
@@ -129,7 +138,7 @@ public class shopScript : MonoBehaviour
                     }
                     else
                     {
-                        mainUI.moneyPlayer -= itemBuy.dataWeapon.price;
+                        UIScript.addMoney = itemBuy.dataWeapon.price * -1;
                         mainUI.dataPlayer.listWeapon.Add(itemBuy.dataWeapon);
                         TextTelk(true);
                     }
