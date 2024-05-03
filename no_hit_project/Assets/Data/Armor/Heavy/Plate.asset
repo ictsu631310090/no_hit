@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14a32bd2070d034cbecc901382df5e6, type: 3}
   m_Name: Plate
   m_EditorClassIdentifier: 
+  id: 108
   nameArmor: Plate
   price: 1500
   setAC: 18

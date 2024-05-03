@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4aca2eeb7198941adca98a74d3d4dc, type: 3}
   m_Name: Longsword
   m_EditorClassIdentifier: 
+  id: 310
   nameWeapon: Longsword
   price: 16
   finesse: 0

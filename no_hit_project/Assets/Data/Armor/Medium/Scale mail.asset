@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14a32bd2070d034cbecc901382df5e6, type: 3}
   m_Name: Scale mail
   m_EditorClassIdentifier: 
+  id: 105
   nameArmor: Scale mail
-  price: 50
+  price: 75
   setAC: 14
   light: 0
   heavy: 0

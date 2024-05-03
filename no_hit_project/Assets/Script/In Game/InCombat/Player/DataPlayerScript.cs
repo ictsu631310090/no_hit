@@ -24,20 +24,20 @@ public class DataPlayerScript : MonoBehaviour
     public int xp;
     public int addXp;//just test
     [HideInInspector] public int level;
+    [HideInInspector] public int pointLevel;
     public int diceDamage;//wapon
     public int bonus;
 
     [Header("Bag")]
-    public List<CreateWeaponScript> listWeapon;
-    public List<CreateShieldScript> listShield;
     public List<CreateArmorScript> listArmor;
+    public List<CreateShieldScript> listShield;
+    public List<CreateWeaponScript> listWeapon;
     [HideInInspector] public CreateWeaponScript[] rlHandWeapon = { null, null };//null,have
     [HideInInspector] public CreateShieldScript[] rlHandShield = { null, null };//null,have
     [HideInInspector] public CreateArmorScript armorUse;
 
     [Header("Bag Dice")]
     public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
-    [HideInInspector] public int pointLevel;
 
     [Header("Link Obj")]
     public ShowPlayerScript showPlayer;

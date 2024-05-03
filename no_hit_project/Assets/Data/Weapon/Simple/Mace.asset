@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4aca2eeb7198941adca98a74d3d4dc, type: 3}
   m_Name: Mace
   m_EditorClassIdentifier: 
+  id: 304
   nameWeapon: Mace
   price: 5
   finesse: 0

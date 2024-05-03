@@ -19,7 +19,8 @@ public class buyItemScript : MonoBehaviour
     }
     public void CannotBuyAgain(Button button)
     {
-        button.interactable = false;
+        button.interactable = false;//if can sell, will fix this.
+
     }
     private void Start()
     {

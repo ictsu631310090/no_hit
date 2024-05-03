@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4aca2eeb7198941adca98a74d3d4dc, type: 3}
   m_Name: Morningstar
   m_EditorClassIdentifier: 
+  id: 305
   nameWeapon: Morningstar
   price: 12
   finesse: 0

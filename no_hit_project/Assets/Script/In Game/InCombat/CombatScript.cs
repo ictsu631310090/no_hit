@@ -6,11 +6,13 @@ using TMPro;
 
 public class CombatScript : MonoBehaviour
 {
-    private int atkSTR;//modifier
-    private int atkDEX;//modifier
     [SerializeField] private UIScript uiScript;
+    private SaveManagerScript saveManager;
     [HideInInspector] public NewDiceRollScript diceRoll;
     [HideInInspector] public DataPlayerScript dataPlayer;
+
+    private int atkSTR;//modifier
+    private int atkDEX;//modifier
     private SetMonsterScript setMon;
     public List<MonsterScript> monsters;
     [HideInInspector] public bool monAttack;
@@ -135,7 +137,7 @@ public class CombatScript : MonoBehaviour
                     atkBonus = atkSTR;
                 }
             }
-            else
+            else//if str
             {
                 atkBonus = atkSTR;
             }
@@ -173,11 +175,13 @@ public class CombatScript : MonoBehaviour
             else if (!diceRoll.attacking && monsters.Count == 0)
             {
                 Debug.Log("Next");
+                saveManager.SaveGame();
                 uiScript.nextScene = true;
             }
         }
         else
         {
+            saveManager.SaveGame();
             uiScript.nextScene = true;
         }
     }
@@ -217,12 +221,15 @@ public class CombatScript : MonoBehaviour
     }
     private void Awake()
     {
+        saveManager = uiScript.GetComponent<SaveManagerScript>();
         diceRoll = GetComponent<NewDiceRollScript>();
         setMon = GetComponent<SetMonsterScript>();
         dataPlayer = GetComponent<DataPlayerScript>();
     }
     private void Start()
     {
+        saveManager.LoadGameButtom();
+
         addDice = 0;
         atkSTR = (dataPlayer.str - 10) / 2;
         atkDEX = (dataPlayer.dex - 10) / 2;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4aca2eeb7198941adca98a74d3d4dc, type: 3}
   m_Name: Greatsword
   m_EditorClassIdentifier: 
+  id: 311
   nameWeapon: Greatsword
   price: 30
   finesse: 0

@@ -37,7 +37,6 @@ public class ItemShieldUIScript : MonoBehaviour
         }
         if (mainUI.dataPlayer.rlHandWeapon[right] == null && mainUI.dataPlayer.rlHandShield[right] == null && canChange) 
         {
-            mainUI.dataPlayer.rlHandShield[right] = dataShield;
             ChangeDataItemInHand(right);
         }//free hand
         else if (canChange)
@@ -45,7 +44,6 @@ public class ItemShieldUIScript : MonoBehaviour
             if (mainUI.dataPlayer.rlHandWeapon[right] != null)//have weapon
             {
                 mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[right]);
-                mainUI.dataPlayer.rlHandShield[right] = dataShield;
                 ChangeDataItemInHand(right);
             }
             else if (mainUI.dataPlayer.rlHandShield[right] != null)//have shield
@@ -56,6 +54,7 @@ public class ItemShieldUIScript : MonoBehaviour
     }
     private void ChangeDataItemInHand(int i)
     {
+        mainUI.dataPlayer.rlHandShield[i] = dataShield;
         mainUI.dataPlayer.armorClass += 2;
         mainUI.dataPlayer.UpdateImageWeapon(i , false);
         mainUI.OpenBagUI();//close

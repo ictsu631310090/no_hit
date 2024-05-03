@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a93b9b4a3d3bf64e81582a92256669c, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
+  id: 201
   nameWeapon: Shield
   price: 10
   addAC: 2

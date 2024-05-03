@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14a32bd2070d034cbecc901382df5e6, type: 3}
   m_Name: Splint
   m_EditorClassIdentifier: 
+  id: 107
   nameArmor: Splint
   price: 200
   setAC: 17

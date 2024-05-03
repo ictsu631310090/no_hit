@@ -4,13 +4,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class CreateSaveScript
 {
-    public static void Save(DataPlayerScript dataPlayer)
+    public static void Save(DataPlayerScript dataPlayer , UIScript ui)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/Player.text";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        GameSaveScript gameSave = new GameSaveScript(dataPlayer);
+        GameSaveScript gameSave = new GameSaveScript(dataPlayer, ui);
 
         formatter.Serialize(stream, gameSave);
         stream.Close();
@@ -30,7 +30,7 @@ public static class CreateSaveScript
         }
         else
         {
-            Debug.LogError("not found Save in" + path);
+            Debug.Log("not found Save in" + path);
             return null;
         }
     }

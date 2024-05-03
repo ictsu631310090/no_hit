@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Armor", menuName = "Create Obj/Armor")]
 public class CreateArmorScript : ScriptableObject
 {
+    public int id;
     public string nameArmor;
     public int price;
     public int setAC;

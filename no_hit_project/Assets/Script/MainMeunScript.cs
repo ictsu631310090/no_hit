@@ -16,7 +16,6 @@ public class MainMeunScript : MonoBehaviour
     }
     public void GoShopScene()
     {
-
         SceneManager.LoadScene(2);
     }
     public void OpenSettingUI()

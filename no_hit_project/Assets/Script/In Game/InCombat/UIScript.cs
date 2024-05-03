@@ -11,10 +11,12 @@ public class UIScript : MonoBehaviour
     public int moneyPlayer;
     public static int addMoney;
 
+    //Script
     [SerializeField] private GameObject anotherScript;
     [HideInInspector] public DataPlayerScript dataPlayer;
     private CombatScript combat;
 
+    [Header ("UI")]
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private GameObject pauseUI;
     private bool pause;
