@@ -102,8 +102,4 @@ public class GameSaveScript
             listWeaponID[i] = 0;
         }
     }
-    private void Start()
-    {
-        
-    }
 }

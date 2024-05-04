@@ -49,11 +49,21 @@ public class ItemWeaponUIScript : MonoBehaviour
             {
                 mainUI.warnText.text = "You already equip that weapon.";
             }
-            else if (mainUI.dataPlayer.rlHandWeapon[right] != null)//have weapon
+            else if (mainUI.dataPlayer.rlHandWeapon[right].twoHand)
+            {
+                mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[right]);
+                mainUI.dataPlayer.rlHandWeapon[0] = null;
+                mainUI.dataPlayer.rlHandWeapon[1] = null;
+                mainUI.dataPlayer.weaponTwoHand = false;
+                mainUI.dataPlayer.showPlayer.modelPlayer[12].color = new Color(1, 1, 1, 0);
+                mainUI.dataPlayer.showPlayer.modelPlayer[13].color = new Color(0.5f, 0.5f, 0.5f, 0);
+                ChangeDataItemInHand(right);
+            }//two hand weapon
+            else if (mainUI.dataPlayer.rlHandWeapon[right] != null)
             {
                 mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[right]);
                 ChangeDataItemInHand(right);
-            }
+            }//have weapon
             else if (mainUI.dataPlayer.rlHandShield[right] != null)//have shield
             {
                 mainUI.dataPlayer.listShield.Add(mainUI.dataPlayer.rlHandShield[right]);
@@ -67,6 +77,9 @@ public class ItemWeaponUIScript : MonoBehaviour
         {
             if (combat.buttonAttack[0].interactable && combat.buttonAttack[1].interactable && combat.buttonAttack[2].interactable)
             {
+                mainUI.dataPlayer.weaponTwoHand = false;
+                mainUI.dataPlayer.showPlayer.modelPlayer[12].color = new Color(1, 1, 1, 0);
+                mainUI.dataPlayer.showPlayer.modelPlayer[13].color = new Color(0.5f, 0.5f, 0.5f, 0);
                 ChangeItem();
             }
             else
@@ -81,7 +94,6 @@ public class ItemWeaponUIScript : MonoBehaviour
     }
     public void ChangeItem()
     {
-        mainUI.dataPlayer.weaponTwoHand = true;
         if (mainUI.dataPlayer.rlHandWeapon[0] == null && mainUI.dataPlayer.rlHandWeapon[1] == null)
         {
             mainUI.dataPlayer.rlHandWeapon[0] = dataWeapon;
@@ -105,6 +117,10 @@ public class ItemWeaponUIScript : MonoBehaviour
             else if (mainUI.dataPlayer.rlHandWeapon[0] != null)
             {
                 mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[0]);
+                if (mainUI.dataPlayer.rlHandWeapon[1] != null && !mainUI.dataPlayer.rlHandWeapon[0].twoHand)
+                {
+                    mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[1]);
+                }//two Hand Weapon
                 mainUI.dataPlayer.rlHandWeapon[0] = dataWeapon;
                 mainUI.dataPlayer.rlHandWeapon[1] = dataWeapon;
                 if (!dataWeapon.canTwoHand)
@@ -155,6 +171,7 @@ public class ItemWeaponUIScript : MonoBehaviour
                 ChangeDataItemInHand(0);
             }//shield any hand
         }//have item
+        mainUI.dataPlayer.weaponTwoHand = true;
         foreach (Button item in combat.buttonAttack)
         {
             item.interactable = false;

@@ -15,6 +15,7 @@ public class NewDiceRollScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI whoUseText;
     [HideInInspector] public float timeClose;
     [HideInInspector] public bool attacking;
+    [HideInInspector] public bool monsAttacking;
     private bool critical;
     [HideInInspector] public List<GameObject> allDice;
 
@@ -189,6 +190,7 @@ public class NewDiceRollScript : MonoBehaviour
     private void Start()
     {
         attacking = false;
+        monsAttacking = false;
         critical = false;
         timeClose = 1f;
         Open = false;

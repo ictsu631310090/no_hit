@@ -77,6 +77,7 @@ public class UIScript : MonoBehaviour
             itemShow.GetComponent<ItemWeaponUIScript>().mainUI = this;
             itemShow.GetComponent<ItemWeaponUIScript>().combat = combat;
             showItemObj.Add(itemShow);
+            //Debug.Log(dataPlayer.listWeapon.Count);
         }
         for (int i = 0; i < dataPlayer.listShield.Count; i++)
         {
@@ -377,6 +378,7 @@ public class UIScript : MonoBehaviour
     }
     private void Start()
     {
+        
         moneyText.text = moneyPlayer.ToString();
         mapUI.SetActive(false);
         openMap = false;

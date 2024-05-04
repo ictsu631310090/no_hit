@@ -7,7 +7,7 @@ using TMPro;
 public class CombatScript : MonoBehaviour
 {
     [SerializeField] private UIScript uiScript;
-    private SaveManagerScript saveManager;
+    [SerializeField] private SaveManagerScript saveManager;
     [HideInInspector] public NewDiceRollScript diceRoll;
     [HideInInspector] public DataPlayerScript dataPlayer;
 
@@ -145,8 +145,8 @@ public class CombatScript : MonoBehaviour
         int numText = atkBonus + dataPlayer.bonus;
         if (buttonAttack.Length > 0)
         {
-            buttonAttack[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "right hand \n d20 + " + numText;
-            buttonAttack[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "left hand \n d20 + " + numText;
+            buttonAttack[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "left hand \n d20 + " + numText;
+            buttonAttack[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "right hand \n d20 + " + numText;
             buttonAttack[2].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "both hand \n d20 + " + numText;
         }
     }  //finess str or dex
@@ -221,7 +221,6 @@ public class CombatScript : MonoBehaviour
     }
     private void Awake()
     {
-        saveManager = uiScript.GetComponent<SaveManagerScript>();
         diceRoll = GetComponent<NewDiceRollScript>();
         setMon = GetComponent<SetMonsterScript>();
         dataPlayer = GetComponent<DataPlayerScript>();

@@ -18,6 +18,10 @@ public class MainMeunScript : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+    public void GoRestScene()
+    {
+        SceneManager.LoadScene(3);
+    }
     public void OpenSettingUI()
     {
         if (!settingOpen)

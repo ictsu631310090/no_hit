@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SaveManagerScript : MonoBehaviour
 {
     [SerializeField] private DataPlayerScript dataPlayer;
-    [HideInInspector] public UIScript ui;
+    [SerializeField] private UIScript ui;
     [SerializeField] private CreateArmorScript[] dataArmor;
     [SerializeField] private CreateShieldScript[] dataShield;
     [SerializeField] private CreateWeaponScript[] dataWeapon;
@@ -22,6 +22,7 @@ public class SaveManagerScript : MonoBehaviour
     public void SaveGame()
     {
         CreateSaveScript.Save(dataPlayer, ui);
+        Debug.Log("Game Save");
     }
     public void LoadGameButtom()
     {
@@ -41,6 +42,8 @@ public class SaveManagerScript : MonoBehaviour
 
             ui.moneyPlayer = dataSave.moneyHave;//UI
         }
+        UpdateImageItem();
+        Debug.Log("Load Game");
     }
     public void ChangeBackData(GameSaveScript dataSave)
     {
@@ -55,19 +58,54 @@ public class SaveManagerScript : MonoBehaviour
         }
         foreach (var item in dataSave.listArmorID)
         {
-            armorList.Add(findArmor(item));
+            if (findArmor(item) != null)
+            {
+                armorList.Add(findArmor(item));
+            }
         }
         dataPlayer.listArmor = armorList;
         foreach (var item in dataSave.listShieldID)
         {
-            shieldList.Add(findShield(item));
+            if (findShield(item) != null)
+            {
+                shieldList.Add(findShield(item));
+            }
         }
         dataPlayer.listShield = shieldList;
         foreach (var item in dataSave.listWeaponID)
         {
-            weaponList.Add(findWeapon(item));
+            if (findWeapon(item) != null)
+            {
+                weaponList.Add(findWeapon(item));
+            }
         }
         dataPlayer.listWeapon = weaponList;
+    }
+    private void UpdateImageItem()
+    {
+        dataPlayer.UpdateImageArmor();
+        dataPlayer.showPlayer.UpdateACText();
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (dataPlayer.rlHandWeapon[i] != null)
+            {
+                if (dataPlayer.rlHandWeapon[i].twoHand)
+                {
+                    dataPlayer.weaponTwoHand = true;
+                    dataPlayer.UpdateImageWeapon(i, true);
+                    break;
+                }
+                else
+                {
+                    dataPlayer.UpdateImageWeapon(i, true);
+                }
+            }
+            else if (dataPlayer.rlHandShield[i] != null)
+            {
+                dataPlayer.UpdateImageWeapon(i, false);
+            }
+        }
     }
     private CreateArmorScript findArmor(int id)
     {
@@ -82,7 +120,6 @@ public class SaveManagerScript : MonoBehaviour
             else if (id == 0)
             {
                 data = null;
-                break;
             }
         }
         return data;
@@ -100,7 +137,6 @@ public class SaveManagerScript : MonoBehaviour
             else if(id == 0)
             {
                 data = null;
-                break;
             }
         }
         return data;
@@ -118,13 +154,8 @@ public class SaveManagerScript : MonoBehaviour
             else if (id == 0)
             {
                 data = null;
-                break;
             }
         }
         return data;
-    }
-    private void Awake()
-    {
-        ui = GetComponent<UIScript>();
     }
 }
