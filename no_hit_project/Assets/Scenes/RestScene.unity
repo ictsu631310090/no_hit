@@ -2470,7 +2470,6 @@ GameObject:
   - component: {fileID: 354934659}
   - component: {fileID: 354934658}
   - component: {fileID: 354934657}
-  - component: {fileID: 354934660}
   m_Layer: 0
   m_Name: Combat Script
   m_TagString: Untagged
@@ -2518,6 +2517,7 @@ MonoBehaviour:
   diceHave: 0000000000000000000000000000000000000000
   showPlayer: {fileID: 1039992860}
   UpStatusButtomObj: {fileID: 1052713006}
+  diceRoll: {fileID: 0}
 --- !u!114 &354934658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2559,18 +2559,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &354934660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354934656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 663503cea8ce81a43a6a8fda2f83cc4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &385128028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7074,6 +7062,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1379658271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1379658273}
+  - component: {fileID: 1379658272}
+  m_Layer: 0
+  m_Name: Scene Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1379658272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379658271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 663503cea8ce81a43a6a8fda2f83cc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataPlayer: {fileID: 354934657}
+--- !u!4 &1379658273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379658271}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473575415
 GameObject:
   m_ObjectHideFlags: 0
@@ -10599,6 +10632,7 @@ SceneRoots:
   - {fileID: 1215313178}
   - {fileID: 1830851837}
   - {fileID: 354934659}
+  - {fileID: 1379658273}
   - {fileID: 840095792}
   - {fileID: 1039992859}
   - {fileID: 1223485823}

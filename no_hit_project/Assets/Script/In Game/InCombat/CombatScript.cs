@@ -8,7 +8,7 @@ public class CombatScript : MonoBehaviour
 {
     [SerializeField] private UIScript uiScript;
     [SerializeField] private SaveManagerScript saveManager;
-    [HideInInspector] public NewDiceRollScript diceRoll;
+     public NewDiceRollScript diceRoll;
     [HideInInspector] public DataPlayerScript dataPlayer;
 
     private int atkSTR;//modifier
@@ -19,7 +19,7 @@ public class CombatScript : MonoBehaviour
     [HideInInspector] public int targetMons;
     public GameObject lightTarget;
 
-    public Button[] buttonAttack; 
+    public Button[] buttonAttack;//r = 0, l = 1, b = 2
     [SerializeField] private Button endTurn;
     public bool finess;
     public int addDice;
@@ -34,6 +34,14 @@ public class CombatScript : MonoBehaviour
         {
             buttonAttack[i].interactable = false;//ปิดปุ่ม
             diceRoll.attacking = true;
+            if (dataPlayer.weaponTwoHand)
+            {
+                dataPlayer.PlayAnimation(i + 2);
+            }
+            else
+            {
+                dataPlayer.PlayAnimation(i + 1);
+            }
             movePlayer = true;
             diceRoll.RollToHit(atkBonus + dataPlayer.bonus, addDice, 0);//0 = player, 1 = enemy
             StartCoroutine(Damage(dataPlayer.diceDamage, atkBonus, addDice));
@@ -60,25 +68,40 @@ public class CombatScript : MonoBehaviour
     }
     IEnumerator Damage(int dice, int bonus, int addDiceInMethod)
     {
-        float timeUse = (3 * diceRoll.timeClose);
-        yield return new WaitForSeconds(timeUse / 2);
+        yield return new WaitForSeconds(diceRoll.timeClose * 1.5f);
         movePlayer = false;
-        yield return new WaitForSeconds(timeUse / 3);
+        yield return new WaitForSeconds(diceRoll.timeClose);
+        if (dice != 0)
+        {
+            yield return new WaitForSeconds(diceRoll.timeClose);
+        }
+        if (diceRoll.critical)
+        {
+            yield return new WaitForSeconds(diceRoll.timeClose);
+        }
         if (addDiceInMethod != 0)
         {
-            yield return new WaitForSeconds(timeUse / 3);
+            yield return new WaitForSeconds(diceRoll.timeClose);
         }
         Debug.Log("result : " + diceRoll.allResult);
         if (diceRoll.allResult >= monsters[targetMons].armorClass)
         {
-            //yield return new WaitForSeconds(diceRoll.timeClose * 0.1f);
             diceRoll.RollDamage(dice, bonus, addDiceInMethod, 0);
-            yield return new WaitForSeconds(timeUse);
+            yield return new WaitForSeconds(2 * diceRoll.timeClose);
+            if (dice != 0)
+            {
+                yield return new WaitForSeconds(diceRoll.timeClose);
+            }
+            if (diceRoll.critical)
+            {
+                yield return new WaitForSeconds(diceRoll.timeClose);
+            }
             if (addDiceInMethod != 0)
             {
-                yield return new WaitForSeconds(timeUse / 3);
+                yield return new WaitForSeconds(diceRoll.timeClose);
             }
             monsters[targetMons].takeDamage = diceRoll.allResult;
+            yield return new WaitForSeconds(diceRoll.timeClose);
         }
         else
         {

@@ -13,10 +13,11 @@ public class NewDiceRollScript : MonoBehaviour
     [SerializeField] private Transform spwanDice;
     [SerializeField] private Texture[] diceTextur;
     [SerializeField] private TextMeshProUGUI whoUseText;
-    [HideInInspector] public float timeClose;
+    [Range (0.0f,1.0f)]
+    public float timeClose;
     [HideInInspector] public bool attacking;
     [HideInInspector] public bool monsAttacking;
-    private bool critical;
+    [HideInInspector] public bool critical;
     [HideInInspector] public List<GameObject> allDice;
 
     [Header("Chack")]
@@ -81,7 +82,6 @@ public class NewDiceRollScript : MonoBehaviour
             allDice.Add(diceObj2);
             critical = false;
         }
-
         if (allResult == 20)
         {
             critical = true;
@@ -118,13 +118,13 @@ public class NewDiceRollScript : MonoBehaviour
             numberText.text = allResult.ToString();
             allDice.Add(objAdd);
         }
-        yield return new WaitForSeconds(timeClose / 2);
-        animationUI.SetBool("open", false);
+        yield return new WaitForSeconds(timeClose);
         foreach (var item in allDice)
         {
             item.GetComponent<Animator>().SetBool("open", false);
         }
-        yield return new WaitForSeconds(timeClose / 3);
+        animationUI.SetBool("open", false);
+        yield return new WaitForSeconds(timeClose);
         attacking = false;
         //Open = false;//test, don't forget remove
     }
@@ -192,7 +192,6 @@ public class NewDiceRollScript : MonoBehaviour
         attacking = false;
         monsAttacking = false;
         critical = false;
-        timeClose = 1f;
         Open = false;
     }
 }

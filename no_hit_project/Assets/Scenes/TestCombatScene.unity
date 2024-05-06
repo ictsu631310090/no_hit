@@ -1937,9 +1937,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311917745}
-  - component: {fileID: 311917754}
-  - component: {fileID: 311917752}
-  - component: {fileID: 311917746}
   - component: {fileID: 311917749}
   - component: {fileID: 311917753}
   m_Layer: 0
@@ -1964,25 +1961,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &311917746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311917743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70391aae77e57a645889ad750ec409c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dataMon:
-  - {fileID: 11400000, guid: 32029fca296aa1946bde5526b169c701, type: 2}
-  monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}
-  spawnPointMon:
-  - {fileID: 1373367219}
-  - {fileID: 2058824379}
-  - {fileID: 804973453}
 --- !u!114 &311917749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,38 +1975,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiScript: {fileID: 1767400768}
   saveManager: {fileID: 610312039}
-  diceRoll: {fileID: 0}
+  diceRoll: {fileID: 1985354551}
   dataPlayer: {fileID: 0}
   monsters: []
   monAttack: 0
   targetMons: 0
   lightTarget: {fileID: 298707755}
   buttonAttack:
-  - {fileID: 1399606027}
   - {fileID: 2005808386}
+  - {fileID: 1399606027}
   - {fileID: 951545444}
   endTurn: {fileID: 1506615252}
   finess: 0
   addDice: 0
   distanceMon: -2
   speedMove: 40
---- !u!114 &311917752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311917743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec7e4dca15a31843808697d3adb958e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numOfMon: 3
-  buttomTarget:
-  - {fileID: 1609850555}
-  - {fileID: 1840749930}
-  - {fileID: 1192343050}
 --- !u!114 &311917753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,38 +2039,7 @@ MonoBehaviour:
   diceHave: 0000000000000000000000000000000000000000
   showPlayer: {fileID: 1617428742}
   UpStatusButtomObj: {fileID: 1062109416}
---- !u!114 &311917754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311917743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be471dfe4d72fde43a272669dbed4e3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberText: {fileID: 53036604}
-  allResult: 0
-  animationUI: {fileID: 506472542}
-  diceUIPrefab: {fileID: 7196150528865195743, guid: 992287e79d5d2ed45b7381de3c3c31cf, type: 3}
-  spwanDice: {fileID: 952877889}
-  diceTextur:
-  - {fileID: 2800000, guid: 64c66b9c9f617dc45a759dae4f7cb3c9, type: 3}
-  - {fileID: 2800000, guid: 85a79f4e0c0c729479eef3344a9f8671, type: 3}
-  - {fileID: 2800000, guid: 9e8c76b545c3a0346bcb34f901cb1eac, type: 3}
-  - {fileID: 2800000, guid: 42d367cd2dbefc247951e84ff692de98, type: 3}
-  - {fileID: 2800000, guid: 18c77227e1e843e44a79a195f5453e31, type: 3}
-  - {fileID: 2800000, guid: aaac2632a73754d4a8324e255fb36734, type: 3}
-  - {fileID: 2800000, guid: b810afb1f08d15f408ccaf0c13ca4168, type: 3}
-  whoUseText: {fileID: 1526681788}
-  timeClose: 1
-  attacking: 0
-  allDice: []
-  bonusTest: 5
-  diceAddTest: 6
-  typeTest: 0
+  diceRoll: {fileID: 1985354551}
 --- !u!1 &352587997
 GameObject:
   m_ObjectHideFlags: 0
@@ -6538,18 +6468,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 311917753}
-        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
-        m_MethodName: PlayAnimation
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &951545445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7840,7 +7758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8862,18 +8780,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 311917753}
-        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
-        m_MethodName: PlayAnimation
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10151,7 +10057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11125,7 +11031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.039215688}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11625,6 +11531,110 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936180067}
   m_CullTransparentMesh: 1
+--- !u!1 &1985354550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1985354552}
+  - component: {fileID: 1985354551}
+  - component: {fileID: 1985354554}
+  - component: {fileID: 1985354553}
+  m_Layer: 0
+  m_Name: Scene Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1985354551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985354550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be471dfe4d72fde43a272669dbed4e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberText: {fileID: 53036604}
+  allResult: 0
+  animationUI: {fileID: 506472542}
+  diceUIPrefab: {fileID: 7196150528865195743, guid: 992287e79d5d2ed45b7381de3c3c31cf, type: 3}
+  spwanDice: {fileID: 952877889}
+  diceTextur:
+  - {fileID: 2800000, guid: 64c66b9c9f617dc45a759dae4f7cb3c9, type: 3}
+  - {fileID: 2800000, guid: 85a79f4e0c0c729479eef3344a9f8671, type: 3}
+  - {fileID: 2800000, guid: 9e8c76b545c3a0346bcb34f901cb1eac, type: 3}
+  - {fileID: 2800000, guid: 42d367cd2dbefc247951e84ff692de98, type: 3}
+  - {fileID: 2800000, guid: 18c77227e1e843e44a79a195f5453e31, type: 3}
+  - {fileID: 2800000, guid: aaac2632a73754d4a8324e255fb36734, type: 3}
+  - {fileID: 2800000, guid: b810afb1f08d15f408ccaf0c13ca4168, type: 3}
+  whoUseText: {fileID: 1526681788}
+  timeClose: 1
+  attacking: 0
+  monsAttacking: 0
+  critical: 0
+  allDice: []
+  bonusTest: 5
+  diceAddTest: 6
+  typeTest: 0
+--- !u!4 &1985354552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985354550}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1985354553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985354550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70391aae77e57a645889ad750ec409c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataMon:
+  - {fileID: 11400000, guid: 32029fca296aa1946bde5526b169c701, type: 2}
+  monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}
+  spawnPointMon:
+  - {fileID: 1373367219}
+  - {fileID: 2058824379}
+  - {fileID: 804973453}
+--- !u!114 &1985354554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985354550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec7e4dca15a31843808697d3adb958e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numOfMon: 3
+  buttomTarget:
+  - {fileID: 1609850555}
+  - {fileID: 1840749930}
+  - {fileID: 1192343050}
 --- !u!1 &2005808384
 GameObject:
   m_ObjectHideFlags: 0
@@ -11716,18 +11726,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 311917753}
-        m_TargetAssemblyTypeName: DataPlayerScript, Assembly-CSharp
-        m_MethodName: PlayAnimation
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12921,6 +12919,7 @@ SceneRoots:
   - {fileID: 610312038}
   - {fileID: 1767400770}
   - {fileID: 311917745}
+  - {fileID: 1985354552}
   - {fileID: 436502736}
   - {fileID: 447450747}
   - {fileID: 1712968512434039826}

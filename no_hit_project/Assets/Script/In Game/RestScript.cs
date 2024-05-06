@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class RestScript : MonoBehaviour
 {
-    private DataPlayerScript dataPlayer;
-    //private CombatScript combat;
-    private void Awake()
-    {
-        dataPlayer = GetComponent<DataPlayerScript>();
-        //combat = GetComponent<CombatScript>();
-    }
+    [SerializeField] private DataPlayerScript dataPlayer;
     private void Start()
     {
         dataPlayer.healHitPoint = dataPlayer.hitPointMax;

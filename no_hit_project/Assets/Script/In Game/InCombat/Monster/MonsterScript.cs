@@ -45,26 +45,30 @@ public class MonsterScript : MonoBehaviour
     }
     IEnumerator Damage(int dice, int bonus)
     {
-        float time = combat.diceRoll.timeClose + (combat.diceRoll.timeClose * 0.1f);
-        if (bonus != 0)
-        {
-            time += combat.diceRoll.timeClose;
-        }
-        yield return new WaitForSeconds((time * 1/2));
+        float time = 3 * combat.diceRoll.timeClose;
+        yield return new WaitForSeconds((time /3));
         moveMons = false;
         animaMon.SetInteger("step", 0);
-        yield return new WaitForSeconds((time * 3/4));
+        yield return new WaitForSeconds((time *2 / 3));
+        if (bonus != 0)
+        {
+            yield return new WaitForSeconds(combat.diceRoll.timeClose);
+        }
         if (combat.diceRoll.allResult >= combat.dataPlayer.armorClass)
         {
             canAttack = true;
-            if (combat.diceRoll.allResult - toHitPlus == 20)
-            {
-                time += combat.diceRoll.timeClose;
-            }
-            yield return new WaitForSeconds(time * 0.1f);
             combat.diceRoll.RollDamage(dice, bonus, 0, 1);
-            yield return new WaitForSeconds(time);
+            if (combat.diceRoll.critical)
+            {
+                yield return new WaitForSeconds(combat.diceRoll.timeClose);
+            }
+            if (bonus != 0)
+            {
+                yield return new WaitForSeconds(combat.diceRoll.timeClose);
+            }
+            yield return new WaitForSeconds((time * 2 / 3));
             combat.dataPlayer.takeDamage = combat.diceRoll.allResult;
+            yield return new WaitForSeconds((time / 3));
         }
         else
         {

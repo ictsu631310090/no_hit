@@ -4058,6 +4058,7 @@ MonoBehaviour:
   diceHave: 0000000000000000000000000000000000000000
   showPlayer: {fileID: 3515944950085587640}
   UpStatusButtomObj: {fileID: 27824212}
+  diceRoll: {fileID: 0}
 --- !u!114 &771220349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7516,7 +7517,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1426920920}
   - component: {fileID: 1426920918}
-  - component: {fileID: 1426920921}
   m_Layer: 0
   m_Name: UI Script
   m_TagString: Untagged
@@ -7581,33 +7581,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1426920921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426920917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 460c4bbd5cb6e8247a0057273b5fed1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  merchantAni: {fileID: 7047522980006261847}
-  bubbleTalk: {fileID: 1385190561}
-  armorCanSell:
-  - {fileID: 11400000, guid: 8b4ebd400584916468d0a6b4ef6972fd, type: 2}
-  - {fileID: 11400000, guid: 097736ab5311d9d419939971066c28d6, type: 2}
-  shieldCanSell:
-  - {fileID: 11400000, guid: 7362ed5cd08f1bb46b9da7e55a277720, type: 2}
-  weaponCanSell:
-  - {fileID: 11400000, guid: 153a55dbfc13c7248933a0baf71f029c, type: 2}
-  - {fileID: 11400000, guid: 550dae6866d9a30429a85a770bfb02dc, type: 2}
-  - {fileID: 11400000, guid: 19bb9124e5ff33f4c80295e118485e06, type: 2}
-  - {fileID: 11400000, guid: 1a91eb2c72e55be469887c074150bb5e, type: 2}
-  buttonBuy: {fileID: 5463222047719923588, guid: a4bce4ee86db86344807a13f3486b268, type: 3}
-  buyUI: {fileID: 402374623}
-  itemBuy: {fileID: 0}
 --- !u!1 &1493422677
 GameObject:
   m_ObjectHideFlags: 0
@@ -10523,6 +10496,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099236060}
   m_CullTransparentMesh: 1
+--- !u!1 &2104287883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2104287885}
+  - component: {fileID: 2104287884}
+  m_Layer: 0
+  m_Name: Scene Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2104287884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104287883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460c4bbd5cb6e8247a0057273b5fed1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainUI: {fileID: 1426920918}
+  merchantAni: {fileID: 7047522980006261847}
+  bubbleTalk: {fileID: 1385190561}
+  armorCanSell:
+  - {fileID: 11400000, guid: 8b4ebd400584916468d0a6b4ef6972fd, type: 2}
+  - {fileID: 11400000, guid: 097736ab5311d9d419939971066c28d6, type: 2}
+  shieldCanSell:
+  - {fileID: 11400000, guid: 7362ed5cd08f1bb46b9da7e55a277720, type: 2}
+  weaponCanSell:
+  - {fileID: 11400000, guid: 153a55dbfc13c7248933a0baf71f029c, type: 2}
+  - {fileID: 11400000, guid: 550dae6866d9a30429a85a770bfb02dc, type: 2}
+  - {fileID: 11400000, guid: 19bb9124e5ff33f4c80295e118485e06, type: 2}
+  - {fileID: 11400000, guid: 1a91eb2c72e55be469887c074150bb5e, type: 2}
+  buttonBuy: {fileID: 5463222047719923588, guid: a4bce4ee86db86344807a13f3486b268, type: 3}
+  buyUI: {fileID: 402374623}
+  itemBuy: {fileID: 0}
+--- !u!4 &2104287885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104287883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122829934
 GameObject:
   m_ObjectHideFlags: 0
@@ -11018,6 +11051,7 @@ SceneRoots:
   - {fileID: 214809810443637946}
   - {fileID: 1426920920}
   - {fileID: 771220353}
+  - {fileID: 2104287885}
   - {fileID: 355938604}
   - {fileID: 3515944950085587639}
   - {fileID: 930093196}

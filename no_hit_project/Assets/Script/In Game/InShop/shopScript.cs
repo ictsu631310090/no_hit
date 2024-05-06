@@ -6,7 +6,7 @@ using TMPro;
 
 public class shopScript : MonoBehaviour
 {
-    private UIScript mainUI;
+    [SerializeField] private UIScript mainUI;
     [SerializeField] private Animator merchantAni;
     [SerializeField] private GameObject bubbleTalk;
     private TextMeshProUGUI talkText;
@@ -90,10 +90,6 @@ public class shopScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         merchantAni.SetInteger("buy", 0);
-    }
-    private void Awake()
-    {
-        mainUI = this.GetComponent<UIScript>();
     }
     private void Start()
     {

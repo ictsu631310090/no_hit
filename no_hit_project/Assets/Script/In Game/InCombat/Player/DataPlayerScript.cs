@@ -42,7 +42,7 @@ public class DataPlayerScript : MonoBehaviour
     [Header("Link Obj")]
     public ShowPlayerScript showPlayer;
     [SerializeField] private GameObject UpStatusButtomObj;
-    private NewDiceRollScript diceRoll;
+    [SerializeField] private NewDiceRollScript diceRoll;
     private CombatScript combat;
     private void LevelUp()
     {
@@ -190,7 +190,7 @@ public class DataPlayerScript : MonoBehaviour
             showPlayer.animaPlayer.SetInteger("step", i);
             StartCoroutine(DeleyAnimationTime());
         }
-        else if (!diceRoll.attacking)
+        else
         {
             showPlayer.animaPlayer.SetInteger("step", i);
             StartCoroutine(DeleyAnimationTime());
@@ -277,7 +277,6 @@ public class DataPlayerScript : MonoBehaviour
     private void Awake()
     {
         showPlayer.dataPlayer = GetComponent<DataPlayerScript>();
-        diceRoll = GetComponent<NewDiceRollScript>();
         combat = GetComponent<CombatScript>();
     }
     private void Start()
@@ -287,8 +286,8 @@ public class DataPlayerScript : MonoBehaviour
         oldConMoPLayer = (con - 10) / 2;
 
         //hitPoint += oldConMoPLayer;
-        //hpLvOne = hitPoint;
-        //hitPointMax = hitPoint;
+        hpLvOne = 8;
+        hitPointMax = hitPoint;
         //weaponTwoHand = false;
 
         //armorClass += oldDexMoPLayer;
