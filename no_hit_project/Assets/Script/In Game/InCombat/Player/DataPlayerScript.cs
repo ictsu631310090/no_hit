@@ -327,7 +327,10 @@ public class DataPlayerScript : MonoBehaviour
         }
         if (takeDamage != 0)
         {
-            PlayAnimation(5);
+            if (takeDamage > 0)
+            {
+                PlayAnimation(5);
+            }
             hitPoint -= takeDamage;
             takeDamage = 0;
             showPlayer.UpdateTextHp();
