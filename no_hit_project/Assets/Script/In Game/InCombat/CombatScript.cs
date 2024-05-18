@@ -8,12 +8,12 @@ public class CombatScript : MonoBehaviour
 {
     [SerializeField] private UIScript uiScript;
     [SerializeField] private SaveManagerScript saveManager;
-     public NewDiceRollScript diceRoll;
+    public NewDiceRollScript diceRoll;
     [HideInInspector] public DataPlayerScript dataPlayer;
 
     private int atkSTR;//modifier
     private int atkDEX;//modifier
-    private SetMonsterScript setMon;
+    public SetMonsterScript setMon;
     public List<MonsterScript> monsters;
     [HideInInspector] public bool monAttack;
     [HideInInspector] public int targetMons;
@@ -244,8 +244,6 @@ public class CombatScript : MonoBehaviour
     }
     private void Awake()
     {
-        diceRoll = GetComponent<NewDiceRollScript>();
-        setMon = GetComponent<SetMonsterScript>();
         dataPlayer = GetComponent<DataPlayerScript>();
     }
     private void Start()

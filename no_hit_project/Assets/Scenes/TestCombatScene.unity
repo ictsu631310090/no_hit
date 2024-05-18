@@ -1977,6 +1977,7 @@ MonoBehaviour:
   saveManager: {fileID: 610312039}
   diceRoll: {fileID: 1985354551}
   dataPlayer: {fileID: 0}
+  setMon: {fileID: 1985354554}
   monsters: []
   monAttack: 0
   targetMons: 0
@@ -11611,6 +11612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70391aae77e57a645889ad750ec409c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combat: {fileID: 311917749}
   dataMon:
   - {fileID: 11400000, guid: 32029fca296aa1946bde5526b169c701, type: 2}
   monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}

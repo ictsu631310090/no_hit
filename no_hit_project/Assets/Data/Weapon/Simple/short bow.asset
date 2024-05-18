@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4aca2eeb7198941adca98a74d3d4dc, type: 3}
+  m_Name: short bow
+  m_EditorClassIdentifier: 
+  id: 305
+  nameWeapon: short bow
+  price: 2
+  finesse: 0
+  twoHand: 1
+  damage: 6
+  canTwoHand: 0
+  damageTwoHand: 0
+  image: {fileID: -1247697682, guid: c641fac91d6bf1d459d12d9065ffc0b2, type: 3}

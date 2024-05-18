@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CreateMonsterScript : MonoBehaviour
 {
+    [SerializeField] private CombatScript combat;
     [SerializeField] private CreateTypeMonScript[] dataMon;
     [SerializeField] private GameObject monsterObj;
     public Transform[] spawnPointMon;
-    private CombatScript combat;
     public void CreateMon(int numOfMon)
     {
         for (int i = 0; i < numOfMon; i++)
@@ -37,9 +37,5 @@ public class CreateMonsterScript : MonoBehaviour
         combat.lightTarget.transform.parent = combat.monsters[numOfMon - 1].transform.GetChild(1);
         combat.lightTarget.transform.position = combat.monsters[numOfMon - 1].transform.GetChild(1).position;
         combat.targetMons = numOfMon - 1;//front
-    }
-    private void Awake()
-    {
-        combat = GetComponent<CombatScript>();
     }
 }
