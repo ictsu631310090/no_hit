@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RestScene.unity
     guid: a0a465f3b60336142970f988edc89fdc
+  - enabled: 1
+    path: Assets/Scenes/EventScnen.unity
+    guid: b5db90bf77f0ee64da5df91bc86afb17
   m_configObjects: {}

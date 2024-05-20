@@ -20,8 +20,6 @@ public class UIScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private GameObject pauseUI;
     private bool pause;
-    [SerializeField] private GameObject mapUI;
-    private bool openMap;
     [HideInInspector] public bool nextScene;
 
     [Header ("Bag EquipMent")]
@@ -39,19 +37,6 @@ public class UIScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] numDiceText;
     [SerializeField] private Button[] useDiceButton;
 
-    public void OpenMapUI()
-    {
-        if (!openMap)
-        {
-            mapUI.SetActive(true);
-            openMap = true;
-        }
-        else
-        {
-            mapUI.SetActive(false);
-            openMap = false;
-        }
-    }
     //Equipment
     public void OpenBagUI()
     {
@@ -378,10 +363,7 @@ public class UIScript : MonoBehaviour
     }
     private void Start()
     {
-        
         moneyText.text = moneyPlayer.ToString();
-        mapUI.SetActive(false);
-        openMap = false;
         bagDiceUI.SetActive(false);
         openDiceBag = false;
         warnText.text = null;

@@ -129,8 +129,4 @@ public class dialogueScript : MonoBehaviour
         }
         TalkDialogue();
     }
-    private void Update()
-    {
-        
-    }
 }
