@@ -6,14 +6,15 @@ using TMPro;
 
 public class CombatScript : MonoBehaviour
 {
+    [Header("Link Script")]
     [SerializeField] private UIScript uiScript;
     [SerializeField] private SaveManagerScript saveManager;
-    public NewDiceRollScript diceRoll;
     [HideInInspector] public DataPlayerScript dataPlayer;
+    [SerializeField] private CreateMonsterScript createMonster;
+    public NewDiceRollScript diceRoll;
 
     private int atkSTR;//modifier
     private int atkDEX;//modifier
-    public SetMonsterScript setMon;
     public List<MonsterScript> monsters;
     [HideInInspector] public bool monAttack;
     [HideInInspector] public int targetMons;
@@ -131,14 +132,14 @@ public class CombatScript : MonoBehaviour
             monsters.Clear();
             lightTarget.SetActive(false);
         }
-        else if (numMon == 2)//have 1 mon
+        else if (numMon == monsters.Count - 1)//have 1 mon
         {
-            foreach (var item in setMon.buttomTarget)
+            foreach (var item in createMonster.buttomTarget)
             {
                 item.SetActive(false);
             }
         }
-        setMon.buttomTarget[idMonDie].SetActive(false);
+        createMonster.buttomTarget[idMonDie].SetActive(false);
         Debug.Log("targetMons : " + targetMons);
     } // player attack
     private void UpdateATKBonus()

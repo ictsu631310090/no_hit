@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class CreateMonsterScript : MonoBehaviour
 {
+    [Header("Link Script")]
     [SerializeField] private CombatScript combat;
+
+    [Header("set data")]
+    [Range(1, 3)]
+    [SerializeField] private int numOfMon;
     [SerializeField] private CreateTypeMonScript[] dataMon;
     [SerializeField] private GameObject monsterObj;
     public Transform[] spawnPointMon;
+    public GameObject[] buttomTarget;
     public void CreateMon(int numOfMon)
     {
         for (int i = 0; i < numOfMon; i++)
@@ -37,5 +43,13 @@ public class CreateMonsterScript : MonoBehaviour
         combat.lightTarget.transform.parent = combat.monsters[numOfMon - 1].transform.GetChild(1);
         combat.lightTarget.transform.position = combat.monsters[numOfMon - 1].transform.GetChild(1).position;
         combat.targetMons = numOfMon - 1;//front
+    }
+    private void Start()
+    {
+        CreateMon(numOfMon);
+        for (int i = numOfMon; i < buttomTarget.Length; i++)
+        {
+            buttomTarget[i].SetActive(false);
+        }
     }
 }

@@ -1535,9 +1535,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiScript: {fileID: 1767400768}
   saveManager: {fileID: 610312039}
-  diceRoll: {fileID: 1985354551}
   dataPlayer: {fileID: 0}
-  setMon: {fileID: 1985354554}
+  createMonster: {fileID: 0}
+  diceRoll: {fileID: 1985354551}
   monsters: []
   monAttack: 0
   targetMons: 0
@@ -10304,7 +10304,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985354552}
   - component: {fileID: 1985354551}
-  - component: {fileID: 1985354554}
   - component: {fileID: 1985354553}
   m_Layer: 0
   m_Name: Scene Script
@@ -10375,6 +10374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combat: {fileID: 311917749}
+  numOfMon: 3
   dataMon:
   - {fileID: 11400000, guid: 32029fca296aa1946bde5526b169c701, type: 2}
   monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}
@@ -10382,19 +10382,6 @@ MonoBehaviour:
   - {fileID: 1373367219}
   - {fileID: 2058824379}
   - {fileID: 804973453}
---- !u!114 &1985354554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985354550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec7e4dca15a31843808697d3adb958e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numOfMon: 3
   buttomTarget:
   - {fileID: 1609850555}
   - {fileID: 1840749930}

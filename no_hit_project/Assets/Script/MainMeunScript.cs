@@ -5,33 +5,38 @@ using UnityEngine.SceneManagement;
 
 public class MainMeunScript : MonoBehaviour
 {
-    [SerializeField] private GameObject SettingUI;
+    [SerializeField] private GameObject settingUI;
     private bool settingOpen;
-    [SerializeField] private GameObject ExitGameUI;
+    [SerializeField] private GameObject exitGameUI;
     private bool exitGameOpen;
     private SaveManagerScript saveManager;
+    //1 = cut scene, 2 = Map, 3 = combat, 4 = shop, 5 = rest, 6 = event
     public void StartGame()
     {
         SceneManager.LoadScene(1);
     }
-    public void GoShopScene()
+    public void MapScene()
     {
         SceneManager.LoadScene(2);
     }
+    public void GoShopScene()
+    {
+        SceneManager.LoadScene(4);
+    }
     public void GoRestScene()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(5);
     }
     public void OpenSettingUI()
     {
         if (!settingOpen)
         {
-            SettingUI.SetActive(true);
+            settingUI.SetActive(true);
             settingOpen = true;
         }
         else
         {
-            SettingUI.SetActive(false);
+            settingUI.SetActive(false);
             settingOpen = false;
         }
     }
@@ -39,12 +44,12 @@ public class MainMeunScript : MonoBehaviour
     {
         if (!exitGameOpen)
         {
-            ExitGameUI.SetActive(true);
+            exitGameUI.SetActive(true);
             exitGameOpen = true;
         }
         else
         {
-            ExitGameUI.SetActive(false);
+            exitGameUI.SetActive(false);
             exitGameOpen = false;
         }
     }
@@ -55,13 +60,22 @@ public class MainMeunScript : MonoBehaviour
     }
     private void Awake()
     {
-        saveManager = GetComponent<SaveManagerScript>();
+        if (saveManager != null)
+        {
+            saveManager = GetComponent<SaveManagerScript>();
+        }
     }
     private void Start()
     {
-        SettingUI.SetActive(false);
         settingOpen = false;
-        ExitGameUI.SetActive(false);
         exitGameOpen = false;
+        if (settingUI != null)
+        {
+            settingUI.SetActive(false);
+        }
+        if (exitGameUI != null)
+        {
+            exitGameUI.SetActive(false);
+        }
     }
 }
