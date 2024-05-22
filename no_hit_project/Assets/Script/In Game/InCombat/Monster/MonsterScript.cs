@@ -49,7 +49,7 @@ public class MonsterScript : MonoBehaviour
         yield return new WaitForSeconds((time /3));
         moveMons = false;
         animaMon.SetInteger("step", 0);
-        yield return new WaitForSeconds((time *2 / 3));
+        yield return new WaitForSeconds((time * 1 / 3));
         if (bonus != 0)
         {
             yield return new WaitForSeconds(combat.diceRoll.timeClose);
@@ -73,7 +73,6 @@ public class MonsterScript : MonoBehaviour
         else
         {
             combat.dataPlayer.showPlayer.showMiss = true;
-            combat.diceRoll.attacking = false;
         }
     }
     public void UpdateHp()

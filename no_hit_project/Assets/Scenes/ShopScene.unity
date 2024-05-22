@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &27824213
 RectTransform:
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &71087324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: -295}
+  m_AnchoredPosition: {x: 115, y: -200}
   m_SizeDelta: {x: 97.05, y: 40.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &71087325
@@ -593,7 +593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &139422269
 RectTransform:
   m_ObjectHideFlags: 0
@@ -611,7 +611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -295}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 97.05, y: 40.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &139422270
@@ -3721,9 +3721,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoint: 14
+  hpLvOne: 0
   hitPointMax: 0
   takeDamage: 0
   healHitPoint: 0
+  haveDamage: 0
   armorClass: 10
   str: 10
   dex: 10
@@ -3746,8 +3748,9 @@ MonoBehaviour:
   - {fileID: 0}
   armorUse: {fileID: 0}
   diceHave: 0000000000000000000000000000000000000000
+  room: 0
   showPlayer: {fileID: 3515944950085587640}
-  UpStatusButtomObj: {fileID: 27824212}
+  upStatusButtomObj: {fileID: 27824212}
   diceRoll: {fileID: 0}
 --- !u!114 &771220349
 MonoBehaviour:
@@ -3763,9 +3766,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiScript: {fileID: 1426920918}
   saveManager: {fileID: 214809810443637947}
-  diceRoll: {fileID: 0}
   dataPlayer: {fileID: 0}
-  setMon: {fileID: 0}
+  createMonster: {fileID: 0}
+  diceRoll: {fileID: 0}
   monsters: []
   monAttack: 0
   targetMons: 0
@@ -8066,7 +8069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1904276188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8084,7 +8087,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -115, y: -295}
+  m_AnchoredPosition: {x: -115, y: -200}
   m_SizeDelta: {x: 97.05, y: 40.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1904276189

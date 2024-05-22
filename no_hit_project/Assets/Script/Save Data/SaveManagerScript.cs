@@ -17,7 +17,26 @@ public class SaveManagerScript : MonoBehaviour
     [HideInInspector] public List<CreateWeaponScript> weaponList;
     public void NewGameButtom()
     {
-        
+        Debug.Log("New Game");
+        dataPlayer.str = 10;
+        dataPlayer.dex = 10;
+        dataPlayer.con = 10;
+        dataPlayer.xp = 0;
+        dataPlayer.level = 1;
+        dataPlayer.pointLevel = 0;
+        dataPlayer.armorUse = null;
+        dataPlayer.listArmor.Clear();
+        dataPlayer.listShield.Clear();
+        dataPlayer.listWeapon.Clear();
+        for (int i = 0; i < dataPlayer.diceHave.Length; i++)
+        {
+            dataPlayer.diceHave[i] = 0;
+        }
+        dataPlayer.haveDamage = 0;
+        ui.moneyPlayer = 0;//UI
+        dataPlayer.room = 0;
+        SaveGame();
+        //CreateSaveScript.Save(dataPlayer, ui);
     }
     public void SaveGame()
     {
@@ -35,10 +54,10 @@ public class SaveManagerScript : MonoBehaviour
             dataPlayer.xp = dataSave.xp;
             dataPlayer.level = dataSave.levelPlayer;
             dataPlayer.pointLevel = dataSave.pointLevel;
+            dataPlayer.room = dataSave.room;
             ChangeBackData(dataSave);
             dataPlayer.diceHave = dataSave.diceHave;
-            dataPlayer.hitPoint = dataSave.hitPoint;
-            dataPlayer.hitPointMax = dataSave.hitPointMax;
+            dataPlayer.haveDamage = dataSave.haveDamage;
 
             ui.moneyPlayer = dataSave.moneyHave;//UI
         }
@@ -84,7 +103,10 @@ public class SaveManagerScript : MonoBehaviour
     private void UpdateImageItem()
     {
         dataPlayer.UpdateImageArmor();
-        dataPlayer.showPlayer.UpdateACText();
+        if (dataPlayer.showPlayer != null)
+        {
+            dataPlayer.showPlayer.UpdateACText();
+        }
 
         for (int i = 0; i < 2; i++)
         {

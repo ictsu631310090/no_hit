@@ -354,7 +354,8 @@ public class UIScript : MonoBehaviour
     IEnumerator DelayChangeScene()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(0);//main menu test
+        //SceneManager.LoadScene(0);//main menu test
+        SceneManager.LoadScene(2);//go to map
     }
     private void Awake()
     {
@@ -363,16 +364,31 @@ public class UIScript : MonoBehaviour
     }
     private void Start()
     {
-        moneyText.text = moneyPlayer.ToString();
-        bagDiceUI.SetActive(false);
-        openDiceBag = false;
-        warnText.text = null;
-        bagUI.SetActive(false);
-        openBag = false;
+        if (moneyText != null)
+        {
+            moneyText.text = moneyPlayer.ToString();
+        }
+        if (bagDiceUI != null)
+        {
+            bagDiceUI.SetActive(false);
+        }
+        if (bagUI != null)
+        {
+            bagUI.SetActive(false);
+        }
+        if (pauseUI != null)
+        {
+            pauseUI.SetActive(false);
+        }
 
-        pauseUI.SetActive(false);
+        openBag = false;
+        openDiceBag = false;
         pause = false;
         nextScene = false;
+        if (warnText != null)
+        {
+            warnText.text = null;
+        }
     }
     void Update()
     {

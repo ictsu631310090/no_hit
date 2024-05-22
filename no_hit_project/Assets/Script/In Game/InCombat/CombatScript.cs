@@ -24,6 +24,7 @@ public class CombatScript : MonoBehaviour
     [SerializeField] private Button endTurn;
     public bool finess;
     public int addDice;
+    private bool playerAttacking;
 
     private int atkBonus;
     private bool movePlayer;
@@ -31,10 +32,10 @@ public class CombatScript : MonoBehaviour
     [SerializeField] private float speedMove;
     public void AttackButtom(int i)// 0-2 //player
     {
-        if (!diceRoll.attacking && monsters.Count > 0)
+        if (!playerAttacking && monsters.Count > 0)
         {
             buttonAttack[i].interactable = false;//ปิดปุ่ม
-            diceRoll.attacking = true;
+            playerAttacking = true;
             if (dataPlayer.weaponTwoHand)
             {
                 dataPlayer.PlayAnimation(i + 2);
@@ -47,7 +48,7 @@ public class CombatScript : MonoBehaviour
             diceRoll.RollToHit(atkBonus + dataPlayer.bonus, addDice, 0);//0 = player, 1 = enemy
             StartCoroutine(Damage(dataPlayer.diceDamage, atkBonus, addDice));
         }
-        else if (!diceRoll.attacking)
+        else if (!playerAttacking)
         {
             buttonAttack[i].interactable = false;//ปิดปุ่ม
             Debug.Log("No Monster");
@@ -61,7 +62,7 @@ public class CombatScript : MonoBehaviour
             positionMon.x += distanceMon;
             dataPlayer.showPlayer.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.showPlayer.animaPlayer.gameObject.transform.position, positionMon, Time.deltaTime * speedMove);
         }
-        else
+        else if (!movePlayer && dataPlayer.showPlayer != null)
         {
             Vector3 oldPosition = dataPlayer.showPlayer.gameObject.transform.position;
             dataPlayer.showPlayer.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.showPlayer.animaPlayer.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
@@ -69,9 +70,10 @@ public class CombatScript : MonoBehaviour
     }
     IEnumerator Damage(int dice, int bonus, int addDiceInMethod)
     {
-        yield return new WaitForSeconds(diceRoll.timeClose * 1.5f);
+        float timeUse = (3 * diceRoll.timeClose);
+        yield return new WaitForSeconds(timeUse / 2);
         movePlayer = false;
-        yield return new WaitForSeconds(diceRoll.timeClose);
+        //yield return new WaitForSeconds(diceRoll.timeClose);
         if (dice != 0)
         {
             yield return new WaitForSeconds(diceRoll.timeClose);
@@ -87,8 +89,8 @@ public class CombatScript : MonoBehaviour
         Debug.Log("result : " + diceRoll.allResult);
         if (diceRoll.allResult >= monsters[targetMons].armorClass)
         {
+            yield return new WaitForSeconds(timeUse / 2);
             diceRoll.RollDamage(dice, bonus, addDiceInMethod, 0);
-            yield return new WaitForSeconds(2 * diceRoll.timeClose);
             if (dice != 0)
             {
                 yield return new WaitForSeconds(diceRoll.timeClose);
@@ -101,14 +103,15 @@ public class CombatScript : MonoBehaviour
             {
                 yield return new WaitForSeconds(diceRoll.timeClose);
             }
+            yield return new WaitForSeconds(timeUse / 2);
             monsters[targetMons].takeDamage = diceRoll.allResult;
-            yield return new WaitForSeconds(diceRoll.timeClose);
         }
         else
         {
             monsters[targetMons].showMissImage = true;
-            diceRoll.attacking = false;
         }
+        yield return new WaitForSeconds(timeUse * 0.1f);
+        playerAttacking = false;
         addDice = 0;
     }
     public void CheckMonsterDie(int idMonDie)
@@ -191,20 +194,22 @@ public class CombatScript : MonoBehaviour
         endTurn.interactable = false;
         if (diceRoll != null)
         {
-            if (!diceRoll.attacking && monsters.Count > 0)
+            if (!playerAttacking && monsters.Count > 0)
             {
                 StopAllCoroutines();
                 StartCoroutine(DelayMonsterAttack());
             }
-            else if (!diceRoll.attacking && monsters.Count == 0)
+            else if (!playerAttacking && monsters.Count == 0)
             {
                 Debug.Log("Next");
+                dataPlayer.room++;
                 saveManager.SaveGame();
                 uiScript.nextScene = true;
             }
         }
         else
         {
+            dataPlayer.room++;
             saveManager.SaveGame();
             uiScript.nextScene = true;
         }
@@ -212,18 +217,27 @@ public class CombatScript : MonoBehaviour
     IEnumerator DelayMonsterAttack()
     {
         float timeUse = (3 * diceRoll.timeClose);
-        yield return new WaitForSeconds(timeUse * 0.1f);
 
         for (int i = 0; i < monsters.Count; i++)
         {
             if (monsters[i] != null)
             {
+                yield return new WaitForSeconds(timeUse * 0.1f);
                 monsters[i].MonsterAttack();
-                yield return new WaitForSeconds(timeUse);
+                yield return new WaitForSeconds(timeUse * 0.1f);
+                yield return new WaitForSeconds(timeUse * 2 / 3);
                 if (monsters[i].canAttack)//to hit
                 {
-                    yield return new WaitForSeconds(timeUse / 2);
                     monsters[i].canAttack = false;
+                    yield return new WaitForSeconds(timeUse / 2);
+                    if (diceRoll.critical)
+                    {
+                        yield return new WaitForSeconds(diceRoll.timeClose);
+                    }
+                    if (monsters[i].damage.z != 0)//bonus
+                    {
+                        yield return new WaitForSeconds(diceRoll.timeClose);
+                    }
                 }
             }
         }
@@ -237,7 +251,7 @@ public class CombatScript : MonoBehaviour
         }
         if (diceRoll != null)
         {
-            diceRoll.attacking = false;
+            playerAttacking = false;
             endTurn.interactable = true;
         }
         monAttack = false;
@@ -250,7 +264,7 @@ public class CombatScript : MonoBehaviour
     private void Start()
     {
         saveManager.LoadGameButtom();
-
+        playerAttacking = false;
         addDice = 0;
         atkSTR = (dataPlayer.str - 10) / 2;
         atkDEX = (dataPlayer.dex - 10) / 2;

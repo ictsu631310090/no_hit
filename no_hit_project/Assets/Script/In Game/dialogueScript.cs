@@ -101,7 +101,7 @@ public class dialogueScript : MonoBehaviour
                 break;//get dice
             case 1:
                 int h = Random.Range(useEvent.details.x, useEvent.details.y);
-                dataPlayer.takeDamage = -1 * h;
+                dataPlayer.healHitPoint = h;
                 text[useEvent.textTalk.Length] = "You get " + h + " heat.";
                 break;//heat
             case 2:

@@ -11,6 +11,7 @@ public class GameSaveScript
     public int xp;
     public int levelPlayer;
     public int pointLevel;
+    public int room;
 
     public int armorUseID;
     public int[] weaponInhandID = { 0, 0 };
@@ -20,8 +21,7 @@ public class GameSaveScript
     public int[] listWeaponID;
 
     public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
-    public int hitPoint;
-    public int hitPointMax;
+    public int haveDamage;
 
     public int moneyHave;//UI
     public GameSaveScript (DataPlayerScript dataPlayer , UIScript money)
@@ -34,9 +34,9 @@ public class GameSaveScript
         pointLevel = dataPlayer.pointLevel;
         ChangeDataItem(dataPlayer);
 
+        room = dataPlayer.room;
         diceHave = dataPlayer.diceHave;
-        hitPoint = dataPlayer.hitPoint;
-        hitPointMax = dataPlayer.hitPointMax;
+        haveDamage = dataPlayer.haveDamage;
 
         moneyHave = money.moneyPlayer;//UI
     }

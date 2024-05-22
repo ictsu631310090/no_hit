@@ -15,37 +15,11 @@ public class NewDiceRollScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI whoUseText;
     [Range (0.0f,1.0f)]
     public float timeClose;
-    [HideInInspector] public bool attacking;
     [HideInInspector] public bool monsAttacking;
     [HideInInspector] public bool critical;
     [HideInInspector] public List<GameObject> allDice;
-
-    [Header("Chack")]
-    public int bonusTest;
-    public int diceAddTest;
-    public int typeTest;
-    private bool Open;
-    public void ButtonChack()
-    {
-        if (!attacking)
-        {
-            if (!Open)
-            {
-                //RollToHit(bonusTest, diceAddTest, typeTest);
-                RollDamage(4, bonusTest, diceAddTest, typeTest);
-
-                Open = true;
-            }
-            else
-            {
-                Open = false;
-
-            }
-        }
-    }//test
     public void RollToHit(int bonus,int diceAdd, int who)
     {
-        attacking = true;
         animationUI.SetBool("open", true);
         ClearAllDice();
         StopCoroutine((TimeDelayRoll(0,0,0,0)));
@@ -124,9 +98,7 @@ public class NewDiceRollScript : MonoBehaviour
             item.GetComponent<Animator>().SetBool("open", false);
         }
         animationUI.SetBool("open", false);
-        yield return new WaitForSeconds(timeClose);
-        attacking = false;
-        //Open = false;//test, don't forget remove
+        yield return new WaitForSeconds(timeClose * 1.5f);
     }
     private void ChangeDiceImage(GameObject obj,int diceImage)
     {
@@ -185,13 +157,10 @@ public class NewDiceRollScript : MonoBehaviour
             default:
                 break;
         }
-        attacking = false;
     }
     private void Start()
     {
-        attacking = false;
         monsAttacking = false;
         critical = false;
-        Open = false;
     }
 }
