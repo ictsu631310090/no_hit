@@ -18,9 +18,9 @@ public class SaveManagerScript : MonoBehaviour
     public void NewGameButtom()
     {
         Debug.Log("New Game");
-        dataPlayer.str = 10;
-        dataPlayer.dex = 10;
-        dataPlayer.con = 10;
+        dataPlayer.str = 12;
+        dataPlayer.dex = 12;
+        dataPlayer.con = 12;
         dataPlayer.xp = 0;
         dataPlayer.level = 1;
         dataPlayer.pointLevel = 0;
