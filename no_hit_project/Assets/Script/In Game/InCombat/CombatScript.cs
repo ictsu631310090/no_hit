@@ -46,7 +46,7 @@ public class CombatScript : MonoBehaviour
             }
             movePlayer = true;
             diceRoll.RollToHit(atkBonus + dataPlayer.bonus, addDice, 0);//0 = player, 1 = enemy
-            StartCoroutine(Damage(dataPlayer.diceDamage, atkBonus, addDice));
+            StartCoroutine(Damage(dataPlayer.diceDamage, atkBonus, addDice, i));
         }
         else if (!playerAttacking)
         {
@@ -68,16 +68,12 @@ public class CombatScript : MonoBehaviour
             dataPlayer.showPlayer.animaPlayer.gameObject.transform.position = Vector3.MoveTowards(dataPlayer.showPlayer.animaPlayer.gameObject.transform.position, oldPosition, Time.deltaTime * speedMove);
         }
     }
-    IEnumerator Damage(int dice, int bonus, int addDiceInMethod)
+    IEnumerator Damage(int dice, int bonus, int addDiceInMethod, int hand)
     {
         float timeUse = (3 * diceRoll.timeClose);
         yield return new WaitForSeconds(timeUse / 2);
         movePlayer = false;
-        //yield return new WaitForSeconds(diceRoll.timeClose);
-        if (dice != 0)
-        {
-            yield return new WaitForSeconds(diceRoll.timeClose);
-        }
+        yield return new WaitForSeconds(diceRoll.timeClose);
         if (diceRoll.critical)
         {
             yield return new WaitForSeconds(diceRoll.timeClose);
@@ -90,21 +86,36 @@ public class CombatScript : MonoBehaviour
         if (diceRoll.allResult >= monsters[targetMons].armorClass)
         {
             yield return new WaitForSeconds(timeUse / 2);
-            diceRoll.RollDamage(dice, bonus, addDiceInMethod, 0);
-            if (dice != 0)
+            if (dataPlayer.rlHandWeapon[hand] == null)
             {
+                diceRoll.RollDamage(1, bonus, addDiceInMethod, 0);
                 yield return new WaitForSeconds(diceRoll.timeClose);
-            }
-            if (diceRoll.critical)
+                if (diceRoll.critical)
+                {
+                    yield return new WaitForSeconds(diceRoll.timeClose);
+                }
+                if (addDiceInMethod != 0)
+                {
+                    yield return new WaitForSeconds(diceRoll.timeClose);
+                }
+                yield return new WaitForSeconds(timeUse / 2);
+                monsters[targetMons].takeDamage = diceRoll.allResult;
+            }//free hand
+            else
             {
+                diceRoll.RollDamage(dice, bonus, addDiceInMethod, 0);
                 yield return new WaitForSeconds(diceRoll.timeClose);
+                if (diceRoll.critical)
+                {
+                    yield return new WaitForSeconds(diceRoll.timeClose);
+                }
+                if (addDiceInMethod != 0)
+                {
+                    yield return new WaitForSeconds(diceRoll.timeClose);
+                }
+                yield return new WaitForSeconds(timeUse / 2);
+                monsters[targetMons].takeDamage = diceRoll.allResult;
             }
-            if (addDiceInMethod != 0)
-            {
-                yield return new WaitForSeconds(diceRoll.timeClose);
-            }
-            yield return new WaitForSeconds(timeUse / 2);
-            monsters[targetMons].takeDamage = diceRoll.allResult;
         }
         else
         {
@@ -172,8 +183,8 @@ public class CombatScript : MonoBehaviour
         int numText = atkBonus + dataPlayer.bonus;
         if (buttonAttack.Length > 0)
         {
-            buttonAttack[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "left hand \n d20 + " + numText;
-            buttonAttack[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "right hand \n d20 + " + numText;
+            buttonAttack[0].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "right hand \n d20 + " + numText;
+            buttonAttack[1].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "left hand \n d20 + " + numText;
             buttonAttack[2].gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "both hand \n d20 + " + numText;
         }
     }  //finess str or dex

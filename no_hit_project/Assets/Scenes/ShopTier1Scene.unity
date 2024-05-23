@@ -3721,7 +3721,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoint: 14
-  hpLvOne: 0
   hitPointMax: 0
   takeDamage: 0
   healHitPoint: 0

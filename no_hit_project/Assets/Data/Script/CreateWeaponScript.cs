@@ -8,6 +8,7 @@ public class CreateWeaponScript : ScriptableObject
     public int id;
     public string nameWeapon;
     public int price;
+    public bool melee;
     public bool finesse;
     public bool twoHand;
     public int damage;

@@ -36,7 +36,6 @@ public class SaveManagerScript : MonoBehaviour
         ui.moneyPlayer = 0;//UI
         dataPlayer.room = 0;
         SaveGame();
-        //CreateSaveScript.Save(dataPlayer, ui);
     }
     public void SaveGame()
     {

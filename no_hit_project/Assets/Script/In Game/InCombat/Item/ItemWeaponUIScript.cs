@@ -48,6 +48,7 @@ public class ItemWeaponUIScript : MonoBehaviour
             if (mainUI.dataPlayer.rlHandWeapon[right] == dataWeapon)
             {
                 mainUI.warnText.text = "You already equip that weapon.";
+                combat.buttonAttack[right].interactable = true;
             }//same
             else if (mainUI.dataPlayer.rlHandWeapon[right] != null)
             {
@@ -70,6 +71,7 @@ public class ItemWeaponUIScript : MonoBehaviour
             else if (mainUI.dataPlayer.rlHandShield[right] != null)//have shield
             {
                 mainUI.dataPlayer.listShield.Add(mainUI.dataPlayer.rlHandShield[right]);
+                mainUI.dataPlayer.rlHandShield[right] = null;
                 ChangeDataItemInHand(right);
             }
         }//have something

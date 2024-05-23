@@ -44,10 +44,12 @@ public class ItemShieldUIScript : MonoBehaviour
             if (mainUI.dataPlayer.rlHandWeapon[right] != null)//have weapon
             {
                 mainUI.dataPlayer.listWeapon.Add(mainUI.dataPlayer.rlHandWeapon[right]);
+                mainUI.dataPlayer.rlHandWeapon[right] = null;
                 ChangeDataItemInHand(right);
             }
             else if (mainUI.dataPlayer.rlHandShield[right] != null)//have shield
             {
+                combat.buttonAttack[right].interactable = true;
                 mainUI.warnText.text = "You're wearing a Shield.";
             }
         }//have something

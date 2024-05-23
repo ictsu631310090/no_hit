@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class DataPlayerScript : MonoBehaviour
 {
     [Header("Status")]
-    public int hitPoint;
+    [HideInInspector] public int hitPoint;
     [HideInInspector] public int hitPointMax;
     [HideInInspector] public int takeDamage;
     [HideInInspector] public int healHitPoint;
     [HideInInspector] public int haveDamage;
+    private int hitPointLevelOne;
     public int armorClass;
     public int str;//0
     public int dex;//1
@@ -173,7 +174,7 @@ public class DataPlayerScript : MonoBehaviour
         if (oldLevelPlayer != level)
         {
             haveDamage = hitPointMax - hitPoint;
-            hitPointMax = 8 + (5 * (level - 1)) + (oldConMoPlayer * level);
+            hitPointMax = hitPointLevelOne + (5 * (level - 1)) + (oldConMoPlayer * level);
             hitPoint = hitPointMax - haveDamage;
             haveDamage = 0;
             oldLevelPlayer = level;
@@ -216,6 +217,13 @@ public class DataPlayerScript : MonoBehaviour
                 {
                     armorClass = armorUse.setAC + oldDexMoPlayer;
                 }
+            }
+        }
+        for (int i = 0; i < rlHandShield.Length; i++)
+        {
+            if (rlHandShield != null)
+            {
+                armorClass += 2;
             }
         }
         UpdateImageArmor();
@@ -291,6 +299,7 @@ public class DataPlayerScript : MonoBehaviour
                 showPlayer.modelPlayer[right + 12].sprite = rlHandWeapon[right].image;
                 if (right == 0)
                 {
+                    showPlayer.modelPlayer[14].color = new Color(1, 1, 1, 0);
                     showPlayer.modelPlayer[12].sortingOrder = 2;
                     showPlayer.modelPlayer[right + 12].color = new Color(1, 1, 1, 1);
                 }
@@ -304,8 +313,7 @@ public class DataPlayerScript : MonoBehaviour
                 if (right == 0)
                 {
                     showPlayer.modelPlayer[12].sprite = rlHandShield[right].image;
-                    showPlayer.modelPlayer[12].sortingOrder = 4;
-                    showPlayer.modelPlayer[12].color = new Color(1, 1, 1, 1);
+                    showPlayer.modelPlayer[14].color = new Color(1, 1, 1, 1);
                 }
                 else//i == 1
                 {
@@ -326,17 +334,18 @@ public class DataPlayerScript : MonoBehaviour
     }
     private void Start()
     {
+        hitPointLevelOne = 10;
         oldLevelPlayer = level;
         oldDexMoPlayer = (dex - 10) / 2;
         oldConMoPlayer = (con - 10) / 2;
         armorClass = 10 + oldDexMoPlayer;
         if (level != 1)
         {
-            hitPointMax = 8 + (5 * (level - 1)) + (oldConMoPlayer * level);
+            hitPointMax = hitPointLevelOne + (5 * (level - 1)) + (oldConMoPlayer * level);
         }
         else
         {
-            hitPointMax = 8 + oldConMoPlayer;
+            hitPointMax = hitPointLevelOne + oldConMoPlayer;
         }
         hitPoint = hitPointMax - haveDamage;
         haveDamage = 0;
@@ -385,6 +394,6 @@ public class DataPlayerScript : MonoBehaviour
             hitPoint -= takeDamage;
             takeDamage = 0;
             showPlayer.UpdateTextHp();
-        }//take gamage
+        }//take damage
     }
 }
