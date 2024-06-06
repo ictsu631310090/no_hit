@@ -86,8 +86,15 @@ public class MonsterScript : MonoBehaviour
         hpbar.fillAmount = scaleBar;
         CheckDie();
     }
+    IEnumerator DelayAnimationStep()
+    {
+        animaMon.SetInteger("step", 2);
+        yield return new WaitForSeconds(0.1f);
+
+    }
     public void CheckDie()
     {
+        StartCoroutine(DelayAnimationStep());
         if (hitPoint <= 0)
         {
             UIScript.addMoney = moneyDrop;
@@ -188,7 +195,6 @@ public class MonsterScript : MonoBehaviour
     {
         if (takeDamage != 0)
         {
-            animaMon.SetInteger("step", 2);
             UpdateHp();
         }
         MoveMonster();

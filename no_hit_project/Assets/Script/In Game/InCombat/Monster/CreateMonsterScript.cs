@@ -23,7 +23,12 @@ public class CreateMonsterScript : MonoBehaviour
             int typeMon = Random.Range(0, dataMon.Length);
             monScript.id = i;
             monScript.monName = dataMon[typeMon].monName;
-            monScript.hitPoint = Random.Range(dataMon[typeMon].hitPoint.x, dataMon[typeMon].hitPoint.y + 1) + dataMon[typeMon].hitPoint.z;
+            int hpMon = Random.Range(dataMon[typeMon].hitPoint.x, dataMon[typeMon].hitPoint.y + 1) + dataMon[typeMon].hitPoint.z;
+            if (hpMon <= 0)
+            {
+                hpMon = 1;
+            }
+            monScript.hitPoint = hpMon;
             monScript.armorClass = dataMon[typeMon].armorClass;
             monScript.toHitPlus = dataMon[typeMon].toHitPlus;
             monScript.damage = dataMon[typeMon].damage;

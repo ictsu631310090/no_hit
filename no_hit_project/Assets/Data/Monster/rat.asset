@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf479f07f6a7c4e4a97e638c75bfed15, type: 3}
-  m_Name: red bat
+  m_Name: rat
   m_EditorClassIdentifier: 
-  monName: red bat
-  hitPoint: {x: 1, y: 4, z: 0}
-  armorClass: 8
+  monName: rat
+  hitPoint: {x: 1, y: 4, z: -1}
+  armorClass: 5
   toHitPlus: 0
-  damage: {x: 1, y: 4, z: 0}
-  model: {fileID: 4552085598951162047, guid: 7dec23eeba7da1f43a2d7bd652e9a1c1, type: 3}
-  moneyDrop: {x: 10, y: 50}
-  xpDrop: 275
-  numDiceDrop: {x: 1, y: 2}
-  typeDiceDrop: 04000000
+  damage: {x: 1, y: 1, z: 0}
+  model: {fileID: 4552085598951162047, guid: 2e2b5589836491949a1daf5ad60c8847, type: 3}
+  moneyDrop: {x: 0, y: 0}
+  xpDrop: 75
+  numDiceDrop: {x: 0, y: 0}
+  typeDiceDrop: 
