@@ -33,9 +33,9 @@ public class DataPlayerScript : MonoBehaviour
     public List<CreateArmorScript> listArmor;
     public List<CreateShieldScript> listShield;
     public List<CreateWeaponScript> listWeapon;
-    [HideInInspector] public CreateWeaponScript[] rlHandWeapon = { null, null };//null,have
-    [HideInInspector] public CreateShieldScript[] rlHandShield = { null, null };//null,have
-    [HideInInspector] public CreateArmorScript armorUse;
+    public CreateWeaponScript[] rlHandWeapon = { null, null };//null,have
+    public CreateShieldScript[] rlHandShield = { null, null };//null,have
+    public CreateArmorScript armorUse;
 
     [Header("Bag Dice")]
     public int[] diceHave = { 0, 0, 0, 0, 0 };//4, 6, 8, 10, 12
@@ -221,7 +221,7 @@ public class DataPlayerScript : MonoBehaviour
         }
         for (int i = 0; i < rlHandShield.Length; i++)
         {
-            if (rlHandShield != null)
+            if (rlHandShield[i] != null)
             {
                 armorClass += 2;
             }
@@ -338,7 +338,6 @@ public class DataPlayerScript : MonoBehaviour
         oldLevelPlayer = level;
         oldDexMoPlayer = (dex - 10) / 2;
         oldConMoPlayer = (con - 10) / 2;
-        armorClass = 10 + oldDexMoPlayer;
         if (level != 1)
         {
             hitPointMax = hitPointLevelOne + (5 * (level - 1)) + (oldConMoPlayer * level);

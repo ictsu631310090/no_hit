@@ -22,8 +22,8 @@ public class NewDiceRollScript : MonoBehaviour
     {
         animationUI.SetBool("open", true);
         ClearAllDice();
-        StopCoroutine((TimeDelayRoll(0,0,0,0)));
-        StartCoroutine(TimeDelayRoll(20, bonus, diceAdd, 0));
+        StopCoroutine((TimeDelayRoll(0, 0, 0, 0, 0)));
+        StartCoroutine(TimeDelayRoll(1, 20, bonus, diceAdd, 0));
         
         switch (who)
         {
@@ -37,14 +37,17 @@ public class NewDiceRollScript : MonoBehaviour
                 break;
         }
     }
-    IEnumerator TimeDelayRoll(int max, int bonus, int diceAdd , int imageDice)
+    IEnumerator TimeDelayRoll(int numDice, int max, int bonus, int diceAdd , int imageDice)
     {
-        GameObject diceObj = Instantiate(diceUIPrefab, spwanDice, false);
-        ChangeDiceImage(diceObj, max);
-        allResult = Random.Range(1, max + 1);
-        diceObj.transform.GetComponentInChildren<TextMeshProUGUI>().text = allResult.ToString();
-        numberText.text = allResult.ToString();
-        allDice.Add(diceObj);
+        for (int j = 0; j < numDice; j++)
+        {
+            GameObject diceObj = Instantiate(diceUIPrefab, spwanDice, false);
+            ChangeDiceImage(diceObj, max);
+            allResult = Random.Range(1, max + 1);
+            diceObj.transform.GetComponentInChildren<TextMeshProUGUI>().text = allResult.ToString();
+            numberText.text = allResult.ToString();
+            allDice.Add(diceObj);
+        }
         if (critical)
         {
             yield return new WaitForSeconds(timeClose);
@@ -136,12 +139,12 @@ public class NewDiceRollScript : MonoBehaviour
         }
         allDice.Clear();
     }
-    public void RollDamage(int max, int bonus, int diceAdd, int who)
+    public void RollDamage(int numDice,int max, int bonus, int diceAdd, int who)
     {
         animationUI.SetBool("open", true);
         ClearAllDice();
-        StopCoroutine((TimeDelayRoll(0, 0, 0, 0)));
-        StartCoroutine(TimeDelayRoll(max, bonus, diceAdd, who));        
+        StopCoroutine((TimeDelayRoll(0, 0, 0, 0, 0)));
+        StartCoroutine(TimeDelayRoll(numDice, max, bonus, diceAdd, who));        
 
         switch (who)
         {

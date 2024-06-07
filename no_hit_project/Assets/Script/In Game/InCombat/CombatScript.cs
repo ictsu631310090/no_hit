@@ -88,7 +88,7 @@ public class CombatScript : MonoBehaviour
             yield return new WaitForSeconds(timeUse / 2);
             if (dataPlayer.rlHandWeapon[hand] == null)
             {
-                diceRoll.RollDamage(1, bonus, addDiceInMethod, 0);
+                diceRoll.RollDamage(1, 1, bonus, addDiceInMethod, 0);
                 yield return new WaitForSeconds(diceRoll.timeClose);
                 if (diceRoll.critical)
                 {
@@ -103,7 +103,7 @@ public class CombatScript : MonoBehaviour
             }//free hand
             else
             {
-                diceRoll.RollDamage(dice, bonus, addDiceInMethod, 0);
+                diceRoll.RollDamage(1, dice, bonus, addDiceInMethod, 0);
                 yield return new WaitForSeconds(diceRoll.timeClose);
                 if (diceRoll.critical)
                 {

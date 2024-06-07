@@ -4865,7 +4865,7 @@ Transform:
   m_GameObject: {fileID: 816660734}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.85, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10289,7 +10289,7 @@ MonoBehaviour:
   combat: {fileID: 311917749}
   numOfMon: 2
   dataMon:
-  - {fileID: 11400000, guid: 32029fca296aa1946bde5526b169c701, type: 2}
+  - {fileID: 11400000, guid: 30ee7718f71fada4fb73c31b1b3035dd, type: 2}
   monsterObj: {fileID: 5354798364525316083, guid: b50209cde6d7a4040a3e2305d757d882, type: 3}
   spawnPointMon:
   - {fileID: 1373367219}

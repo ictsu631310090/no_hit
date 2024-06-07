@@ -41,9 +41,9 @@ public class MonsterScript : MonoBehaviour
         combat.diceRoll.RollToHit(toHitPlus, 0, 1);
         animaMon.SetInteger("step", 1);
         moveMons = true;
-        StartCoroutine(Damage(damage.y, damage.z));
+        StartCoroutine(Damage(damage.x, damage.y, damage.z));
     }
-    IEnumerator Damage(int dice, int bonus)
+    IEnumerator Damage(int numDice, int sizeDice, int bonus)
     {
         float time = 3 * combat.diceRoll.timeClose;
         yield return new WaitForSeconds((time /3));
@@ -57,7 +57,7 @@ public class MonsterScript : MonoBehaviour
         if (combat.diceRoll.allResult >= combat.dataPlayer.armorClass)
         {
             canAttack = true;
-            combat.diceRoll.RollDamage(dice, bonus, 0, 1);
+            combat.diceRoll.RollDamage(numDice, sizeDice, bonus, 0, 1);
             if (combat.diceRoll.critical)
             {
                 yield return new WaitForSeconds(combat.diceRoll.timeClose);
@@ -99,7 +99,7 @@ public class MonsterScript : MonoBehaviour
         {
             UIScript.addMoney = moneyDrop;
             combat.dataPlayer.addXp = xpDrop;
-            combat.diceRoll.RollDamage(4, 0, 0, 2);//heal
+            combat.diceRoll.RollDamage(1, 4, 0, 0, 2);//heal
             foreach (var item in diceDrop)
             {
                 switch (item)

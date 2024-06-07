@@ -112,6 +112,7 @@ public class ShowPlayerScript : MonoBehaviour
         levelText.text = "Lv." + dataPlayer.level;
 
         UpdateStatus();
+        UpdateACText();
     }
     private void Update()
     {
