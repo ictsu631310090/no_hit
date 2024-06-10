@@ -33,7 +33,7 @@ public class SaveManagerScript : MonoBehaviour
             dataPlayer.diceHave[i] = 0;
         }
         dataPlayer.haveDamage = 0;
-        ui.moneyPlayer = 0;//UI
+        ui.moneyPlayer = 100;//UI
         dataPlayer.room = 0;
         SaveGame();
     }

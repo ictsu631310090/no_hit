@@ -6,14 +6,31 @@ using UnityEngine.SceneManagement;
 
 public class MapScript : MonoBehaviour
 {
-    [SerializeField] private Button[] mapButton;
     [SerializeField] private DataPlayerScript dataplayer;
+    [SerializeField] private Button[] mapButton;
+
+    public DataMap[] allDataMaps;
+    public static DataMap useNow;
     public void FightScene1()
     {
+        useNow = allDataMaps[0];
+        //useNow.numOfMon = allDataMaps[0].numOfMon;
+        //useNow.dataMon = allDataMaps[0].dataMon;
+
         SceneManager.LoadScene(3);
     }
     public void FightScene2()
     {
+        useNow.numOfMon = allDataMaps[1].numOfMon;
+        useNow.dataMon = allDataMaps[1].dataMon;
+
+        SceneManager.LoadScene(3);
+    }
+    public void FightScene3()
+    {
+        useNow.numOfMon = allDataMaps[2].numOfMon;
+        useNow.dataMon = allDataMaps[2].dataMon;
+
         SceneManager.LoadScene(3);
     }
     public void GoShopScene()
@@ -44,10 +61,12 @@ public class MapScript : MonoBehaviour
                     mapButton[i].interactable = false;
                 }
             }
+
         }
     }
     private void Start()
     {
+        Debug.Log("room :" + dataplayer.room);
         StartCoroutine(nextRoom());
     }
     private void Update()

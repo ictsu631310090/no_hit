@@ -71,9 +71,19 @@ public class CombatScript : MonoBehaviour
     IEnumerator Damage(int dice, int bonus, int addDiceInMethod, int hand)
     {
         float timeUse = (3 * diceRoll.timeClose);
-        yield return new WaitForSeconds(timeUse / 2);
+        //to hit
+        yield return new WaitForSeconds(diceRoll.timeClose * 1.5f);
         movePlayer = false;
-        yield return new WaitForSeconds(diceRoll.timeClose);
+        if (addDiceInMethod != 0)
+        {
+            yield return new WaitForSeconds(diceRoll.timeClose * 1.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(diceRoll.timeClose * 0.5f);
+        }
+        
+        //damage
         if (diceRoll.critical)
         {
             yield return new WaitForSeconds(diceRoll.timeClose);
@@ -82,46 +92,34 @@ public class CombatScript : MonoBehaviour
         {
             yield return new WaitForSeconds(diceRoll.timeClose);
         }
-        Debug.Log("result : " + diceRoll.allResult);
         if (diceRoll.allResult >= monsters[targetMons].armorClass)
         {
-            yield return new WaitForSeconds(timeUse / 2);
+            yield return new WaitForSeconds(diceRoll.timeClose);//close to hit
             if (dataPlayer.rlHandWeapon[hand] == null)
             {
                 diceRoll.RollDamage(1, 1, bonus, addDiceInMethod, 0);
-                yield return new WaitForSeconds(diceRoll.timeClose);
-                if (diceRoll.critical)
-                {
-                    yield return new WaitForSeconds(diceRoll.timeClose);
-                }
-                if (addDiceInMethod != 0)
-                {
-                    yield return new WaitForSeconds(diceRoll.timeClose);
-                }
-                yield return new WaitForSeconds(timeUse / 2);
-                monsters[targetMons].takeDamage = diceRoll.allResult;
             }//free hand
             else
             {
                 diceRoll.RollDamage(1, dice, bonus, addDiceInMethod, 0);
-                yield return new WaitForSeconds(diceRoll.timeClose);
-                if (diceRoll.critical)
-                {
-                    yield return new WaitForSeconds(diceRoll.timeClose);
-                }
-                if (addDiceInMethod != 0)
-                {
-                    yield return new WaitForSeconds(diceRoll.timeClose);
-                }
-                yield return new WaitForSeconds(timeUse / 2);
-                monsters[targetMons].takeDamage = diceRoll.allResult;
             }
+            yield return new WaitForSeconds(diceRoll.timeClose);
+            if (diceRoll.critical)
+            {
+                yield return new WaitForSeconds(diceRoll.timeClose);
+            }
+            if (addDiceInMethod != 0)
+            {
+                yield return new WaitForSeconds(diceRoll.timeClose);
+            }
+            yield return new WaitForSeconds(timeUse / 2);
+            monsters[targetMons].takeDamage = diceRoll.allResult;
         }
         else
         {
             monsters[targetMons].showMissImage = true;
         }
-        yield return new WaitForSeconds(timeUse * 0.1f);
+        //yield return new WaitForSeconds(timeUse * 0.1f);
         playerAttacking = false;
         addDice = 0;
     }
@@ -212,7 +210,6 @@ public class CombatScript : MonoBehaviour
             }
             else if (!playerAttacking && monsters.Count == 0)
             {
-                Debug.Log("Next");
                 dataPlayer.room++;
                 saveManager.SaveGame();
                 uiScript.nextScene = true;
@@ -224,6 +221,7 @@ public class CombatScript : MonoBehaviour
             saveManager.SaveGame();
             uiScript.nextScene = true;
         }
+        Debug.Log("room : " + dataPlayer.room);
     }
     IEnumerator DelayMonsterAttack()
     {

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf479f07f6a7c4e4a97e638c75bfed15, type: 3}
   m_Name: red bat
   m_EditorClassIdentifier: 
+  id: 101
   monName: Red Bat
   hitPoint: {x: 1, y: 4, z: 0}
   armorClass: 8

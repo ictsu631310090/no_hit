@@ -39,11 +39,12 @@ public class NewDiceRollScript : MonoBehaviour
     }
     IEnumerator TimeDelayRoll(int numDice, int max, int bonus, int diceAdd , int imageDice)
     {
+        allResult = 0;
         for (int j = 0; j < numDice; j++)
         {
             GameObject diceObj = Instantiate(diceUIPrefab, spwanDice, false);
             ChangeDiceImage(diceObj, max);
-            allResult = Random.Range(1, max + 1);
+            allResult += Random.Range(1, max + 1);
             diceObj.transform.GetComponentInChildren<TextMeshProUGUI>().text = allResult.ToString();
             numberText.text = allResult.ToString();
             allDice.Add(diceObj);
@@ -53,7 +54,7 @@ public class NewDiceRollScript : MonoBehaviour
             yield return new WaitForSeconds(timeClose);
             GameObject diceObj2 = Instantiate(diceUIPrefab, spwanDice, false);
             ChangeDiceImage(diceObj2, max);
-            allResult = Random.Range(1, max + 1);
+            allResult += Random.Range(1, max + 1);
             diceObj2.transform.GetComponentInChildren<TextMeshProUGUI>().text = allResult.ToString();
             numberText.text = allResult.ToString();
             allDice.Add(diceObj2);
@@ -101,7 +102,7 @@ public class NewDiceRollScript : MonoBehaviour
             item.GetComponent<Animator>().SetBool("open", false);
         }
         animationUI.SetBool("open", false);
-        yield return new WaitForSeconds(timeClose * 1.5f);
+        yield return new WaitForSeconds(timeClose);
     }
     private void ChangeDiceImage(GameObject obj,int diceImage)
     {

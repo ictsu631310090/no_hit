@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf479f07f6a7c4e4a97e638c75bfed15, type: 3}
   m_Name: sRat
   m_EditorClassIdentifier: 
+  id: 103
   monName: Skeleton Rat
   hitPoint: {x: 7, y: 8, z: -7}
   armorClass: 5

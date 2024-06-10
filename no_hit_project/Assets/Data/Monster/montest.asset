@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf479f07f6a7c4e4a97e638c75bfed15, type: 3}
   m_Name: montest
   m_EditorClassIdentifier: 
+  id: -101
   monName: montest
   hitPoint: {x: 5, y: 10, z: 1}
   armorClass: 10

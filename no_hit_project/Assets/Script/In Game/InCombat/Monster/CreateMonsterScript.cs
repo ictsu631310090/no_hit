@@ -8,6 +8,7 @@ public class CreateMonsterScript : MonoBehaviour
     [SerializeField] private CombatScript combat;
 
     [Header("set data")]
+    [SerializeField] private SpriteRenderer bgImage;
     [Range(1, 3)]
     [SerializeField] private int numOfMon;
     [SerializeField] private CreateTypeMonScript[] dataMon;
@@ -64,6 +65,12 @@ public class CreateMonsterScript : MonoBehaviour
             hpMon = 1;
         }
         return hpMon;
+    }
+    private void Awake()
+    {
+        numOfMon = MapScript.useNow.numOfMon;
+        dataMon = MapScript.useNow.dataMon;
+        bgImage.sprite = MapScript.useNow.bgImage;
     }
     private void Start()
     {
